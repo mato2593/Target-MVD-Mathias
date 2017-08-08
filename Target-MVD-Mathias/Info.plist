@@ -34,7 +34,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookDisplayName</key>
-	<string>APP-NAME</string>
+	<string>Target-MVD-Mathias</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
