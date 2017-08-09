@@ -16,8 +16,8 @@
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "9B5AFAD91C7205EB002347D6"
                      BuildableName = "swiftbase.app"
-                     BlueprintName = "swift-base"
-                     ReferencedContainer = "container:swift-base.xcodeproj">
+                     BlueprintName = "Target-MVD-Mathias"
+                     ReferencedContainer = "container:Target-MVD-Mathias.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>
@@ -34,8 +34,8 @@
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "9B5AFAD91C7205EB002347D6"
                      BuildableName = "swiftbase.app"
-                     BlueprintName = "swift-base"
-                     ReferencedContainer = "container:swift-base.xcodeproj">
+                     BlueprintName = "Target-MVD-Mathias"
+                     ReferencedContainer = "container:Target-MVD-Mathias.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>
@@ -190,9 +190,9 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "19F68CB3554C52BAF54028452F51780C"
-               BuildableName = "Pods_swift_base.framework"
-               BlueprintName = "Pods-swift-base"
+               BlueprintIdentifier = "EDE9FB36119E6E660DD1B6D5786D39B0"
+               BuildableName = "Pods_Target_MVD_Mathias.framework"
+               BlueprintName = "Pods-Target-MVD-Mathias"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -204,7 +204,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F8BB08A11D9B5121262FB5F5E6FE1A58"
+               BlueprintIdentifier = "8216B69FF72DAF6EA21533AAF4C632D8"
                BuildableName = "SDWebImage.framework"
                BlueprintName = "SDWebImage"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -218,7 +218,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "55D82DC1096450D7B9B71AC9CA78E5E9"
+               BlueprintIdentifier = "428829DEF6E995F079346EEF17610FFB"
                BuildableName = "SwiftyJSON.framework"
                BlueprintName = "SwiftyJSON"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -234,8 +234,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9B5AFAD91C7205EB002347D6"
                BuildableName = "swiftbase.app"
-               BlueprintName = "swift-base"
-               ReferencedContainer = "container:swift-base.xcodeproj">
+               BlueprintName = "Target-MVD-Mathias"
+               ReferencedContainer = "container:Target-MVD-Mathias.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -253,7 +253,7 @@
                BlueprintIdentifier = "9B2BF7281EBB9AB5001638C4"
                BuildableName = "AcceptanceTests.xctest"
                BlueprintName = "AcceptanceTests"
-               ReferencedContainer = "container:swift-base.xcodeproj">
+               ReferencedContainer = "container:Target-MVD-Mathias.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -262,8 +262,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B5AFAD91C7205EB002347D6"
             BuildableName = "swiftbase.app"
-            BlueprintName = "swift-base"
-            ReferencedContainer = "container:swift-base.xcodeproj">
+            BlueprintName = "Target-MVD-Mathias"
+            ReferencedContainer = "container:Target-MVD-Mathias.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -285,8 +285,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B5AFAD91C7205EB002347D6"
             BuildableName = "swiftbase.app"
-            BlueprintName = "swift-base"
-            ReferencedContainer = "container:swift-base.xcodeproj">
+            BlueprintName = "Target-MVD-Mathias"
+            ReferencedContainer = "container:Target-MVD-Mathias.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -304,8 +304,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B5AFAD91C7205EB002347D6"
             BuildableName = "swiftbase.app"
-            BlueprintName = "swift-base"
-            ReferencedContainer = "container:swift-base.xcodeproj">
+            BlueprintName = "Target-MVD-Mathias"
+            ReferencedContainer = "container:Target-MVD-Mathias.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
