@@ -74,6 +74,27 @@ class UserAPI {
       failure(error)
     }
   }
+  
+  class func signup(name: String, email: String, password: String, gender: String, success: @escaping (_ responseObject: [String: Any]) -> Void, failure: @escaping (_ error: Error) -> Void) {
+    let parameters = [
+      "user": [
+        "name": name,
+        "email": email,
+        "password": password,
+        "password_confirmation": password,
+        "gender": gender.lowercased()
+      ]
+    ]
+    
+    APIClient.sendPostRequest(usersUrl, params: parameters as [String : AnyObject]?,
+                              success: { (response) -> Void in
+                                let json = JSON(response)
+                                UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                success(response)
+    }) { (error) -> Void in
+      failure(error)
+    }
+  }
 
   class func getMyProfile(_ success: @escaping (_ json: JSON) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = currentUserUrl + "profile"
