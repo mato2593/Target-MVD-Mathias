@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     // MARK: Outlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -26,7 +26,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // MARK: Constants
     let minPasswordLength = 8
     let genderPickerView = UIPickerView()
-    let genderValues = ["SELECT YOUR GENDER", "MALE", "FEMALE"]
+    let genderValues = ["MALE", "FEMALE"]
     
     // MARK: Variables
     var errorsInForm: Bool = false
@@ -39,7 +39,8 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         genderPickerView.delegate = self
         
         genderTextField.inputView = genderPickerView
-        genderTextField.text = genderValues[0]
+        genderTextField.attributedPlaceholder = NSAttributedString(string: "SELECT YOUR GENDER", attributes: [NSForegroundColorAttributeName: UIColor.black])
+        genderTextField.delegate = self
     }
     
     // MARK: Actions
@@ -142,7 +143,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     private func genderIsInvalid() -> Bool {
         let gender = genderTextField.text!
-        return gender.isEmpty || genderPickerView.selectedRow(inComponent: 0) == 0
+        return gender.isEmpty
     }
     
     // MARK: PickerView DataSource
@@ -163,6 +164,13 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         genderTextField.text = genderValues[row]
+    }
+    
+    // MARK: TextField Delegate
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        genderPickerView.selectRow(0, inComponent: 0, animated: false)
+        pickerView(genderPickerView, didSelectRow: 0, inComponent: 0)
     }
     
 }
