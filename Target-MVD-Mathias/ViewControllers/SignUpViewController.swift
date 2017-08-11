@@ -25,20 +25,21 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // MARK: Constants
     let minPasswordLength = 8
+    let genderPickerView = UIPickerView()
     let genderValues = ["SELECT YOUR GENDER", "MALE", "FEMALE"]
     
     // MARK: Variables
     var errorsInForm: Bool = false
-    var selectedGenderRow: Int = 0
     
     // MARK: Lifecycle
     override func viewDidLoad() {
-        let genderPickerView = UIPickerView()
+        super.viewDidLoad()
+        
         genderPickerView.dataSource = self
         genderPickerView.delegate = self
         
         genderTextField.inputView = genderPickerView
-        genderTextField.text = genderValues[selectedGenderRow]
+        genderTextField.text = genderValues[0]
     }
     
     // MARK: Actions
@@ -142,7 +143,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     private func genderIsInvalid() -> Bool {
         let gender = genderTextField.text!
-        return gender.isEmpty || selectedGenderRow == 0
+        return gender.isEmpty || genderPickerView.selectedRow(inComponent: 0) == 0
     }
     
     // MARK: PickerView DataSource
@@ -162,25 +163,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedGenderRow = row
         genderTextField.text = genderValues[row]
     }
     
-    // MARK: Helper methods for test purposes
-    func randomImage() -> UIImage {
-        let square = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        let rr = CGFloat(arc4random_uniform(255))
-        let rg = CGFloat(arc4random_uniform(255))
-        let rb = CGFloat(arc4random_uniform(255))
-        square.backgroundColor = UIColor(red: rr/255, green: rg/255, blue: rb/255, alpha: 1.0)
-        UIGraphicsBeginImageContext(square.frame.size)
-        square.drawHierarchy(in: square.frame, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
-    }
-    
-    func randomName() -> String {
-        return "user\(arc4random_uniform(10000))"
-    }
 }
