@@ -109,8 +109,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self, storyboardIdentifier: "Onboarding")
         }) { (error) in
             self.hideSpinner()
-            self.showMessageError(title: "Error", errorMessage: error.localizedDescription)
-            print(error)
+            self.showMessageError(title: "Error", errorMessage: error.domain.capitalizeFirstLetter())
         }
     }
     
