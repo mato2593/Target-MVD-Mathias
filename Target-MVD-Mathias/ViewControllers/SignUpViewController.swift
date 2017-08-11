@@ -114,7 +114,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     private func showErrorInForm(textField: UITextField, errorLabel: UILabel) {
-        textField.addBorder(color: UIColor.tomato(), weight: 1.0)
+        textField.addBorder(color: .tomato, weight: 1.0)
         errorLabel.isHidden = false
     }
     
