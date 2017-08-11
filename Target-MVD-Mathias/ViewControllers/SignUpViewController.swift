@@ -29,7 +29,8 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     let genderValues = ["MALE", "FEMALE"]
     
     // MARK: Variables
-    var errorsInForm: Bool = false
+    var errorsInForm = false
+    var firstTimeOpeningPicker = true
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -169,8 +170,11 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // MARK: TextField Delegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        genderPickerView.selectRow(0, inComponent: 0, animated: false)
-        pickerView(genderPickerView, didSelectRow: 0, inComponent: 0)
+        if firstTimeOpeningPicker {
+            firstTimeOpeningPicker = false
+            genderPickerView.selectRow(0, inComponent: 0, animated: false)
+            pickerView(genderPickerView, didSelectRow: 0, inComponent: 0)
+        }
     }
     
 }
