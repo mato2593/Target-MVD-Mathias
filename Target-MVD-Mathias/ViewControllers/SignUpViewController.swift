@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class SignUpViewController: UIViewController {
     
     // MARK: Outlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -147,17 +147,9 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         return gender.isEmpty
     }
     
-    // MARK: PickerView DataSource
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return genderValues.count
-    }
-    
-    // MARK: PickerView Delegate
+}
+
+extension SignUpViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return genderValues[row]
@@ -167,7 +159,21 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         genderTextField.text = genderValues[row]
     }
     
-    // MARK: TextField Delegate
+}
+
+extension SignUpViewController: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genderValues.count
+    }
+    
+}
+
+extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if firstTimeOpeningPicker {
