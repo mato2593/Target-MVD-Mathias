@@ -41,6 +41,19 @@
 		E8B30E021E72FF8000131DCF /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B30E011E72FF8000131DCF /* UIStoryboardExtension.swift */; };
 		E8FBB1BF1DD21A32000D6740 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBB1BE1DD21A32000D6740 /* Session.swift */; };
 		E8FBB1C11DD21D18000D6740 /* SessionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBB1C01DD21D18000D6740 /* SessionDataManager.swift */; };
+		F502D6EC1F3B636F00474060 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F502D6EB1F3B636F00474060 /* Onboarding.storyboard */; };
+		F53ED73C1F3CA2F2007C6D43 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */; };
+		F5631F161F41EAC100CA49BD /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F0C1F41EAC100CA49BD /* OpenSans-Bold.ttf */; };
+		F5631F171F41EAC100CA49BD /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F0D1F41EAC100CA49BD /* OpenSans-BoldItalic.ttf */; };
+		F5631F181F41EAC100CA49BD /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F0E1F41EAC100CA49BD /* OpenSans-ExtraBold.ttf */; };
+		F5631F191F41EAC100CA49BD /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F0F1F41EAC100CA49BD /* OpenSans-ExtraBoldItalic.ttf */; };
+		F5631F1A1F41EAC100CA49BD /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F101F41EAC100CA49BD /* OpenSans-Italic.ttf */; };
+		F5631F1B1F41EAC100CA49BD /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F111F41EAC100CA49BD /* OpenSans-Light.ttf */; };
+		F5631F1C1F41EAC100CA49BD /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F121F41EAC100CA49BD /* OpenSans-LightItalic.ttf */; };
+		F5631F1D1F41EAC100CA49BD /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F131F41EAC100CA49BD /* OpenSans-Regular.ttf */; };
+		F5631F1E1F41EAC100CA49BD /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F141F41EAC100CA49BD /* OpenSans-Semibold.ttf */; };
+		F5631F1F1F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F151F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf */; };
+		F577F6741F3E2F2300D11F6C /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F577F6731F3E2F2300D11F6C /* ErrorExtension.swift */; };
 		FA54D5881E11C59600F0DBEA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54D5871E11C59600F0DBEA /* FirstViewController.swift */; };
 		FABDC9221EE1EB2B000DDAC3 /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDC9211EE1EB2B000DDAC3 /* ConfigurationManager.swift */; };
 /* End PBXBuildFile section */
@@ -101,6 +114,19 @@
 		E8B30E011E72FF8000131DCF /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		E8FBB1BE1DD21A32000D6740 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		E8FBB1C01DD21D18000D6740 /* SessionDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDataManager.swift; sourceTree = "<group>"; };
+		F502D6EB1F3B636F00474060 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		F5631F0C1F41EAC100CA49BD /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		F5631F0D1F41EAC100CA49BD /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		F5631F0E1F41EAC100CA49BD /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		F5631F0F1F41EAC100CA49BD /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		F5631F101F41EAC100CA49BD /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		F5631F111F41EAC100CA49BD /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		F5631F121F41EAC100CA49BD /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		F5631F131F41EAC100CA49BD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		F5631F141F41EAC100CA49BD /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		F5631F151F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		F577F6731F3E2F2300D11F6C /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		FA54D5871E11C59600F0DBEA /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		FABDC9211EE1EB2B000DDAC3 /* ConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +163,7 @@
 		9B0C72511C738C3100BAF3B1 /* Target-MVD-Mathias */ = {
 			isa = PBXGroup;
 			children = (
+				F5631F0B1F41EAC100CA49BD /* Resources */,
 				E8290BFC1D832D6400599960 /* Extensions */,
 				9BFA84EF1C7767DD009F64E4 /* Helpers */,
 				9BDA91E01C7390D30003877D /* Manager */,
@@ -149,6 +176,7 @@
 				9B0C726D1C738D3400BAF3B1 /* Info.plist */,
 				9BFA84F21C776827009F64E4 /* LaunchScreen.storyboard */,
 				9BFA84F41C77682B009F64E4 /* Main.storyboard */,
+				F502D6EB1F3B636F00474060 /* Onboarding.storyboard */,
 			);
 			path = "Target-MVD-Mathias";
 			sourceTree = "<group>";
@@ -318,8 +346,27 @@
 				E8B30E011E72FF8000131DCF /* UIStoryboardExtension.swift */,
 				E81171911DE5EFB7003D3DF5 /* UIViewControllerExtension.swift */,
 				E8290BFD1D832D9200599960 /* UIViewExtension.swift */,
+				F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */,
+				F577F6731F3E2F2300D11F6C /* ErrorExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F5631F0B1F41EAC100CA49BD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F5631F0C1F41EAC100CA49BD /* OpenSans-Bold.ttf */,
+				F5631F0D1F41EAC100CA49BD /* OpenSans-BoldItalic.ttf */,
+				F5631F0E1F41EAC100CA49BD /* OpenSans-ExtraBold.ttf */,
+				F5631F0F1F41EAC100CA49BD /* OpenSans-ExtraBoldItalic.ttf */,
+				F5631F101F41EAC100CA49BD /* OpenSans-Italic.ttf */,
+				F5631F111F41EAC100CA49BD /* OpenSans-Light.ttf */,
+				F5631F121F41EAC100CA49BD /* OpenSans-LightItalic.ttf */,
+				F5631F131F41EAC100CA49BD /* OpenSans-Regular.ttf */,
+				F5631F141F41EAC100CA49BD /* OpenSans-Semibold.ttf */,
+				F5631F151F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,9 +471,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5631F1A1F41EAC100CA49BD /* OpenSans-Italic.ttf in Resources */,
+				F5631F171F41EAC100CA49BD /* OpenSans-BoldItalic.ttf in Resources */,
 				9BFA84F51C77682B009F64E4 /* Main.storyboard in Resources */,
+				F5631F1E1F41EAC100CA49BD /* OpenSans-Semibold.ttf in Resources */,
+				F5631F181F41EAC100CA49BD /* OpenSans-ExtraBold.ttf in Resources */,
 				9BFA84F31C776827009F64E4 /* LaunchScreen.storyboard in Resources */,
+				F5631F1C1F41EAC100CA49BD /* OpenSans-LightItalic.ttf in Resources */,
 				9B0C72721C738D3400BAF3B1 /* Assets.xcassets in Resources */,
+				F5631F161F41EAC100CA49BD /* OpenSans-Bold.ttf in Resources */,
+				F502D6EC1F3B636F00474060 /* Onboarding.storyboard in Resources */,
+				F5631F1F1F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf in Resources */,
+				F5631F1B1F41EAC100CA49BD /* OpenSans-Light.ttf in Resources */,
+				F5631F1D1F41EAC100CA49BD /* OpenSans-Regular.ttf in Resources */,
+				F5631F191F41EAC100CA49BD /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +646,7 @@
 				9BD409101CE9F19E005223C9 /* UIHelper.swift in Sources */,
 				9B186ED81CA30DEF002CADE5 /* PaginatedTableView.swift in Sources */,
 				9B88CC651CAB2DCE00AE60C5 /* PaginatedCollectionView.swift in Sources */,
+				F577F6741F3E2F2300D11F6C /* ErrorExtension.swift in Sources */,
 				E8B30E021E72FF8000131DCF /* UIStoryboardExtension.swift in Sources */,
 				9B3AA3A11ED4D014005A4D26 /* HomeViewController.swift in Sources */,
 				9B77E0751E2FB66F0020E450 /* UserDataManager.swift in Sources */,
@@ -603,6 +662,7 @@
 				9B0C72761C738D3400BAF3B1 /* UserAPI.swift in Sources */,
 				9BE3669D1F101737007CAECD /* MultipartMedia.swift in Sources */,
 				9B3AA39B1ED35013005A4D26 /* SignUpViewController.swift in Sources */,
+				F53ED73C1F3CA2F2007C6D43 /* UIColorExtension.swift in Sources */,
 				9B0C72711C738D3400BAF3B1 /* AppDelegate.swift in Sources */,
 				E8FBB1C11DD21D18000D6740 /* SessionDataManager.swift in Sources */,
 				9B77E0791E2FCF710020E450 /* Media.swift in Sources */,

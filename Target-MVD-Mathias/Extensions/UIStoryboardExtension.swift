@@ -9,12 +9,12 @@
 import UIKit
 
 extension UIStoryboard {
-    class func instantiateViewController <T: UIViewController>(_ type: T.Type, storyboardIdentifier: String = "Main") -> T? {
-        let storyboard = UIStoryboard(name: storyboardIdentifier, bundle: nil)
-        return storyboard.instantiateViewController(type)
-    }
-
-    func instantiateViewController <T: UIViewController>(_ type: T.Type) -> T? {
-        return instantiateViewController(withIdentifier: String(describing: type)) as? T
-    }
+  class func instantiateViewController <T: UIViewController>(_ type: T.Type, storyboardIdentifier: String = "Main") -> T? {
+    let storyboard = UIStoryboard(name: storyboardIdentifier, bundle: nil)
+    return storyboard.instantiateViewController(type)
+  }
+  
+  func instantiateViewController <T: UIViewController>(_ type: T.Type) -> T? {
+    return instantiateViewController(withIdentifier: String(describing: type)) as? T
+  }
 }

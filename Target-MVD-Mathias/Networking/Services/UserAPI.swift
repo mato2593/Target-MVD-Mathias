@@ -13,7 +13,7 @@ class UserAPI {
   
   fileprivate static let usersUrl = "/users/"
   fileprivate static let currentUserUrl = "/user/"
-
+  
   class func login(_ email: String, password: String, success: @escaping (_ responseObject: String?) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "sign_in"
     let parameters = [
@@ -23,15 +23,15 @@ class UserAPI {
       ]
     ]
     APIClient.sendPostRequest(url, params: parameters as [String : AnyObject]?,
-      success: { (response) -> Void in
-        let json = JSON(response)
-        UserDataManager.storeUserObject(User.parse(fromJSON: json))
-        success("")
+                              success: { (response) -> Void in
+                                let json = JSON(response)
+                                UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                success("")
     }) { (error) -> Void in
-        failure(error)
+      failure(error)
     }
   }
-
+  
   //Example method that uploads an image using multipart-form.
   class func signup(_ email: String, password: String, avatar: UIImage, success: @escaping (_ responseObject: [String: Any]) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let parameters = [
@@ -52,7 +52,7 @@ class UserAPI {
       failure(error)
     })
   }
-
+  
   //Example method that uploads base64 encoded image.
   class func signup(_ email: String, password: String, avatar64: UIImage, success: @escaping (_ responseObject: [String: Any]) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let picData = UIImageJPEGRepresentation(avatar64, 0.75)
@@ -74,7 +74,28 @@ class UserAPI {
       failure(error)
     }
   }
-
+  
+  class func signup(name: String, email: String, password: String, gender: String, success: @escaping (_ responseObject: [String: Any]) -> Void, failure: @escaping (_ error: Error) -> Void) {
+    let parameters = [
+      "user": [
+        "name": name,
+        "email": email,
+        "password": password,
+        "password_confirmation": password,
+        "gender": gender.lowercased()
+      ]
+    ]
+    
+    APIClient.sendPostRequest(usersUrl, params: parameters as [String : AnyObject]?,
+                              success: { (response) -> Void in
+                                let json = JSON(response)
+                                UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                success(response)
+    }) { (error) -> Void in
+      failure(error)
+    }
+  }
+  
   class func getMyProfile(_ success: @escaping (_ json: JSON) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = currentUserUrl + "profile"
     APIClient.sendGetRequest(url, success: { (responseObject) in
@@ -84,17 +105,17 @@ class UserAPI {
       failure(error)
     }
   }
-
+  
   class func loginWithFacebook(token: String, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = currentUserUrl + "facebook"
     let parameters = [
       "access_token": token
       ] as [String : Any]
     APIClient.sendPostRequest(url, params: parameters as [String : AnyObject]?,
-      success: { (responseObject) -> Void in
-        let json = JSON(responseObject)
-        UserDataManager.storeUserObject(User.parse(fromJSON: json))
-        success()
+                              success: { (responseObject) -> Void in
+                                let json = JSON(responseObject)
+                                UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                success()
     }) { (error) -> Void in
       failure(error)
     }

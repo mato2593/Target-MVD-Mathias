@@ -27,4 +27,11 @@ extension String {
     let predicate = NSPredicate(format: "SELF MATCHES %@", "[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(\\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@([A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?")
     return predicate.evaluate(with: self)
   }
+  
+  func capitalizeFirstLetter() -> String {
+    let first = String(characters.prefix(1)).capitalized
+    let other = String(characters.dropFirst())
+    return first + other
+  }
+
 }
