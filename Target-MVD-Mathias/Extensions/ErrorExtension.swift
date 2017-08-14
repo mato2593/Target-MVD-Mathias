@@ -9,11 +9,11 @@
 import Foundation
 
 extension Error {
-    var code: Int {
-        return _code
-    }
-    
-    var domain: String {
-        return _domain
-    }
+  var code: Int {
+    return _code
+  }
+  
+  var domain: String {
+    return _domain
+  }
 }
