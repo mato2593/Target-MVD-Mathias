@@ -31,10 +31,20 @@ class SignUpViewController: UIViewController {
   // MARK: Variables
   var errorsInForm = false
   var firstTimeOpeningPicker = true
+  var firstTimeEditingPassword = true
   
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    setupView()
+  }
+  
+  private func setupView() {
+    nameTextField.delegate = self
+    emailTextField.delegate = self
+    passwordTextField.delegate = self
+    confirmPasswordTextField.delegate = self
     
     genderPickerView.dataSource = self
     genderPickerView.delegate = self
@@ -64,8 +74,7 @@ class SignUpViewController: UIViewController {
     let errorLabels = [nameErrorLabel, emailErrorLabel, passwordErrorLabel, confirmPasswordErrorLabel, genderErrorLabel]
     
     for i in 0..<textFields.count {
-      textFields[i]?.layer.borderColor = UIColor.black.cgColor
-      errorLabels[i]?.isHidden = true
+      hideErrorInForm(textField: textFields[i]!, errorLabel: errorLabels[i]!)
     }
     
     errorsInForm = false
@@ -115,34 +124,39 @@ class SignUpViewController: UIViewController {
     }
   }
   
-  private func showErrorInForm(textField: UITextField, errorLabel: UILabel) {
+  fileprivate func showErrorInForm(textField: UITextField, errorLabel: UILabel) {
     textField.addBorder(color: .tomato, weight: 1.0)
     errorLabel.isHidden = false
   }
   
-  private func nameIsInvalid() -> Bool {
+  fileprivate func hideErrorInForm(textField: UITextField, errorLabel: UILabel) {
+    textField.layer.borderColor = UIColor.black.cgColor
+    errorLabel.isHidden = true
+  }
+  
+  fileprivate func nameIsInvalid() -> Bool {
     let name = nameTextField.text!
     return name.isEmpty
   }
   
-  private func emailIsInvalid() -> Bool {
+  fileprivate func emailIsInvalid() -> Bool {
     let email = emailTextField.text!
     return !email.isEmailFormatted()
   }
   
-  private func passwordIsInvalid() -> Bool {
+  fileprivate func passwordIsInvalid() -> Bool {
     let password = passwordTextField.text!
     return password.length() < minPasswordLength
   }
   
-  private func confirmPasswordIsInvalid() -> Bool {
+  fileprivate func confirmPasswordIsInvalid() -> Bool {
     let password = passwordTextField.text!
     let confirmPassword = confirmPasswordTextField.text!
     
     return confirmPassword != password
   }
   
-  private func genderIsInvalid() -> Bool {
+  fileprivate func genderIsInvalid() -> Bool {
     let gender = genderTextField.text!
     return gender.isEmpty
   }
@@ -176,10 +190,55 @@ extension SignUpViewController: UIPickerViewDataSource {
 extension SignUpViewController: UITextFieldDelegate {
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    if firstTimeOpeningPicker {
+    if firstTimeOpeningPicker && textField == genderTextField {
       firstTimeOpeningPicker = false
       genderPickerView.selectRow(0, inComponent: 0, animated: false)
       pickerView(genderPickerView, didSelectRow: 0, inComponent: 0)
+    }
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    switch textField {
+      case nameTextField:
+        if nameIsInvalid() {
+          showErrorInForm(textField: nameTextField, errorLabel: nameErrorLabel)
+        } else {
+          hideErrorInForm(textField: nameTextField, errorLabel: nameErrorLabel)
+        }
+      case emailTextField:
+        if emailIsInvalid() {
+          showErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
+        } else {
+          hideErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
+        }
+      case passwordTextField, confirmPasswordTextField:
+        checkPasswordErrors()
+        
+        if textField == passwordTextField {
+          firstTimeEditingPassword = false
+      }
+      case genderTextField:
+        if genderIsInvalid() {
+          showErrorInForm(textField: genderTextField, errorLabel: genderErrorLabel)
+        } else {
+          hideErrorInForm(textField: genderTextField, errorLabel: genderErrorLabel)
+        }
+      default:
+        break
+    }
+  }
+  
+  fileprivate func checkPasswordErrors() {
+    if passwordIsInvalid() {
+      showErrorInForm(textField: passwordTextField, errorLabel: passwordErrorLabel)
+    } else {
+      hideErrorInForm(textField: passwordTextField, errorLabel: passwordErrorLabel)
+      
+      if confirmPasswordIsInvalid() && !firstTimeEditingPassword {
+        showErrorInForm(textField: confirmPasswordTextField, errorLabel: confirmPasswordErrorLabel)
+      } else {
+        hideErrorInForm(textField: confirmPasswordTextField, errorLabel: confirmPasswordErrorLabel)
+      }
     }
   }
   
