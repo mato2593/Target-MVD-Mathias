@@ -10,15 +10,32 @@ import UIKit
 
 class SignInViewController: UIViewController {
   
+  // MARK: Outlets
+  @IBOutlet weak var emailTextField: UITextField!
+  @IBOutlet weak var passwordTextField: UITextField!
+  
+  @IBOutlet weak var signInErrorLabel: UILabel!
+  
+  // MARK: Actions
   @IBAction func tapOnSignInButton(_ sender: Any) {
-    view.showSpinner(message: "View spinner")
-    UserAPI.login("toptier@mail.com", password: "123456789", success: { (responseObject) in
+    showSpinner()
+    
+    let email = emailTextField.text!
+    let password = passwordTextField.text!
+    
+    UserAPI.login(email, password: password, success: { (responseObject) in
       self.hideSpinner()
-      UIApplication.shared.keyWindow?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController")
+      print(responseObject!)
+      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self, storyboardIdentifier: "Onboarding")
     }) { (error) in
       self.hideSpinner()
-      self.showMessageError(title: "Error", errorMessage: error.localizedDescription)
+      self.showSignInError()
       print(error)
     }
+  }
+  
+  // MARK: Private functions
+  private func showSignInError() {
+    signInErrorLabel.isHidden = false
   }
 }
