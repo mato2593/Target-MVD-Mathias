@@ -322,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PPY-xB-GMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1459" y="-548"/>
+            <point key="canvasLocation" x="-1076" y="-548"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="g7b-g4-baf">
@@ -456,18 +456,29 @@
                                     <segue destination="GtC-Zi-BpW" kind="show" id="unV-Rv-6V8"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="oops! this email is not valid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mik-VS-c9t" userLabel="Email Error Label">
+                                <rect key="frame" x="49" y="251" width="277" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="40C-Tt-BIK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
+                                <color key="textColor" red="0.87843137250000003" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oTE-E4-lfb" firstAttribute="top" secondItem="33e-Uo-FSs" secondAttribute="bottom" constant="75" id="1Ds-yi-Jad"/>
                             <constraint firstItem="P7B-Ch-adi" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="30w-Dg-hjY"/>
                             <constraint firstItem="BlL-6Z-qHm" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="45W-9e-Sad"/>
+                            <constraint firstItem="Mik-VS-c9t" firstAttribute="leading" relation="lessThanOrEqual" secondItem="tYR-Xu-sLT" secondAttribute="leading" constant="49" id="7DD-8l-XhV"/>
                             <constraint firstAttribute="trailing" secondItem="BJQ-1o-Fv5" secondAttribute="trailing" id="9FP-y1-4ki"/>
                             <constraint firstItem="BJQ-1o-Fv5" firstAttribute="leading" secondItem="tYR-Xu-sLT" secondAttribute="leading" id="9YT-mr-F2f"/>
                             <constraint firstItem="bXx-ZK-YpT" firstAttribute="top" secondItem="AJw-yH-Rh1" secondAttribute="bottom" constant="8" id="9tS-hd-zXd"/>
                             <constraint firstItem="xmo-Ws-o77" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="E0n-0U-ChU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9nG-IC-guA" secondAttribute="trailing" constant="109" id="Egd-xr-eXa"/>
                             <constraint firstItem="xmo-Ws-o77" firstAttribute="top" secondItem="BlL-6Z-qHm" secondAttribute="bottom" constant="4" id="Ej7-Ji-ik4"/>
+                            <constraint firstItem="9nG-IC-guA" firstAttribute="top" secondItem="Mik-VS-c9t" secondAttribute="bottom" constant="6" id="FTb-Fb-pdl"/>
                             <constraint firstItem="sz8-zG-vgc" firstAttribute="leading" secondItem="xmo-Ws-o77" secondAttribute="leading" id="LVh-hD-xmz"/>
                             <constraint firstItem="9nG-IC-guA" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="M4L-Nv-bkw"/>
                             <constraint firstItem="sz8-zG-vgc" firstAttribute="trailing" secondItem="xmo-Ws-o77" secondAttribute="trailing" id="MSF-03-pnd"/>
@@ -484,8 +495,11 @@
                             <constraint firstItem="qSQ-Gm-3yd" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="d7Y-nd-NWf"/>
                             <constraint firstAttribute="trailing" secondItem="xmo-Ws-o77" secondAttribute="trailing" constant="66" id="eQs-uL-qVb"/>
                             <constraint firstItem="oTE-E4-lfb" firstAttribute="leading" secondItem="tYR-Xu-sLT" secondAttribute="leading" constant="87" id="fZi-49-zSs"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Mik-VS-c9t" secondAttribute="trailing" constant="49" id="jsQ-EE-c13"/>
+                            <constraint firstItem="Mik-VS-c9t" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="kXZ-X6-qJv"/>
                             <constraint firstItem="sz8-zG-vgc" firstAttribute="top" secondItem="9nG-IC-guA" secondAttribute="bottom" constant="4" id="l3X-UI-Tbt"/>
                             <constraint firstItem="BlL-6Z-qHm" firstAttribute="top" secondItem="oTE-E4-lfb" secondAttribute="bottom" constant="68" id="lyB-l5-8Uh"/>
+                            <constraint firstItem="Mik-VS-c9t" firstAttribute="top" secondItem="xmo-Ws-o77" secondAttribute="bottom" constant="4" id="nQ4-Sn-7l1"/>
                             <constraint firstItem="BJQ-1o-Fv5" firstAttribute="top" secondItem="tYR-Xu-sLT" secondAttribute="top" id="nbA-D9-4aw"/>
                             <constraint firstItem="EqA-8x-Equ" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="pTe-Mt-VTr"/>
                             <constraint firstAttribute="trailing" secondItem="oTE-E4-lfb" secondAttribute="trailing" constant="87" id="qfu-cR-4LA"/>
@@ -495,11 +509,11 @@
                             <constraint firstItem="Hi8-Ir-EKa" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="uYK-SE-ue2"/>
                             <constraint firstItem="bXx-ZK-YpT" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="wPh-zw-jMg"/>
                             <constraint firstItem="AJw-yH-Rh1" firstAttribute="centerX" secondItem="tYR-Xu-sLT" secondAttribute="centerX" id="wsV-ZJ-kPL"/>
-                            <constraint firstItem="9nG-IC-guA" firstAttribute="top" secondItem="xmo-Ws-o77" secondAttribute="bottom" constant="24" id="xBS-yd-3Sx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kWd-eZ-WPE"/>
                     <connections>
+                        <outlet property="emailErrorLabel" destination="Mik-VS-c9t" id="Fun-4i-ooj"/>
                         <outlet property="emailTextField" destination="xmo-Ws-o77" id="dsu-gu-RIY"/>
                         <outlet property="passwordTextField" destination="sz8-zG-vgc" id="sBS-01-Q1b"/>
                         <outlet property="signInErrorLabel" destination="AJw-yH-Rh1" id="5Fe-bG-pHG"/>
@@ -507,7 +521,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPz-NP-6EF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1990" y="-548"/>
+            <point key="canvasLocation" x="-1830" y="-548"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="FFq-MY-bfp">
@@ -557,7 +571,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X6g-Y3-y0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-924" y="-548"/>
+            <point key="canvasLocation" x="-393" y="-547"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pVi-3g-rF6">
@@ -579,7 +593,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ty0-fu-d7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2487.1999999999998" y="-547.37631184407803"/>
+            <point key="canvasLocation" x="-2569" y="-547"/>
         </scene>
     </scenes>
     <resources>
