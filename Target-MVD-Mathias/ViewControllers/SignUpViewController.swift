@@ -68,6 +68,10 @@ class SignUpViewController: UIViewController {
     }
   }
   
+  @IBAction func tapOnSignInButton(_ sender: Any) {
+    self.navigationController?.popViewController(animated: true)
+  }
+  
   // MARK: Private methods
   private func resetErrors() {
     let textFields = [nameTextField, emailTextField, passwordTextField, confirmPasswordTextField, genderTextField]
