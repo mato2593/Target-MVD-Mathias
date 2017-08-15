@@ -25,14 +25,6 @@ class SignInViewController: UIViewController {
   // MARK: Variables
   var signInError = false
   
-  // MARK: Lifecycle
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    emailTextField.delegate = self
-    passwordTextField.delegate = self
-  }
-  
   // MARK: Actions
   @IBAction func tapOnSignInButton(_ sender: Any) {
     if errorsInForm() {
@@ -43,7 +35,7 @@ class SignInViewController: UIViewController {
     }
   }
   
-  // MARK: Private functions\
+  // MARK: Private functions
   private func errorsInForm() -> Bool {
     return emailIsInvalid() || passwordIsInvalid()
   }

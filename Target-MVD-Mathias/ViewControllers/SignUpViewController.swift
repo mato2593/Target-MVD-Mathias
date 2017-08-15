@@ -69,7 +69,7 @@ class SignUpViewController: UIViewController {
   }
   
   @IBAction func tapOnSignInButton(_ sender: Any) {
-    self.navigationController?.popViewController(animated: true)
+    navigationController?.popViewController(animated: true)
   }
   
   // MARK: Private methods
