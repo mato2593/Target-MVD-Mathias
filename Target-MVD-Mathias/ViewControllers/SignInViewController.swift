@@ -55,10 +55,7 @@ class SignInViewController: UIViewController {
   
   private func signIn() {
     showSpinner()
-    
-    if signInError {
-      resetErrors()
-    }
+    resetErrors()
     
     let email = emailTextField.text!
     let password = passwordTextField.text!
