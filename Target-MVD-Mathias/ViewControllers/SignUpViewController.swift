@@ -210,6 +210,8 @@ extension SignUpViewController: UITextFieldDelegate {
       case passwordTextField, confirmPasswordTextField:
         checkPasswordErrors()
         
+        firstTimeEditingPassword = textField != passwordTextField
+        
         if textField == passwordTextField {
           firstTimeEditingPassword = false
         }

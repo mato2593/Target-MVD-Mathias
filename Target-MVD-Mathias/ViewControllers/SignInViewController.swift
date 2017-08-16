@@ -17,6 +17,13 @@ class SignInViewController: UIViewController {
   @IBOutlet weak var emailErrorLabel: UILabel!
   @IBOutlet weak var signInErrorLabel: UILabel!
   
+  @IBOutlet weak var headerTitleLabel: UILabel!
+  @IBOutlet weak var emailLabel: UILabel!
+  @IBOutlet weak var passwordLabel: UILabel!
+  @IBOutlet weak var signInButton: UIButton!
+  @IBOutlet weak var facebookSignInButton: UIButton!
+  @IBOutlet weak var signUpButton: UIButton!
+  
   // MARK: Constants
   let minPasswordLength = 8
   let signInErrorMessage = "this email and password don’t match"
@@ -24,6 +31,13 @@ class SignInViewController: UIViewController {
   
   // MARK: Variables
   var signInError = false
+  
+  // MARK: Lifecycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    setLetterSpacing()
+  }
   
   // MARK: Actions
   @IBAction func tapOnSignInButton(_ sender: Any) {
@@ -36,6 +50,17 @@ class SignInViewController: UIViewController {
   }
   
   // MARK: Private functions
+  private func setLetterSpacing() {
+    let defaultSpacing: CGFloat = 1.6
+    
+    headerTitleLabel.setSpacing(ofCharacter: 3.0)
+    emailLabel.setSpacing(ofCharacter: defaultSpacing)
+    passwordLabel.setSpacing(ofCharacter: defaultSpacing)
+    signInButton.titleLabel?.setSpacing(ofCharacter: defaultSpacing)
+    facebookSignInButton.titleLabel?.setSpacing(ofCharacter: 2.4)
+    signUpButton.titleLabel?.setSpacing(ofCharacter: defaultSpacing)
+  }
+  
   private func errorsInForm() -> Bool {
     return emailIsInvalid() || passwordIsInvalid()
   }
