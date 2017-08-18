@@ -61,13 +61,18 @@ class SignInViewController: UIViewController {
         self.hideSpinner()
         return
       }
-      if result?.grantedPermissions == nil || result?.isCancelled ?? true {
-        self.hideSpinner()
-      } else if !(result?.grantedPermissions.contains("email"))! {
-        self.hideSpinner()
-        self.showMessageError(title: "Oops..", errorMessage: "It seems that you haven't allowed Facebook to provide your email address.")
+      
+      if let result = result {
+        if result.grantedPermissions == nil || result.isCancelled {
+          self.hideSpinner()
+        } else if !result.grantedPermissions.contains("email") {
+          self.hideSpinner()
+          self.showMessageError(title: "Oops..", errorMessage: "It seems that you haven't allowed Facebook to provide your email address.")
+        } else {
+          self.facebookLoginCallback()
+        }
       } else {
-        self.facebookLoginCallback()
+        self.hideSpinner()
       }
     }
   }
