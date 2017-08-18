@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     spinner = UIHelper.initSpinner()
     
     if UserDataManager.userHasToken() {
-      let vc = UIStoryboard.instantiateViewController(HomeViewController.self, storyboardIdentifier: "Onboarding")
+      let vc = UIStoryboard.instantiateViewController(HomeViewController.self, storyboardIdentifier: "Main")
       self.window?.rootViewController = vc
     }
     
