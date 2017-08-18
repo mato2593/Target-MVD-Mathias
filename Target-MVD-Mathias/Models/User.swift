@@ -38,12 +38,10 @@ class User: NSObject, NSCoding {
   
   //MARK Parser
   class func parse(fromJSON json: JSON) -> User {
-    let user = json["user"]
-    
-    return User(id:       user["id"].intValue,
-                username: user["username"].stringValue,
-                email:    user["email"].stringValue,
-                image:    user["profile_picture"].stringValue
+    return User(id:       json["user_id"].intValue,
+                username: json["name"].stringValue,
+                email:    json["email"].stringValue,
+                image:    json["image"].stringValue
     )
   }
 }

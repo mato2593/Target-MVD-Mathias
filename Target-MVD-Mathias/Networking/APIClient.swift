@@ -48,13 +48,10 @@ class APIClient {
                                               HTTPHeader.contentType.rawValue: "application/json"]
   
   fileprivate class func getHeader() -> [String: String]? {
-    if let session = SessionDataManager.getSessionObject() {
-      return baseHeaders + [
-        HTTPHeader.uid.rawValue: session.uid ?? "",
-        HTTPHeader.client.rawValue: session.client ?? "",
-        HTTPHeader.token.rawValue: session.accessToken ?? ""
-      ]
+    if let token = UserDataManager.getAccessToken() {
+      return baseHeaders + ["X-USER-TOKEN": token]
     }
+    
     return baseHeaders
   }
   

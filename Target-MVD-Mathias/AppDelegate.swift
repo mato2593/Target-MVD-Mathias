@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     IQKeyboardManager.sharedManager().enable = true
     spinner = UIHelper.initSpinner()
     
-    if SessionDataManager.checkSession() {
+    if UserDataManager.userHasToken() {
       let vc = UIStoryboard.instantiateViewController(HomeViewController.self, storyboardIdentifier: "Onboarding")
       self.window?.rootViewController = vc
     }

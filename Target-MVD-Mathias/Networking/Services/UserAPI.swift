@@ -107,14 +107,16 @@ class UserAPI {
   }
   
   class func loginWithFacebook(token: String, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
-    let url = currentUserUrl + "facebook"
+    let url = usersUrl + "sign_in"
     let parameters = [
-      "access_token": token
+      "type": "facebook",
+      "fb_access_token": token
       ] as [String : Any]
     APIClient.sendPostRequest(url, params: parameters as [String : AnyObject]?,
                               success: { (responseObject) -> Void in
                                 let json = JSON(responseObject)
                                 UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                UserDataManager.storeAccessToken(json["token"].stringValue)
                                 success()
     }) { (error) -> Void in
       failure(error)
@@ -124,7 +126,8 @@ class UserAPI {
   class func logout(_ success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "sign_out"
     APIClient.sendDeleteRequest(url, success: { (_) in
-      SessionDataManager.deleteSessionObject()
+      UserDataManager.deleteUserObject()
+      UserDataManager.deleteAccessToken()
       success()
     }) { (error) -> Void in
       failure(error)
