@@ -90,6 +90,7 @@ class UserAPI {
                               success: { (response) -> Void in
                                 let json = JSON(response)
                                 UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                UserDataManager.storeAccessToken(json["token"].stringValue)
                                 success(response)
     }) { (error) -> Void in
       failure(error)
