@@ -121,7 +121,7 @@ class SignUpViewController: UIViewController {
     
     UserAPI.signup(name: name, email: email, password: password, gender: gender, success: { (_) in
       self.hideSpinner()
-      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateInitialViewController()
     }) { (error) in
       self.hideSpinner()
       self.showMessageError(title: "Error", errorMessage: error.domain.capitalizeFirstLetter())

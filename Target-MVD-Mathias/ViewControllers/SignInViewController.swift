@@ -86,7 +86,7 @@ class SignInViewController: UIViewController {
     UserAPI.loginWithFacebook(token: FBSDKAccessToken.current().tokenString,
                               success: { _ -> Void in
                                 self.hideSpinner()
-                                UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+                                UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateInitialViewController()
     }) { (error) -> Void in
       self.hideSpinner()
       self.showMessageError(title: "Error", errorMessage: error._domain)
@@ -123,7 +123,7 @@ class SignInViewController: UIViewController {
     
     UserAPI.login(email, password: password, success: { (_) in
       self.hideSpinner()
-      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateInitialViewController()
     }) { (_) in
       self.hideSpinner()
       self.showSignInError()

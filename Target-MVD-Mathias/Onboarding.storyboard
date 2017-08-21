@@ -372,7 +372,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nG-IC-guA" userLabel="Password Label">
-                                <rect key="frame" x="158" y="250" width="60" height="15"/>
+                                <rect key="frame" x="157" y="250" width="62" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="mXz-fi-Lgb"/>
                                     <constraint firstAttribute="height" constant="15" id="wMg-9t-u73"/>
@@ -542,7 +542,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="l1n-9t-kH9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Nnr-qh-pHC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nnr-qh-pHC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

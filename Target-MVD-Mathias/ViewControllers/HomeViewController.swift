@@ -18,14 +18,4 @@ class HomeViewController: UIViewController {
     }
   }
 
-  @IBAction func tapOnLogOutButton(_ sender: Any) {
-    view.showSpinner(message: "Signing out")
-    UserAPI.logout({
-      self.hideSpinner()
-      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
-    }) { (error) in
-      self.hideSpinner()
-      print(error)
-    }
-  }
 }
