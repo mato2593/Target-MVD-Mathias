@@ -44,12 +44,7 @@ class UserDataManager: NSObject {
   
   class func getAccessToken() -> String? {
     let defaults = UserDefaults.standard
-    
-    if let token = defaults.object(forKey: "access-token") as? String {
-      return token
-    }
-    
-    return nil
+    return defaults.object(forKey: "access-token") as? String
   }
   
   class func deleteAccessToken() {
