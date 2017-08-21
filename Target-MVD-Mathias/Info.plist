@@ -27,7 +27,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fbXXXXXXXXXXX</string>
+				<string>fb109802899713362</string>
 			</array>
 		</dict>
 	</array>
@@ -35,6 +35,8 @@
 	<string>1</string>
 	<key>ConfigurationName</key>
 	<string>Debug</string>
+	<key>FacebookAppID</key>
+	<string>109802899713362</string>
 	<key>FacebookDisplayName</key>
 	<string>Target-MVD-Mathias</string>
 	<key>LSApplicationQueriesSchemes</key>

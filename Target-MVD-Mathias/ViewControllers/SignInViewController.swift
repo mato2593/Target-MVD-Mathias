@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class SignInViewController: UIViewController {
   
@@ -49,6 +50,49 @@ class SignInViewController: UIViewController {
     }
   }
   
+  @IBAction func facebookLogin() {
+    showSpinner()
+    let fbLoginManager = FBSDKLoginManager()
+    //Logs out before login, in case user changes facebook accounts
+    fbLoginManager.logOut()
+    fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) -> Void in
+      guard error == nil else {
+        self.showMessageError(title: "Oops..", errorMessage: "Something went wrong, try again later.")
+        self.hideSpinner()
+        return
+      }
+      
+      if let result = result {
+        if result.grantedPermissions == nil || result.isCancelled {
+          self.hideSpinner()
+        } else if !result.grantedPermissions.contains("email") {
+          self.hideSpinner()
+          self.showMessageError(title: "Oops..", errorMessage: "It seems that you haven't allowed Facebook to provide your email address.")
+        } else {
+          self.facebookLoginCallback()
+        }
+      } else {
+        self.hideSpinner()
+      }
+    }
+  }
+  
+  //MARK: Facebook callback methods
+  func facebookLoginCallback() {
+    //Optionally store params (facebook user data) locally.
+    guard FBSDKAccessToken.current() != nil else {
+      return
+    }
+    UserAPI.loginWithFacebook(token: FBSDKAccessToken.current().tokenString,
+                              success: { _ -> Void in
+                                self.hideSpinner()
+                                UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+    }) { (error) -> Void in
+      self.hideSpinner()
+      self.showMessageError(title: "Error", errorMessage: error._domain)
+    }
+  }
+  
   // MARK: Private functions
   private func setLetterSpacing() {
     let defaultSpacing: CGFloat = 1.6
@@ -79,7 +123,7 @@ class SignInViewController: UIViewController {
     
     UserAPI.login(email, password: password, success: { (_) in
       self.hideSpinner()
-      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self, storyboardIdentifier: "Onboarding")
+      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
     }) { (_) in
       self.hideSpinner()
       self.showSignInError()

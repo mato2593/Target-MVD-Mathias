@@ -34,4 +34,26 @@ class UserDataManager: NSObject {
   class func checkSignin() -> Bool {
     return self.getUserObject() != nil
   }
+  
+  // MARK: Access token functions
+  
+  class func storeAccessToken(_ token: String) {
+    let defaults = UserDefaults.standard
+    defaults.set(token, forKey: "access-token")
+  }
+  
+  class func getAccessToken() -> String? {
+    let defaults = UserDefaults.standard
+    return defaults.object(forKey: "access-token") as? String
+  }
+  
+  class func deleteAccessToken() {
+    let defaults = UserDefaults.standard
+    defaults.removeObject(forKey: "access-token")
+  }
+  
+  class func userHasToken() -> Bool {
+    return self.getAccessToken() != nil
+  }
+  
 }

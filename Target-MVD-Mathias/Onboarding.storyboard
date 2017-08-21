@@ -438,6 +438,9 @@
                                 <state key="normal" title="CONNECT WITH FACEBOOK">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="facebookLogin" destination="Qwu-P5-r8j" eventType="touchUpInside" id="3uD-a3-QrC"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hi8-Ir-EKa" userLabel="Separator">
                                 <rect key="frame" x="127" y="493" width="121" height="1"/>
@@ -533,56 +536,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPz-NP-6EF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1830" y="-548"/>
-        </scene>
-        <!--Home View Controller-->
-        <scene sceneID="FFq-MY-bfp">
-            <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="Z9K-0A-ify" customClass="HomeViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mgb-Uc-Qo1"/>
-                        <viewControllerLayoutGuide type="bottom" id="TFT-fU-jLd"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OS3-mh-5mi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are logged in/signed up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5K-fQ-60b">
-                                <rect key="frame" x="81" y="323" width="213" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6c-Yd-t9H">
-                                <rect key="frame" x="162" y="374" width="52" height="30"/>
-                                <accessibility key="accessibilityConfiguration" identifier="LogoutButton"/>
-                                <state key="normal" title="Log out"/>
-                                <connections>
-                                    <action selector="tapOnLogOutButton:" destination="Z9K-0A-ify" eventType="touchUpInside" id="Pzf-gG-3EU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYD-vZ-woH">
-                                <rect key="frame" x="127" y="273" width="121" height="30"/>
-                                <state key="normal" title="Try get my profile"/>
-                                <connections>
-                                    <action selector="tapOnGetMyProfile:" destination="Z9K-0A-ify" eventType="touchUpInside" id="zYT-DZ-XjU"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <accessibility key="accessibilityConfiguration" identifier="AfterLoginSignupView"/>
-                        <constraints>
-                            <constraint firstItem="EYD-vZ-woH" firstAttribute="centerX" secondItem="OS3-mh-5mi" secondAttribute="centerX" id="1qV-AN-mH5"/>
-                            <constraint firstItem="A6c-Yd-t9H" firstAttribute="centerX" secondItem="OS3-mh-5mi" secondAttribute="centerX" id="ONL-Kl-wpD"/>
-                            <constraint firstItem="E5K-fQ-60b" firstAttribute="centerX" secondItem="OS3-mh-5mi" secondAttribute="centerX" id="ce8-fP-4HK"/>
-                            <constraint firstItem="A6c-Yd-t9H" firstAttribute="top" secondItem="E5K-fQ-60b" secondAttribute="bottom" constant="30" id="kVz-o6-MZf"/>
-                            <constraint firstItem="E5K-fQ-60b" firstAttribute="top" secondItem="EYD-vZ-woH" secondAttribute="bottom" constant="20" id="rss-d0-ts7"/>
-                            <constraint firstItem="E5K-fQ-60b" firstAttribute="centerY" secondItem="OS3-mh-5mi" secondAttribute="centerY" id="tox-kX-yDE"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X6g-Y3-y0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-393" y="-547"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pVi-3g-rF6">
