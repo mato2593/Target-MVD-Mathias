@@ -50,7 +50,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zbo-2P-3JE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xEC-KC-o6Y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xEC-KC-o6Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -82,7 +82,7 @@
                                     <constraint firstAttribute="height" constant="145" id="Nec-Ys-4ZY"/>
                                 </constraints>
                             </imageView>
-                            <navigationBar opaque="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8R-gy-gUO">
+                            <navigationBar opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8R-gy-gUO">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Profile" id="a58-EN-fBM">
@@ -241,6 +241,9 @@
                             <constraint firstItem="PNB-7D-C5E" firstAttribute="top" secondItem="khR-Ak-dil" secondAttribute="bottom" constant="40" id="zEd-Lv-49i"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="navigationBar" destination="u8R-gy-gUO" id="3fh-EK-IS7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XvU-Rk-kvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -250,7 +253,7 @@
     <resources>
         <image name="ChatIcon" width="28" height="23"/>
         <image name="ForwardArrow" width="10" height="19"/>
-        <image name="ProfileBackground" width="285" height="144"/>
+        <image name="ProfileBackground" width="286" height="144"/>
         <image name="UserAvatarPlaceholder" width="83" height="83"/>
         <image name="UserProfile" width="23" height="23"/>
     </resources>

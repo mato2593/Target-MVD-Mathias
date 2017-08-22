@@ -10,11 +10,16 @@ import UIKit
 
 class UserProfileViewController: UIViewController {
   
+  // MARK: Outlets
+  @IBOutlet weak var navigationBar: UINavigationBar!
+  
+  
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
+    navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationBar.shadowImage = UIImage()
   }
   
   override func didReceiveMemoryWarning() {
