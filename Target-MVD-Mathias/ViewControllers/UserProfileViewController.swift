@@ -13,6 +13,14 @@ class UserProfileViewController: UIViewController {
   // MARK: Outlets
   @IBOutlet weak var navigationBar: UINavigationBar!
   
+  @IBOutlet weak var avatarImageView: UIImageView!
+  
+  @IBOutlet weak var usernameTextField: UITextField!
+  @IBOutlet weak var emailTextField: UITextField!
+  @IBOutlet weak var passwordTextField: UITextField!
+  
+  @IBOutlet weak var usernameErrorLabel: UILabel!
+  @IBOutlet weak var emailErrorLabel: UILabel!
   
   // MARK: Lifecycle
   override func viewDidLoad() {
@@ -20,11 +28,8 @@ class UserProfileViewController: UIViewController {
     
     navigationBar.setBackgroundImage(UIImage(), for: .default)
     navigationBar.shadowImage = UIImage()
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+    
+    passwordTextField.attributedPlaceholder = NSAttributedString(string: "********", attributes: [NSForegroundColorAttributeName: UIColor.black])
   }
   
   // MARK: Actions
@@ -39,4 +44,7 @@ class UserProfileViewController: UIViewController {
     }
   }
   
+  @IBAction func tapOnSaveChangesButton(_ sender: Any) {
+    print("SAVE CHANGES")
+  }
 }

@@ -176,6 +176,9 @@
                                 <state key="normal" title="SAVE CHANGES">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tapOnSaveChangesButton:" destination="V5g-hq-06q" eventType="touchUpInside" id="5bc-34-LeU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNB-7D-C5E" userLabel="Log Out Button">
                                 <rect key="frame" x="112" y="523" width="150" height="32"/>
@@ -242,7 +245,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="avatarImageView" destination="Ilu-pr-9cj" id="2lz-At-uXk"/>
+                        <outlet property="emailErrorLabel" destination="crp-xG-YuM" id="dZW-FQ-s7A"/>
+                        <outlet property="emailTextField" destination="3mm-kl-BAu" id="8i2-N4-gPM"/>
                         <outlet property="navigationBar" destination="u8R-gy-gUO" id="3fh-EK-IS7"/>
+                        <outlet property="passwordTextField" destination="RaW-hh-QkF" id="1q2-oE-IcF"/>
+                        <outlet property="usernameErrorLabel" destination="Jim-nh-Oae" id="0do-dX-Exk"/>
+                        <outlet property="usernameTextField" destination="aLG-Dn-0RJ" id="ERK-gi-4nm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XvU-Rk-kvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
