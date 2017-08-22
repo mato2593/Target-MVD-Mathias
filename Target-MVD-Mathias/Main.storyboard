@@ -33,7 +33,7 @@
                         <barButtonItem key="leftBarButtonItem" image="UserProfile" id="mhM-ES-wBK">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="V5g-hq-06q" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="yIq-bF-Pw2"/>
+                                <segue destination="V5g-hq-06q" kind="show" customClass="SegueFromLeft" customModule="swiftbase" customModuleProvider="target" id="yIq-bF-Pw2"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ChatIcon" id="YwX-IA-yCy">
@@ -63,10 +63,10 @@
             </objects>
             <point key="canvasLocation" x="-305" y="662"/>
         </scene>
-        <!--User Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="XqE-sZ-UO2">
             <objects>
-                <viewController id="V5g-hq-06q" customClass="UserProfileViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="V5g-hq-06q" customClass="UserProfileViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gqd-wz-EtI"/>
                         <viewControllerLayoutGuide type="bottom" id="yVO-SX-4by"/>
@@ -82,16 +82,6 @@
                                     <constraint firstAttribute="height" constant="145" id="Nec-Ys-4ZY"/>
                                 </constraints>
                             </imageView>
-                            <navigationBar opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8R-gy-gUO">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Profile" id="a58-EN-fBM">
-                                        <barButtonItem key="rightBarButtonItem" image="ForwardArrow" id="IOK-iQ-yQ0">
-                                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USERNAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxc-2c-7SL" userLabel="Name Label">
                                 <rect key="frame" x="109" y="203" width="157" height="15"/>
                                 <constraints>
@@ -204,11 +194,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="u8R-gy-gUO" firstAttribute="top" secondItem="gqd-wz-EtI" secondAttribute="bottom" id="12b-my-whj"/>
                             <constraint firstItem="aLG-Dn-0RJ" firstAttribute="leading" secondItem="z3n-Jo-Blz" secondAttribute="leading" constant="70" id="48P-5S-pto"/>
-                            <constraint firstItem="u8R-gy-gUO" firstAttribute="leading" secondItem="z3n-Jo-Blz" secondAttribute="leading" id="7sV-mV-J93"/>
                             <constraint firstItem="crp-xG-YuM" firstAttribute="top" secondItem="3mm-kl-BAu" secondAttribute="bottom" id="9Dr-El-3M7"/>
                             <constraint firstItem="PQu-zr-mOP" firstAttribute="top" secondItem="crp-xG-YuM" secondAttribute="bottom" constant="3" id="BGv-Om-ur1"/>
+                            <constraint firstItem="174-mk-ZKG" firstAttribute="top" secondItem="gqd-wz-EtI" secondAttribute="bottom" constant="-26" id="Bhj-Qk-1t5"/>
                             <constraint firstItem="aLG-Dn-0RJ" firstAttribute="top" secondItem="Dxc-2c-7SL" secondAttribute="bottom" constant="4" id="DPe-51-CbY"/>
                             <constraint firstItem="Ilu-pr-9cj" firstAttribute="centerX" secondItem="174-mk-ZKG" secondAttribute="centerX" id="G2a-YJ-E3a"/>
                             <constraint firstItem="3mm-kl-BAu" firstAttribute="trailing" secondItem="aLG-Dn-0RJ" secondAttribute="trailing" id="GR7-dv-r9F"/>
@@ -221,9 +210,7 @@
                             <constraint firstItem="Qh3-0t-3td" firstAttribute="leading" secondItem="z3n-Jo-Blz" secondAttribute="leading" constant="109" id="TWz-lx-KkX"/>
                             <constraint firstItem="yVO-SX-4by" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PNB-7D-C5E" secondAttribute="bottom" constant="20" id="Tmz-gq-91y"/>
                             <constraint firstItem="Qh3-0t-3td" firstAttribute="top" secondItem="Jim-nh-Oae" secondAttribute="bottom" constant="3" id="X3E-me-s8H"/>
-                            <constraint firstItem="174-mk-ZKG" firstAttribute="top" secondItem="gqd-wz-EtI" secondAttribute="bottom" constant="18" id="ZDw-Bb-jya"/>
                             <constraint firstItem="Jim-nh-Oae" firstAttribute="leading" secondItem="z3n-Jo-Blz" secondAttribute="leading" constant="20" id="a2S-du-AKe"/>
-                            <constraint firstAttribute="trailing" secondItem="u8R-gy-gUO" secondAttribute="trailing" id="aMM-Dm-TEk"/>
                             <constraint firstAttribute="trailing" secondItem="crp-xG-YuM" secondAttribute="trailing" constant="20" id="azB-vz-a1I"/>
                             <constraint firstItem="Dxc-2c-7SL" firstAttribute="top" secondItem="174-mk-ZKG" secondAttribute="bottom" constant="20" id="c2y-Y8-LMC"/>
                             <constraint firstAttribute="trailing" secondItem="PQu-zr-mOP" secondAttribute="trailing" constant="109" id="cG0-ZG-bAY"/>
@@ -248,7 +235,6 @@
                         <outlet property="avatarImageView" destination="Ilu-pr-9cj" id="2lz-At-uXk"/>
                         <outlet property="emailErrorLabel" destination="crp-xG-YuM" id="dZW-FQ-s7A"/>
                         <outlet property="emailTextField" destination="3mm-kl-BAu" id="8i2-N4-gPM"/>
-                        <outlet property="navigationBar" destination="u8R-gy-gUO" id="3fh-EK-IS7"/>
                         <outlet property="passwordTextField" destination="RaW-hh-QkF" id="1q2-oE-IcF"/>
                         <outlet property="usernameErrorLabel" destination="Jim-nh-Oae" id="0do-dX-Exk"/>
                         <outlet property="usernameTextField" destination="aLG-Dn-0RJ" id="ERK-gi-4nm"/>
@@ -261,7 +247,6 @@
     </scenes>
     <resources>
         <image name="ChatIcon" width="28" height="23"/>
-        <image name="ForwardArrow" width="10" height="19"/>
         <image name="ProfileBackground" width="286" height="144"/>
         <image name="UserAvatarPlaceholder" width="83" height="83"/>
         <image name="UserProfile" width="23" height="23"/>

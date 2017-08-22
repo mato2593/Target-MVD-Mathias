@@ -10,6 +10,13 @@ import UIKit
 
 class HomeViewController: UIViewController {
   
+  // MARK: Lifecycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    makeNavigationBarTransparent()
+  }
+  
   @IBAction func tapOnGetMyProfile(_ sender: Any) {
     UserAPI.getMyProfile({ (json) in
       print(json)

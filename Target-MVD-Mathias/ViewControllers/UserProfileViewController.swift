@@ -11,8 +11,6 @@ import UIKit
 class UserProfileViewController: UIViewController {
   
   // MARK: Outlets
-  @IBOutlet weak var navigationBar: UINavigationBar!
-  
   @IBOutlet weak var avatarImageView: UIImageView!
   
   @IBOutlet weak var usernameTextField: UITextField!
@@ -25,11 +23,12 @@ class UserProfileViewController: UIViewController {
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    navigationBar.setBackgroundImage(UIImage(), for: .default)
-    navigationBar.shadowImage = UIImage()
+
+    setupNavigationBar()
     
     passwordTextField.attributedPlaceholder = NSAttributedString(string: "********", attributes: [NSForegroundColorAttributeName: UIColor.black])
+    
+    getUserData()
   }
   
   // MARK: Actions
@@ -46,5 +45,28 @@ class UserProfileViewController: UIViewController {
   
   @IBAction func tapOnSaveChangesButton(_ sender: Any) {
     print("SAVE CHANGES")
+  }
+  
+  // MARK: Functions
+  func setupNavigationBar() {
+    let goBackToHomeNavigationItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ForwardArrow"), style: .plain, target: self, action:#selector(UserProfileViewController.goBackToHome))
+    goBackToHomeNavigationItem.tintColor = .black
+    
+    navigationItem.setRightBarButton(goBackToHomeNavigationItem, animated: false)
+    
+    makeNavigationBarTransparent()
+  }
+  
+  func getUserData() {
+    UserAPI.getMyProfile({ (json) in
+      print(json)
+    }) { (error) in
+      print(error)
+    }
+  }
+  
+  func goBackToHome() {
+    let homeViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+    navigationController?.pushViewController(homeViewController!, animated: true)
   }
 }

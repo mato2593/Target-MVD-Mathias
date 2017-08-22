@@ -24,4 +24,11 @@ extension UIViewController {
   func hideSpinner() {
     view.hideSpinner()
   }
+  
+  func makeNavigationBarTransparent(hidesBackButton: Bool = true) {
+    navigationItem.setHidesBackButton(hidesBackButton, animated: false)
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.isTranslucent = true
+  }
 }
