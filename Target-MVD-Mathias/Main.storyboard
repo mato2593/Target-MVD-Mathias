@@ -100,6 +100,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="V5g-hq-06q" id="q6B-5W-9Me"/>
+                                </connections>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you forgot to put your name!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jim-nh-Oae" userLabel="Name Error Label">
                                 <rect key="frame" x="20" y="259" width="335" height="14"/>
@@ -127,6 +130,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <connections>
+                                    <outlet property="delegate" destination="V5g-hq-06q" id="6tq-bq-Nk1"/>
+                                </connections>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="oops! this email is not valid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crp-xG-YuM" userLabel="Email Error Label">
                                 <rect key="frame" x="20" y="332" width="335" height="14"/>
@@ -236,6 +242,7 @@
                         <outlet property="emailErrorLabel" destination="crp-xG-YuM" id="dZW-FQ-s7A"/>
                         <outlet property="emailTextField" destination="3mm-kl-BAu" id="8i2-N4-gPM"/>
                         <outlet property="passwordTextField" destination="RaW-hh-QkF" id="1q2-oE-IcF"/>
+                        <outlet property="saveChangesButton" destination="khR-Ak-dil" id="NUc-V1-GFv"/>
                         <outlet property="usernameErrorLabel" destination="Jim-nh-Oae" id="0do-dX-Exk"/>
                         <outlet property="usernameTextField" destination="aLG-Dn-0RJ" id="ERK-gi-4nm"/>
                     </connections>

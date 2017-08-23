@@ -108,6 +108,30 @@ class UserAPI {
     }
   }
   
+  class func updateUser(id: String, name: String?, email: String?, password: String?, avatar64: UIImage?, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
+    let url = usersUrl + id
+    
+    var userParams: [String: Any] = [:]
+    
+    userParams["name"] = name ?? nil
+    userParams["email"] = email ?? nil
+    userParams["password"] = password ?? nil
+    userParams["image"] = avatar64 ?? nil
+    
+    let parameters = [
+      "user": userParams
+    ]
+    
+    APIClient.sendPutRequest(url, params: parameters as [String: AnyObject]?,
+                             success: { (responseObject) in
+                              let json  = JSON(responseObject)
+                              UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                              success()
+    }) { (error) -> Void in
+      failure(error)
+    }
+  }
+  
   class func loginWithFacebook(token: String, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "sign_in"
     let parameters = [
