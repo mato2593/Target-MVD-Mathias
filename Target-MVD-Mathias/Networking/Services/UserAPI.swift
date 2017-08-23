@@ -99,7 +99,7 @@ class UserAPI {
   }
   
   class func getMyProfile(_ success: @escaping (_ json: JSON) -> Void, failure: @escaping (_ error: Error) -> Void) {
-    let url = currentUserUrl + "profile"
+    let url = usersUrl + "\(UserDataManager.getUserId())"
     APIClient.sendGetRequest(url, success: { (responseObject) in
       let json = JSON(responseObject)
       success(json)

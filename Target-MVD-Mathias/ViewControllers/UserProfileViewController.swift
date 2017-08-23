@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class UserProfileViewController: UIViewController {
   
@@ -26,6 +27,8 @@ class UserProfileViewController: UIViewController {
 
     setupNavigationBar()
     
+    avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width/2
+    avatarImageView.layer.masksToBounds = true
     passwordTextField.attributedPlaceholder = NSAttributedString(string: "********", attributes: [NSForegroundColorAttributeName: UIColor.black])
     
     getUserData()
@@ -58,11 +61,11 @@ class UserProfileViewController: UIViewController {
   }
   
   func getUserData() {
-    UserAPI.getMyProfile({ (json) in
-      print(json)
-    }) { (error) in
-      print(error)
-    }
+    let user = UserDataManager.getUserObject()
+    
+    usernameTextField.text = user?.username
+    emailTextField.text = user?.email
+    avatarImageView.sd_setImage(with: user?.image)
   }
   
   func goBackToHome() {

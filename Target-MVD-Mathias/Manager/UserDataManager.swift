@@ -35,6 +35,10 @@ class UserDataManager: NSObject {
     return self.getUserObject() != nil
   }
   
+  class func getUserId() -> Int {
+    return self.getUserObject()?.id ?? 0
+  }
+  
   // MARK: Access token functions
   
   class func storeAccessToken(_ token: String) {
