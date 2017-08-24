@@ -78,7 +78,7 @@ class SignUpViewController: UIViewController {
     let errorLabels = [nameErrorLabel, emailErrorLabel, passwordErrorLabel, confirmPasswordErrorLabel, genderErrorLabel]
     
     for i in 0..<textFields.count {
-      hideErrorInForm(textField: textFields[i]!, errorLabel: errorLabels[i]!)
+      UIHelper.hideErrorInForm(textField: textFields[i]!, errorLabel: errorLabels[i]!)
     }
     
     errorsInForm = false
@@ -89,25 +89,25 @@ class SignUpViewController: UIViewController {
     
     if nameIsInvalid() {
       result = false
-      showErrorInForm(textField: nameTextField, errorLabel: nameErrorLabel)
+      UIHelper.showErrorInForm(textField: nameTextField, errorLabel: nameErrorLabel)
     }
     
     if emailIsInvalid() {
       result = false
-      showErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
+      UIHelper.showErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
     }
     
     if passwordIsInvalid() {
       result = false
-      showErrorInForm(textField: passwordTextField, errorLabel: passwordErrorLabel)
+      UIHelper.showErrorInForm(textField: passwordTextField, errorLabel: passwordErrorLabel)
     } else if confirmPasswordIsInvalid() {
       result = false
-      showErrorInForm(textField: confirmPasswordTextField, errorLabel: confirmPasswordErrorLabel)
+      UIHelper.showErrorInForm(textField: confirmPasswordTextField, errorLabel: confirmPasswordErrorLabel)
     }
     
     if genderIsInvalid() {
       result = false
-      showErrorInForm(textField: genderTextField, errorLabel: genderErrorLabel)
+      UIHelper.showErrorInForm(textField: genderTextField, errorLabel: genderErrorLabel)
     }
     
     return result
@@ -126,16 +126,6 @@ class SignUpViewController: UIViewController {
       self.hideSpinner()
       self.showMessageError(title: "Error", errorMessage: error.domain.capitalizeFirstLetter())
     }
-  }
-  
-  fileprivate func showErrorInForm(textField: UITextField, errorLabel: UILabel) {
-    textField.addBorder(color: .tomato, weight: 1.0)
-    errorLabel.isHidden = false
-  }
-  
-  fileprivate func hideErrorInForm(textField: UITextField, errorLabel: UILabel) {
-    textField.layer.borderColor = UIColor.black.cgColor
-    errorLabel.isHidden = true
   }
   
   fileprivate func nameIsInvalid() -> Bool {
@@ -204,9 +194,9 @@ extension SignUpViewController: UITextFieldDelegate {
   func textFieldDidEndEditing(_ textField: UITextField) {
     switch textField {
       case nameTextField:
-        toggleErrorInForm(error: nameIsInvalid(), textField: nameTextField, errorLabel: nameErrorLabel)
+        UIHelper.toggleErrorInForm(error: nameIsInvalid(), textField: nameTextField, errorLabel: nameErrorLabel)
       case emailTextField:
-        toggleErrorInForm(error: emailIsInvalid(), textField: emailTextField, errorLabel: emailErrorLabel)
+        UIHelper.toggleErrorInForm(error: emailIsInvalid(), textField: emailTextField, errorLabel: emailErrorLabel)
       case passwordTextField, confirmPasswordTextField:
         checkPasswordErrors()
         
@@ -216,7 +206,7 @@ extension SignUpViewController: UITextFieldDelegate {
           firstTimeEditingPassword = false
         }
       case genderTextField:
-        toggleErrorInForm(error: genderIsInvalid(), textField: genderTextField, errorLabel: genderErrorLabel)
+        UIHelper.toggleErrorInForm(error: genderIsInvalid(), textField: genderTextField, errorLabel: genderErrorLabel)
       default:
         break
     }
@@ -224,20 +214,12 @@ extension SignUpViewController: UITextFieldDelegate {
   
   fileprivate func checkPasswordErrors() {
     if passwordIsInvalid() {
-      showErrorInForm(textField: passwordTextField, errorLabel: passwordErrorLabel)
+      UIHelper.showErrorInForm(textField: passwordTextField, errorLabel: passwordErrorLabel)
     } else {
-      hideErrorInForm(textField: passwordTextField, errorLabel: passwordErrorLabel)
+      UIHelper.hideErrorInForm(textField: passwordTextField, errorLabel: passwordErrorLabel)
       
       let confirmPasswordError = confirmPasswordIsInvalid() && !firstTimeEditingPassword
-      toggleErrorInForm(error: confirmPasswordError, textField: confirmPasswordTextField, errorLabel: confirmPasswordErrorLabel)
-    }
-  }
-  
-  fileprivate func toggleErrorInForm(error: Bool, textField: UITextField, errorLabel: UILabel) {
-    if error {
-      showErrorInForm(textField: textField, errorLabel: errorLabel)
-    } else {
-      hideErrorInForm(textField: textField, errorLabel: errorLabel)
+      UIHelper.toggleErrorInForm(error: confirmPasswordError, textField: confirmPasswordTextField, errorLabel: confirmPasswordErrorLabel)
     }
   }
   
