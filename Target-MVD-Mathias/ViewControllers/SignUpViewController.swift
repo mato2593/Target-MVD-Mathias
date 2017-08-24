@@ -130,7 +130,7 @@ class SignUpViewController: UIViewController {
   
   fileprivate func nameIsInvalid() -> Bool {
     let name = nameTextField.text!
-    return name.isEmpty
+    return !name.isValidUsername()
   }
   
   fileprivate func emailIsInvalid() -> Bool {
@@ -140,7 +140,7 @@ class SignUpViewController: UIViewController {
   
   fileprivate func passwordIsInvalid() -> Bool {
     let password = passwordTextField.text!
-    return password.length() < minPasswordLength
+    return !password.isValidPassword()
   }
   
   fileprivate func confirmPasswordIsInvalid() -> Bool {

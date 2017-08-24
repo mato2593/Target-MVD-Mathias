@@ -46,8 +46,8 @@ class UIHelper {
     errorLabel?.isHidden = false
   }
   
-  class func hideErrorInForm(textField: UITextField, errorLabel: UILabel) {
+  class func hideErrorInForm(textField: UITextField, errorLabel: UILabel?) {
     textField.addBorder(color: .black, weight: 1)
-    errorLabel.isHidden = true
+    errorLabel?.isHidden = true
   }
 }

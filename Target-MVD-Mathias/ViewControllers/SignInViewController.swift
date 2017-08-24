@@ -150,7 +150,7 @@ class SignInViewController: UIViewController {
   
   fileprivate func passwordIsInvalid() -> Bool {
     let password = passwordTextField.text!
-    return password.length() < minPasswordLength
+    return !password.isValidPassword()
   }
   
 }

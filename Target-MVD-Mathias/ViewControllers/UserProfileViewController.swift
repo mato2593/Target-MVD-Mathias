@@ -116,6 +116,32 @@ class UserProfileViewController: UIViewController {
     let homeViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
     navigationController?.pushViewController(homeViewController!, animated: true)
   }
+  
+  func areTextFieldsValid(_ textFields: [UITextField]) -> Bool {
+    var areValid = false
+    
+    do {
+      for textField in textFields {
+        try checkForErrors(textField: textField)
+      }
+      
+      areValid = true
+      hideErrorsInForm()
+    } catch UserDataErrors.emtyUsername {
+      UIHelper.showErrorInForm(textField: usernameTextField, errorLabel: usernameErrorLabel)
+    } catch UserDataErrors.invalidEmail {
+      UIHelper.showErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
+    } catch {
+      print("Something went wrong")
+    }
+    
+    return areValid
+  }
+  
+  func hideErrorsInForm() {
+    UIHelper.hideErrorInForm(textField: usernameTextField, errorLabel: usernameErrorLabel)
+    UIHelper.hideErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
+  }
 }
 
 extension UserProfileViewController: UITextFieldDelegate {
@@ -124,14 +150,61 @@ extension UserProfileViewController: UITextFieldDelegate {
     switch textField {
     case usernameTextField:
       usernameChanged = usernameTextField.text != username
+      validateTextField(usernameTextField)
     case emailTextField:
       emailChanged = emailTextField.text != email
+      validateTextField(emailTextField)
     default:
       break
     }
     
+    let errorsInForm = !(usernameTextField.text!.isValidUsername()) || !(emailTextField.text!.isEmailFormatted())
     let dataChanged = usernameChanged || emailChanged
-    dataChanged ? enableSaveChangesButton() : disableSaveChangesButton()
+    dataChanged && !errorsInForm ? enableSaveChangesButton() : disableSaveChangesButton()
+  }
+  
+  func validateTextField(_ textField: UITextField) {
+    do {
+      try checkForErrors(textField: textField)
+      let errorLabel = errorLabelFromTextField(textField)
+      UIHelper.hideErrorInForm(textField: textField, errorLabel: errorLabel)
+    } catch UserDataErrors.emtyUsername {
+      UIHelper.showErrorInForm(textField: usernameTextField, errorLabel: usernameErrorLabel)
+    } catch UserDataErrors.invalidEmail {
+      UIHelper.showErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
+    } catch {
+      print("Something went wrong")
+    }
+  }
+  
+  func checkForErrors(textField: UITextField) throws {
+    switch textField {
+    case usernameTextField:
+      if !(usernameTextField.text!.isValidUsername()) {
+        throw UserDataErrors.emtyUsername
+      }
+    case emailTextField:
+      if !(emailTextField.text!.isEmailFormatted()) {
+        throw UserDataErrors.invalidEmail
+      }
+    default:
+      break
+    }
+  }
+  
+  func errorLabelFromTextField(_ textField: UITextField) -> UILabel? {
+    var errorLabel: UILabel?
+    
+    switch textField {
+    case usernameTextField:
+      errorLabel = usernameErrorLabel
+    case emailTextField:
+      errorLabel = emailErrorLabel
+    default:
+      break
+    }
+    
+    return errorLabel
   }
   
 }
