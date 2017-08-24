@@ -108,15 +108,20 @@ class UserAPI {
     }
   }
   
-  class func updateUser(id: String, name: String?, email: String?, password: String?, avatar64: UIImage?, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
-    let url = usersUrl + id
+  class func updateUser(name: String?, email: String?, password: String?, avatar64: UIImage?, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
+    let url = usersUrl + "\(UserDataManager.getUserId())"
     
     var userParams: [String: Any] = [:]
     
     userParams["name"] = name ?? nil
     userParams["email"] = email ?? nil
     userParams["password"] = password ?? nil
-    userParams["image"] = avatar64 ?? nil
+    
+    if let image = avatar64 {
+      let picData = UIImageJPEGRepresentation(image, 0.75)
+      
+      userParams["image"] = picData?.asBase64Param()
+    }
     
     let parameters = [
       "user": userParams

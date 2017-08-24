@@ -23,6 +23,9 @@ class UserProfileViewController: UIViewController {
   
   @IBOutlet weak var saveChangesButton: UIButton!
   
+  // MARK: Constants
+  let imagePicker = UIImagePickerController()
+  
   // MARK: Variables
   var imageChanged = false
   var usernameChanged = false
@@ -44,6 +47,13 @@ class UserProfileViewController: UIViewController {
   }
   
   // MARK: Actions
+  @IBAction func tapOnAvatarImageView(_ sender: Any) {
+    imagePicker.allowsEditing = false
+    imagePicker.sourceType = .photoLibrary
+    
+    present(imagePicker, animated: true, completion: nil)
+  }
+  
   @IBAction func tapOnLogOutButton(_ sender: Any) {
     view.showSpinner(message: "Signing out")
     UserAPI.logout({
@@ -59,7 +69,6 @@ class UserProfileViewController: UIViewController {
     self.showSpinner()
     
     UserAPI.updateUser(
-      id: "\(UserDataManager.getUserId())",
       name: usernameChanged ? usernameTextField.text : nil,
       email: emailChanged ? emailTextField.text : nil,
       password: passwordChanged ? passwordTextField.text : nil,
@@ -86,6 +95,7 @@ class UserProfileViewController: UIViewController {
   func setupView() {
     avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width/2
     avatarImageView.layer.masksToBounds = true
+    imagePicker.delegate = self
     
     passwordTextField.attributedPlaceholder = NSAttributedString(string: "********", attributes: [NSForegroundColorAttributeName: UIColor.black])
     
@@ -116,6 +126,7 @@ class UserProfileViewController: UIViewController {
   func resetInitialValues() {
     username = usernameTextField.text!
     email = emailTextField.text!
+    imageChanged = false
   }
   
   func goBackToHome() {
@@ -165,7 +176,7 @@ extension UserProfileViewController: UITextFieldDelegate {
     }
     
     let errorsInForm = !(usernameTextField.text!.isValidUsername()) || !(emailTextField.text!.isEmailFormatted())
-    let dataChanged = usernameChanged || emailChanged
+    let dataChanged = usernameChanged || emailChanged || imageChanged
     dataChanged && !errorsInForm ? enableSaveChangesButton() : disableSaveChangesButton()
   }
   
@@ -211,6 +222,26 @@ extension UserProfileViewController: UITextFieldDelegate {
     }
     
     return errorLabel
+  }
+  
+}
+
+extension UserProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      avatarImageView.contentMode = .scaleAspectFill
+      avatarImageView.image = pickedImage
+      imageChanged = true
+      let formDataIsValid = usernameTextField.text!.isValidUsername() && emailTextField.text!.isEmailFormatted()
+      formDataIsValid ? enableSaveChangesButton() : disableSaveChangesButton()
+    }
+    
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    dismiss(animated: true, completion: nil)
   }
   
 }
