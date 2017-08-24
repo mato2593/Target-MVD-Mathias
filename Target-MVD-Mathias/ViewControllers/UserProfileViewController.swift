@@ -65,6 +65,7 @@ class UserProfileViewController: UIViewController {
       password: passwordChanged ? passwordTextField.text : nil,
       avatar64: imageChanged ? avatarImageView.image : nil,
       success: {
+        self.resetInitialValues()
         self.hideSpinner()
         self.disableSaveChangesButton()
       }) { (error) in
@@ -110,6 +111,11 @@ class UserProfileViewController: UIViewController {
   func enableSaveChangesButton() {
     saveChangesButton.isEnabled = true
     saveChangesButton.layer.backgroundColor = UIColor.black.cgColor
+  }
+  
+  func resetInitialValues() {
+    username = usernameTextField.text!
+    email = emailTextField.text!
   }
   
   func goBackToHome() {
