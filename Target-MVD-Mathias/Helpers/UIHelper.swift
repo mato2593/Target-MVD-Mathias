@@ -26,4 +26,28 @@ class UIHelper {
     hud.isUserInteractionEnabled = false
     return hud
   }
+  
+  // MARK: Form errors
+  class func toggleErrorInForm(error: Bool, textField: UITextField, errorLabel: UILabel, errorMessage: String = "") {
+    if error {
+      showErrorInForm(textField: textField, errorLabel: errorLabel, errorMessage: errorMessage)
+    } else {
+      hideErrorInForm(textField: textField, errorLabel: errorLabel)
+    }
+  }
+  
+  class func showErrorInForm(textField: UITextField, errorLabel: UILabel?, errorMessage: String = "") {
+    textField.addBorder(color: .tomato, weight: 1.5)
+    
+    if !errorMessage.isEmpty {
+      errorLabel?.text = errorMessage
+    }
+    
+    errorLabel?.isHidden = false
+  }
+  
+  class func hideErrorInForm(textField: UITextField, errorLabel: UILabel?) {
+    textField.addBorder(color: .black, weight: 1)
+    errorLabel?.isHidden = true
+  }
 }

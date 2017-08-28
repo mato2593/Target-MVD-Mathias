@@ -86,7 +86,7 @@ class SignInViewController: UIViewController {
     UserAPI.loginWithFacebook(token: FBSDKAccessToken.current().tokenString,
                               success: { _ -> Void in
                                 self.hideSpinner()
-                                UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+                                UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateInitialViewController()
     }) { (error) -> Void in
       self.hideSpinner()
       self.showMessageError(title: "Error", errorMessage: error._domain)
@@ -110,8 +110,8 @@ class SignInViewController: UIViewController {
   }
   
   private func showErrorsInForm() {
-    toggleErrorInForm(error: emailIsInvalid(), textField: emailTextField, errorLabel: emailErrorLabel)
-    toggleErrorInForm(error: passwordIsInvalid(), textField: passwordTextField, errorLabel: signInErrorLabel, errorMessage: passwordErrorMessage)
+    UIHelper.toggleErrorInForm(error: emailIsInvalid(), textField: emailTextField, errorLabel: emailErrorLabel)
+    UIHelper.toggleErrorInForm(error: passwordIsInvalid(), textField: passwordTextField, errorLabel: signInErrorLabel, errorMessage: passwordErrorMessage)
   }
   
   private func signIn() {
@@ -123,7 +123,7 @@ class SignInViewController: UIViewController {
     
     UserAPI.login(email, password: password, success: { (_) in
       self.hideSpinner()
-      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.instantiateInitialViewController()
     }) { (_) in
       self.hideSpinner()
       self.showSignInError()
@@ -132,30 +132,15 @@ class SignInViewController: UIViewController {
   }
   
   private func showSignInError() {
-    showErrorInForm(textField: emailTextField, errorLabel: nil)
-    showErrorInForm(textField: passwordTextField, errorLabel: signInErrorLabel, errorMessage: signInErrorMessage)
+    UIHelper.showErrorInForm(textField: emailTextField, errorLabel: nil)
+    UIHelper.showErrorInForm(textField: passwordTextField, errorLabel: signInErrorLabel, errorMessage: signInErrorMessage)
   }
   
   private func resetErrors() {
-    hideErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
-    hideErrorInForm(textField: passwordTextField, errorLabel: signInErrorLabel)
+    UIHelper.hideErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
+    UIHelper.hideErrorInForm(textField: passwordTextField, errorLabel: signInErrorLabel)
     
     signInError = false
-  }
-  
-  fileprivate func showErrorInForm(textField: UITextField, errorLabel: UILabel?, errorMessage: String = "") {
-    textField.addBorder(color: .tomato, weight: 1.5)
-    
-    if !errorMessage.isEmpty {
-      errorLabel?.text = errorMessage
-    }
-    
-    errorLabel?.isHidden = false
-  }
-  
-  fileprivate func hideErrorInForm(textField: UITextField, errorLabel: UILabel) {
-    textField.addBorder(color: .black, weight: 1)
-    errorLabel.isHidden = true
   }
   
   fileprivate func emailIsInvalid() -> Bool {
@@ -165,7 +150,7 @@ class SignInViewController: UIViewController {
   
   fileprivate func passwordIsInvalid() -> Bool {
     let password = passwordTextField.text!
-    return password.length() < minPasswordLength
+    return !password.isValidPassword()
   }
   
 }
@@ -176,20 +161,12 @@ extension SignInViewController: UITextFieldDelegate {
     if !signInError {
       switch textField {
       case emailTextField:
-        toggleErrorInForm(error: emailIsInvalid(), textField: emailTextField, errorLabel: emailErrorLabel)
+        UIHelper.toggleErrorInForm(error: emailIsInvalid(), textField: emailTextField, errorLabel: emailErrorLabel)
       case passwordTextField:
-        toggleErrorInForm(error: passwordIsInvalid(), textField: passwordTextField, errorLabel: signInErrorLabel, errorMessage: passwordErrorMessage)
+        UIHelper.toggleErrorInForm(error: passwordIsInvalid(), textField: passwordTextField, errorLabel: signInErrorLabel, errorMessage: passwordErrorMessage)
       default:
         break
       }
-    }
-  }
-  
-  fileprivate func toggleErrorInForm(error: Bool, textField: UITextField, errorLabel: UILabel, errorMessage: String = "") {
-    if error {
-      showErrorInForm(textField: textField, errorLabel: errorLabel, errorMessage: errorMessage)
-    } else {
-      hideErrorInForm(textField: textField, errorLabel: errorLabel)
     }
   }
   

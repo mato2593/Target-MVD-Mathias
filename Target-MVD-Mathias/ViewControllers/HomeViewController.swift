@@ -10,6 +10,13 @@ import UIKit
 
 class HomeViewController: UIViewController {
   
+  // MARK: Lifecycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    makeNavigationBarTransparent()
+  }
+  
   @IBAction func tapOnGetMyProfile(_ sender: Any) {
     UserAPI.getMyProfile({ (json) in
       print(json)
@@ -18,14 +25,4 @@ class HomeViewController: UIViewController {
     }
   }
 
-  @IBAction func tapOnLogOutButton(_ sender: Any) {
-    view.showSpinner(message: "Signing out")
-    UserAPI.logout({
-      self.hideSpinner()
-      UIApplication.shared.keyWindow?.rootViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
-    }) { (error) in
-      self.hideSpinner()
-      print(error)
-    }
-  }
 }

@@ -34,4 +34,13 @@ extension String {
     return first + other
   }
 
+  func isValidUsername() -> Bool {
+    let username = self.trimmingCharacters(in: .whitespaces)
+    return !username.isEmpty
+  }
+  
+  func isValidPassword() -> Bool {
+    return length() >= 8
+  }
+  
 }

@@ -17,4 +17,10 @@ extension UIStoryboard {
   func instantiateViewController <T: UIViewController>(_ type: T.Type) -> T? {
     return instantiateViewController(withIdentifier: String(describing: type)) as? T
   }
+  
+  class func instantiateInitialViewController(storyboardIdentifier: String = "Main", bundle: Bundle? = nil) -> UIViewController? {
+    let storyboard = UIStoryboard(name: storyboardIdentifier, bundle: bundle)
+    return storyboard.instantiateInitialViewController()
+  }
+  
 }
