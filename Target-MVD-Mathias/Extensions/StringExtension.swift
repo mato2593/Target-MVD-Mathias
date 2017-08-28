@@ -35,8 +35,7 @@ extension String {
   }
 
   func isValidUsername() -> Bool {
-    let whitespaceSet = NSCharacterSet.whitespaces
-    let username = self.trimmingCharacters(in: whitespaceSet)
+    let username = self.trimmingCharacters(in: .whitespaces)
     return !username.isEmpty
   }
   

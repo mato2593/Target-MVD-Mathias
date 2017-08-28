@@ -32,8 +32,8 @@ class UserProfileViewController: UIViewController {
   var emailChanged = false
   var passwordChanged = false
   
-  var username: String = ""
-  var email: String = ""
+  var username = ""
+  var email = ""
   
   // MARK: Lifecycle
   override func viewDidLoad() {
@@ -147,7 +147,7 @@ class UserProfileViewController: UIViewController {
       
       areValid = true
       hideErrorsInForm()
-    } catch UserDataErrors.emtyUsername {
+    } catch UserDataErrors.emptyUsername {
       UIHelper.showErrorInForm(textField: usernameTextField, errorLabel: usernameErrorLabel)
     } catch UserDataErrors.invalidEmail {
       UIHelper.showErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
@@ -188,7 +188,7 @@ extension UserProfileViewController: UITextFieldDelegate {
       try checkForErrors(textField: textField)
       let errorLabel = errorLabelFromTextField(textField)
       UIHelper.hideErrorInForm(textField: textField, errorLabel: errorLabel)
-    } catch UserDataErrors.emtyUsername {
+    } catch UserDataErrors.emptyUsername {
       UIHelper.showErrorInForm(textField: usernameTextField, errorLabel: usernameErrorLabel)
     } catch UserDataErrors.invalidEmail {
       UIHelper.showErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
@@ -201,7 +201,7 @@ extension UserProfileViewController: UITextFieldDelegate {
     switch textField {
     case usernameTextField:
       if !(usernameTextField.text!.isValidUsername()) {
-        throw UserDataErrors.emtyUsername
+        throw UserDataErrors.emptyUsername
       }
     case emailTextField:
       if !(emailTextField.text!.isEmailFormatted()) {

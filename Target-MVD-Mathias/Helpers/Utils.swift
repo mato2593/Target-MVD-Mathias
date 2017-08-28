@@ -9,6 +9,6 @@
 import Foundation
 
 enum UserDataErrors: Error {
-  case emtyUsername
+  case emptyUsername
   case invalidEmail
 }
