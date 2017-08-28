@@ -95,6 +95,7 @@ class UserProfileViewController: UIViewController {
   func setupView() {
     avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width/2
     avatarImageView.layer.masksToBounds = true
+    avatarImageView.addBorder(color: .black, weight: 3.0)
     imagePicker.delegate = self
     
     passwordTextField.attributedPlaceholder = NSAttributedString(string: "********", attributes: [NSForegroundColorAttributeName: UIColor.black])
@@ -107,7 +108,9 @@ class UserProfileViewController: UIViewController {
     
     usernameTextField.text = user?.username
     emailTextField.text = user?.email
-    avatarImageView.sd_setImage(with: user?.image)
+    SDImageCache.shared().removeImage(forKey: user?.image?.absoluteString, withCompletion: {
+      self.avatarImageView.sd_setImage(with: user?.image, placeholderImage: #imageLiteral(resourceName: "UserAvatarPlaceholder"), options: .refreshCached)
+    })
     
     username = user?.username ?? ""
     email = user?.email ?? ""
