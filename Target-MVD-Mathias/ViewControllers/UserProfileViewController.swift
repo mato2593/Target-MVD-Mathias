@@ -23,6 +23,19 @@ class UserProfileViewController: UIViewController {
   
   @IBOutlet weak var saveChangesButton: UIButton!
   
+  // Change Password Dialog
+  @IBOutlet weak var changePasswordView: UIView!
+  
+  @IBOutlet weak var currentPasswordLabel: UILabel!
+  @IBOutlet weak var newPasswordLabel: UILabel!
+  @IBOutlet weak var reenterNewPasswordLabel: UILabel!
+  
+  @IBOutlet weak var currentPasswordTextField: UITextField!
+  @IBOutlet weak var newPasswordTextField: UITextField!
+  @IBOutlet weak var reenterNewPasswordTextField: UITextField!
+  
+  @IBOutlet weak var doneChangingPasswordButton: UIButton!
+  
   // MARK: Constants
   let imagePicker = UIImagePickerController()
   
@@ -35,6 +48,24 @@ class UserProfileViewController: UIViewController {
   var username = ""
   var email = ""
   
+  lazy var goBackToHomeNavigationItem: UIBarButtonItem = {
+    return UIBarButtonItem(image: #imageLiteral(resourceName: "ForwardArrow"), style: .plain, target: self, action:#selector(UserProfileViewController.goBackToHome))
+  }()
+  
+  var showingChangePasswordDialog = false {
+    didSet {
+      UIView.transition(with: changePasswordView,
+                        duration: 0.35,
+                        options: .transitionCrossDissolve,
+                        animations: {
+                          self.changePasswordView.isHidden = !self.showingChangePasswordDialog
+                        },
+                        completion: nil)
+      
+      goBackToHomeNavigationItem.isEnabled = !showingChangePasswordDialog
+    }
+  }
+  
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,6 +73,8 @@ class UserProfileViewController: UIViewController {
     setupNavigationBar()
     
     setupView()
+    
+    setLetterSpacing()
     
     getUserData()
   }
@@ -82,9 +115,15 @@ class UserProfileViewController: UIViewController {
       }
   }
   
+  @IBAction func tapOnDoneChangingPasswordButton(_ sender: Any) {
+  }
+  
+  @IBAction func tapOutsideChangePasswordDialog(_ sender: Any) {
+    showingChangePasswordDialog = false
+  }
+  
   // MARK: Functions
   func setupNavigationBar() {
-    let goBackToHomeNavigationItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ForwardArrow"), style: .plain, target: self, action:#selector(UserProfileViewController.goBackToHome))
     goBackToHomeNavigationItem.tintColor = .black
     
     navigationItem.setRightBarButton(goBackToHomeNavigationItem, animated: false)
@@ -101,6 +140,15 @@ class UserProfileViewController: UIViewController {
     passwordTextField.attributedPlaceholder = NSAttributedString(string: "********", attributes: [NSForegroundColorAttributeName: UIColor.black])
     
     disableSaveChangesButton()
+  }
+  
+  private func setLetterSpacing() {
+    let defaultSpacing: CGFloat = 1.6
+    
+    currentPasswordLabel.setSpacing(ofLine: 1.6, ofCharacter: defaultSpacing)
+    newPasswordLabel.setSpacing(ofCharacter: defaultSpacing)
+    reenterNewPasswordLabel.setSpacing(ofCharacter: defaultSpacing)
+    doneChangingPasswordButton.titleLabel?.setSpacing(ofCharacter: defaultSpacing)
   }
   
   func getUserData() {
@@ -165,6 +213,16 @@ class UserProfileViewController: UIViewController {
 }
 
 extension UserProfileViewController: UITextFieldDelegate {
+  
+  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    if textField == passwordTextField {
+      showingChangePasswordDialog = true
+      
+      return false
+    }
+    
+    return true
+  }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     switch textField {
