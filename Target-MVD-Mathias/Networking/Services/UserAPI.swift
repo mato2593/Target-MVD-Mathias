@@ -137,7 +137,7 @@ class UserAPI {
   }
   
   class func resetPassword(_ previousPassword: String, newPassword: String, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
-    let url = usersUrl + "\(UserDataManager.getUserId())" + "/password/change"
+    let url = usersUrl + "\(UserDataManager.getUserId())/password/change"
     
     let parameters = [
       "user": [
