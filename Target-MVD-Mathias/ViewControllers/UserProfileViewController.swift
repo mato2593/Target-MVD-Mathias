@@ -50,7 +50,7 @@ class UserProfileViewController: UIViewController {
   var email = ""
   
   lazy var goBackToHomeNavigationItem: UIBarButtonItem = {
-    return UIBarButtonItem(image: #imageLiteral(resourceName: "ForwardArrow"), style: .plain, target: self, action:#selector(UserProfileViewController.goBackToHome))
+    return UIBarButtonItem(image: #imageLiteral(resourceName: "ForwardArrow"), style: .plain, target: self, action: #selector(goBackToHome))
   }()
   
   var showingChangePasswordDialog = false {
@@ -193,7 +193,7 @@ class UserProfileViewController: UIViewController {
       self.avatarImageView.sd_setImage(with: user?.image, placeholderImage: #imageLiteral(resourceName: "UserAvatarPlaceholder"), options: .refreshCached)
     })
     
-    if let fromFacebook = user?.isFromFacebook, fromFacebook {
+    if UserDataManager.isUserFromFacebook() {
       passwordTextField.isHidden = true
       passwordLabel.isHidden = true
     }

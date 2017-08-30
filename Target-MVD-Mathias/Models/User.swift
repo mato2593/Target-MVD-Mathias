@@ -15,7 +15,6 @@ class User: NSObject, NSCoding {
   var email: String
   var gender: String
   var image: URL?
-  var isFromFacebook: Bool?
   
   init(id: Int, username: String = "", email: String, image: String = "", gender: String = "") {
     self.id = id
@@ -23,7 +22,6 @@ class User: NSObject, NSCoding {
     self.email = email
     self.image = URL(string: image)
     self.gender = gender
-    self.isFromFacebook = false
   }
   
   required init(coder aDecoder: NSCoder) {
@@ -32,7 +30,6 @@ class User: NSObject, NSCoding {
     self.email = aDecoder.decodeObject(forKey: "user-email") as? String ?? ""
     self.image = URL(string: aDecoder.decodeObject(forKey: "user-image") as? String ?? "")
     self.gender = aDecoder.decodeObject(forKey: "user-gender") as? String ?? ""
-    self.isFromFacebook = aDecoder.decodeObject(forKey: "user-from-facebook") as? Bool ?? false
   }
   
   func encode(with aCoder: NSCoder) {
@@ -41,7 +38,6 @@ class User: NSObject, NSCoding {
     aCoder.encode(self.email, forKey: "user-email")
     aCoder.encode(self.image?.absoluteString, forKey: "user-image")
     aCoder.encode(self.gender, forKey: "user-gender")
-    aCoder.encode(self.isFromFacebook, forKey: "user-from-facebook")
   }
   
   //MARK Parser

@@ -164,10 +164,9 @@ class UserAPI {
     APIClient.sendPostRequest(url, params: parameters as [String : AnyObject]?,
                               success: { (responseObject) -> Void in
                                 let json = JSON(responseObject)
-                                let user = User.parse(fromJSON: json)
-                                user.isFromFacebook = true
                                 
-                                UserDataManager.storeUserObject(user)
+                                UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                UserDataManager.setUserFromFacebook()
                                 UserDataManager.storeAccessToken(json["token"].stringValue)
                                 
                                 success()
@@ -180,6 +179,7 @@ class UserAPI {
     let url = usersUrl + "sign_out"
     APIClient.sendDeleteRequest(url, success: { (_) in
       UserDataManager.deleteUserObject()
+      UserDataManager.deleteUserFromFacebook()
       UserDataManager.deleteAccessToken()
       success()
     }) { (error) -> Void in
