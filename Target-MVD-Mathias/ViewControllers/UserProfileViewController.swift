@@ -55,6 +55,12 @@ class UserProfileViewController: UIViewController {
   
   var showingChangePasswordDialog = false {
     didSet {
+      if showingChangePasswordDialog {
+        currentPasswordTextField.text = ""
+        newPasswordTextField.text = ""
+        reenterNewPasswordTextField.text = ""
+      }
+      
       UIView.transition(with: changePasswordView,
                         duration: 0.35,
                         options: .transitionCrossDissolve,
