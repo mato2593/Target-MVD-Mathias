@@ -382,6 +382,7 @@
                         <outlet property="emailTextField" destination="3mm-kl-BAu" id="8i2-N4-gPM"/>
                         <outlet property="newPasswordLabel" destination="JoT-2r-a4v" id="EQ2-OZ-YrH"/>
                         <outlet property="newPasswordTextField" destination="VE9-KD-eGd" id="igg-eU-kua"/>
+                        <outlet property="passwordLabel" destination="PQu-zr-mOP" id="ORJ-36-wsv"/>
                         <outlet property="passwordTextField" destination="RaW-hh-QkF" id="1q2-oE-IcF"/>
                         <outlet property="reenterNewPasswordLabel" destination="IND-sa-6We" id="6av-0b-hdv"/>
                         <outlet property="reenterNewPasswordTextField" destination="evI-Pk-N1M" id="56W-eH-QjA"/>

@@ -108,14 +108,13 @@ class UserAPI {
     }
   }
   
-  class func updateUser(name: String?, email: String?, password: String?, avatar64: UIImage?, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
+  class func updateUser(name: String?, email: String?, avatar64: UIImage?, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "\(UserDataManager.getUserId())"
     
     var userParams: [String: Any] = [:]
     
     userParams["name"] = name ?? nil
     userParams["email"] = email ?? nil
-    userParams["password"] = password ?? nil
     
     if let image = avatar64 {
       let picData = UIImageJPEGRepresentation(image, 0.75)
@@ -137,6 +136,25 @@ class UserAPI {
     }
   }
   
+  class func resetPassword(_ previousPassword: String, newPassword: String, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
+    let url = usersUrl + "\(UserDataManager.getUserId())" + "/password/change"
+    
+    let parameters = [
+      "user": [
+        "prev": previousPassword,
+        "password": newPassword,
+        "confirmation": newPassword
+      ]
+    ]
+    
+    APIClient.sendPutRequest(url, params: parameters as [String : AnyObject]?,
+                             success: { (_) -> Void in
+                              success()
+    }) { (error) -> Void in
+      failure(error)
+    }
+  }
+  
   class func loginWithFacebook(token: String, success: @escaping () -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "sign_in"
     let parameters = [
@@ -146,8 +164,12 @@ class UserAPI {
     APIClient.sendPostRequest(url, params: parameters as [String : AnyObject]?,
                               success: { (responseObject) -> Void in
                                 let json = JSON(responseObject)
-                                UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                let user = User.parse(fromJSON: json)
+                                user.isFromFacebook = true
+                                
+                                UserDataManager.storeUserObject(user)
                                 UserDataManager.storeAccessToken(json["token"].stringValue)
+                                
                                 success()
     }) { (error) -> Void in
       failure(error)

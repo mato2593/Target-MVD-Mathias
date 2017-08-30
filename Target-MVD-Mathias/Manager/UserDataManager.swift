@@ -39,6 +39,10 @@ class UserDataManager: NSObject {
     return self.getUserObject()?.id ?? 0
   }
   
+  class func isUserFromFacebook() -> Bool {
+    return self.getUserObject()?.isFromFacebook ?? false
+  }
+  
   // MARK: Access token functions
   
   class func storeAccessToken(_ token: String) {
