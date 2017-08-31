@@ -53,6 +53,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Show your fucking location!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Enable this permition to change your avatar</string>
 	<key>UILaunchStoryboardName</key>
