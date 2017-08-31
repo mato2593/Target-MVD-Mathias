@@ -26,8 +26,51 @@
                     <view key="view" contentMode="scaleToFill" id="YnO-i4-MwY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmI-cP-6Sq" userLabel="Map View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="523"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTG-5P-Mc5" userLabel="Create New Target View">
+                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE NEW TARGET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58l-xF-ewx" userLabel="Create New Target Label">
+                                        <rect key="frame" x="60" y="54" width="255" height="15"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewTarget" translatesAutoresizingMaskIntoConstraints="NO" id="Mhd-Rb-Eza" userLabel="Create New Target Image">
+                                        <rect key="frame" x="172" y="12" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="XfQ-Ov-Fzp"/>
+                                            <constraint firstAttribute="height" constant="30" id="d6W-1T-2Ac"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="58l-xF-ewx" secondAttribute="trailing" constant="60" id="5cM-qh-FAG"/>
+                                    <constraint firstAttribute="height" constant="80" id="Q0H-Qn-ZNo"/>
+                                    <constraint firstItem="58l-xF-ewx" firstAttribute="leading" secondItem="gTG-5P-Mc5" secondAttribute="leading" constant="60" id="WeI-rc-czS"/>
+                                    <constraint firstItem="58l-xF-ewx" firstAttribute="top" secondItem="Mhd-Rb-Eza" secondAttribute="bottom" constant="12" id="ehA-Z8-kIp"/>
+                                    <constraint firstAttribute="bottom" secondItem="58l-xF-ewx" secondAttribute="bottom" constant="11" id="iWn-PZ-58x"/>
+                                    <constraint firstItem="Mhd-Rb-Eza" firstAttribute="top" secondItem="gTG-5P-Mc5" secondAttribute="top" constant="12" id="lkV-SJ-7zw"/>
+                                    <constraint firstItem="Mhd-Rb-Eza" firstAttribute="centerX" secondItem="gTG-5P-Mc5" secondAttribute="centerX" id="zM6-1q-fOB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration" identifier="AfterLoginSignupView"/>
+                        <constraints>
+                            <constraint firstItem="lmI-cP-6Sq" firstAttribute="leading" secondItem="YnO-i4-MwY" secondAttribute="leading" id="6CD-fI-seG"/>
+                            <constraint firstItem="gRs-YP-uAr" firstAttribute="top" secondItem="gTG-5P-Mc5" secondAttribute="bottom" id="HaQ-VU-5u3"/>
+                            <constraint firstItem="gTG-5P-Mc5" firstAttribute="leading" secondItem="YnO-i4-MwY" secondAttribute="leading" id="JD0-aX-b2E"/>
+                            <constraint firstAttribute="trailing" secondItem="gTG-5P-Mc5" secondAttribute="trailing" id="Pg2-Fq-VCO"/>
+                            <constraint firstItem="gTG-5P-Mc5" firstAttribute="top" secondItem="lmI-cP-6Sq" secondAttribute="bottom" id="UDU-69-n7H"/>
+                            <constraint firstItem="lmI-cP-6Sq" firstAttribute="top" secondItem="b07-nt-cIs" secondAttribute="bottom" id="l91-hp-6Jd"/>
+                            <constraint firstAttribute="trailing" secondItem="lmI-cP-6Sq" secondAttribute="trailing" id="vHR-EQ-bv0"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Target Points" id="H1w-Gm-nDC">
                         <barButtonItem key="leftBarButtonItem" image="UserProfile" id="mhM-ES-wBK">
@@ -40,10 +83,14 @@
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="createNewTargetLabel" destination="58l-xF-ewx" id="ruu-w9-sdu"/>
+                        <outlet property="mapViewContainer" destination="lmI-cP-6Sq" id="QBb-Fp-dEs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCL-Vt-8BE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="710" y="662"/>
+            <point key="canvasLocation" x="709.60000000000002" y="661.61919040479768"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TXa-6s-tgt">
@@ -403,6 +450,7 @@
     </scenes>
     <resources>
         <image name="ChatIcon" width="28" height="23"/>
+        <image name="NewTarget" width="32" height="32"/>
         <image name="ProfileBackground" width="286" height="144"/>
         <image name="UserAvatarPlaceholder" width="83" height="83"/>
         <image name="UserProfile" width="23" height="23"/>

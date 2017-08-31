@@ -13,6 +13,10 @@ target 'Target-MVD-Mathias' do
   pod 'FBSDKLoginKit';
   pod 'FBSDKShareKit';
   # ------
+  
+  # Google Maps SDK ---
+  pod 'GoogleMaps'
+  # ------
 end
 
 target 'AcceptanceTests' do
