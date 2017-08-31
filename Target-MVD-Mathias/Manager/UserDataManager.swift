@@ -39,6 +39,23 @@ class UserDataManager: NSObject {
     return self.getUserObject()?.id ?? 0
   }
   
+  // MARK: Facebook
+  
+  class func setUserFromFacebook() {
+    let defaults = UserDefaults.standard
+    defaults.set(true, forKey: "from-facebook")
+  }
+  
+  class func isUserFromFacebook() -> Bool {
+    let defaults = UserDefaults.standard
+    return defaults.object(forKey: "from-facebook") as? Bool ?? false
+  }
+  
+  class func deleteUserFromFacebook() {
+    let defaults = UserDefaults.standard
+    defaults.removeObject(forKey: "from-facebook")
+  }
+  
   // MARK: Access token functions
   
   class func storeAccessToken(_ token: String) {

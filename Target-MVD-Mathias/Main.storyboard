@@ -160,6 +160,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="V5g-hq-06q" id="4JH-tL-PcN"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khR-Ak-dil" userLabel="Save Changes Button">
                                 <rect key="frame" x="109" y="444" width="157" height="39"/>
@@ -203,6 +206,124 @@
                                     <action selector="tapOnAvatarImageView:" destination="V5g-hq-06q" eventType="touchUpInside" id="qgH-mc-blU"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1h-nR-noQ" userLabel="Change Password View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tz3-9W-aJe" userLabel="Change Password Background">
+                                        <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="uuY-SJ-1Ae" appends="YES" id="Ee7-8d-G7k"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwC-Rc-ON2" userLabel="Dialog View">
+                                        <rect key="frame" x="45" y="82" width="284" height="459"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ENTER YOUR CURRENT PASSWORD TO EDIT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7S-17-Ntb" userLabel="Current Password Label">
+                                                <rect key="frame" x="12" y="20" width="260" height="15"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Npz-8P-s6J" userLabel="Current Password Text Field">
+                                                <rect key="frame" x="25" y="48" width="234" height="37"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="37" id="MWT-Qn-Bwk"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW PASSWORD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoT-2r-a4v" userLabel="New Password Label">
+                                                <rect key="frame" x="12" y="103" width="260" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="SYp-sx-K1l"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VE9-KD-eGd" userLabel="New Password Text Field">
+                                                <rect key="frame" x="25" y="128" width="234" height="37"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="37" id="20G-LT-fGd"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REENTER NEW PASSWORD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IND-sa-6We" userLabel="Reenter New Password Label">
+                                                <rect key="frame" x="12" y="183" width="260" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="3rm-oo-J0Y"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evI-Pk-N1M" userLabel="Reenter New Password Text Field">
+                                                <rect key="frame" x="25" y="208" width="234" height="37"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="37" id="NQE-Ua-gY3"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UB-mm-Xh9" userLabel="Done Button">
+                                                <rect key="frame" x="37" y="394" width="210" height="40"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="WN4-fb-zFE"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
+                                                <state key="normal" title="DONE">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tapOnDoneChangingPasswordButton:" destination="V5g-hq-06q" eventType="touchUpInside" id="X5q-RT-OYj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="VE9-KD-eGd" firstAttribute="trailing" secondItem="Npz-8P-s6J" secondAttribute="trailing" id="AaB-WP-WOE"/>
+                                            <constraint firstItem="Npz-8P-s6J" firstAttribute="leading" secondItem="LwC-Rc-ON2" secondAttribute="leading" constant="25" id="BPZ-EX-kj2"/>
+                                            <constraint firstItem="JoT-2r-a4v" firstAttribute="top" secondItem="Npz-8P-s6J" secondAttribute="bottom" constant="18" id="BPy-lg-Vwf"/>
+                                            <constraint firstItem="evI-Pk-N1M" firstAttribute="top" secondItem="IND-sa-6We" secondAttribute="bottom" constant="5" id="CT2-bC-Obi"/>
+                                            <constraint firstAttribute="trailing" secondItem="W7S-17-Ntb" secondAttribute="trailing" constant="12" id="G2q-x7-kbe"/>
+                                            <constraint firstItem="VE9-KD-eGd" firstAttribute="leading" secondItem="Npz-8P-s6J" secondAttribute="leading" id="LQU-Ri-cno"/>
+                                            <constraint firstItem="VE9-KD-eGd" firstAttribute="top" secondItem="JoT-2r-a4v" secondAttribute="bottom" constant="5" id="M2d-Jf-uJx"/>
+                                            <constraint firstItem="JoT-2r-a4v" firstAttribute="leading" secondItem="W7S-17-Ntb" secondAttribute="leading" id="NX9-7d-Jxp"/>
+                                            <constraint firstItem="1UB-mm-Xh9" firstAttribute="leading" secondItem="LwC-Rc-ON2" secondAttribute="leading" constant="37" id="R0E-I9-Yq9"/>
+                                            <constraint firstItem="Npz-8P-s6J" firstAttribute="top" secondItem="W7S-17-Ntb" secondAttribute="bottom" constant="13" id="U7V-cI-1Fo"/>
+                                            <constraint firstItem="IND-sa-6We" firstAttribute="trailing" secondItem="JoT-2r-a4v" secondAttribute="trailing" id="XK6-ql-sj3"/>
+                                            <constraint firstItem="W7S-17-Ntb" firstAttribute="top" secondItem="LwC-Rc-ON2" secondAttribute="top" constant="20" id="ZLS-EB-SlS"/>
+                                            <constraint firstItem="IND-sa-6We" firstAttribute="top" secondItem="VE9-KD-eGd" secondAttribute="bottom" constant="18" id="aEX-9n-IVJ"/>
+                                            <constraint firstItem="JoT-2r-a4v" firstAttribute="trailing" secondItem="W7S-17-Ntb" secondAttribute="trailing" id="byr-Hd-uMq"/>
+                                            <constraint firstAttribute="trailing" secondItem="Npz-8P-s6J" secondAttribute="trailing" constant="25" id="hyS-bj-0Qz"/>
+                                            <constraint firstAttribute="bottom" secondItem="1UB-mm-Xh9" secondAttribute="bottom" constant="25" id="kxD-vg-98e"/>
+                                            <constraint firstItem="IND-sa-6We" firstAttribute="leading" secondItem="JoT-2r-a4v" secondAttribute="leading" id="l1W-CS-hQy"/>
+                                            <constraint firstItem="evI-Pk-N1M" firstAttribute="trailing" secondItem="VE9-KD-eGd" secondAttribute="trailing" id="qak-2n-1n3"/>
+                                            <constraint firstItem="evI-Pk-N1M" firstAttribute="leading" secondItem="VE9-KD-eGd" secondAttribute="leading" id="qwC-vB-Zvt"/>
+                                            <constraint firstItem="W7S-17-Ntb" firstAttribute="leading" secondItem="LwC-Rc-ON2" secondAttribute="leading" constant="12" id="rAq-or-xYa"/>
+                                            <constraint firstAttribute="trailing" secondItem="1UB-mm-Xh9" secondAttribute="trailing" constant="37" id="rDS-e6-aRQ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.39501284246575341" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="LwC-Rc-ON2" firstAttribute="top" secondItem="Z1h-nR-noQ" secondAttribute="top" constant="82" id="0nx-bW-43E"/>
+                                    <constraint firstItem="LwC-Rc-ON2" firstAttribute="centerX" secondItem="Z1h-nR-noQ" secondAttribute="centerX" id="8w0-Ac-mau"/>
+                                    <constraint firstItem="Tz3-9W-aJe" firstAttribute="height" secondItem="Z1h-nR-noQ" secondAttribute="height" id="DvO-ZZ-eqR"/>
+                                    <constraint firstItem="Tz3-9W-aJe" firstAttribute="centerX" secondItem="Z1h-nR-noQ" secondAttribute="centerX" id="OPz-ch-25B"/>
+                                    <constraint firstItem="Tz3-9W-aJe" firstAttribute="centerY" secondItem="Z1h-nR-noQ" secondAttribute="centerY" id="OWu-Hg-pTt"/>
+                                    <constraint firstItem="LwC-Rc-ON2" firstAttribute="leading" secondItem="Z1h-nR-noQ" secondAttribute="leading" constant="45" id="PSB-F6-pZV"/>
+                                    <constraint firstItem="Tz3-9W-aJe" firstAttribute="width" secondItem="Z1h-nR-noQ" secondAttribute="width" id="YPn-C7-Xw7"/>
+                                    <constraint firstAttribute="bottom" secondItem="LwC-Rc-ON2" secondAttribute="bottom" constant="126" id="uvk-6H-V1j"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -214,9 +335,12 @@
                             <constraint firstItem="Ilu-pr-9cj" firstAttribute="centerX" secondItem="174-mk-ZKG" secondAttribute="centerX" id="G2a-YJ-E3a"/>
                             <constraint firstItem="3mm-kl-BAu" firstAttribute="trailing" secondItem="aLG-Dn-0RJ" secondAttribute="trailing" id="GR7-dv-r9F"/>
                             <constraint firstItem="PNB-7D-C5E" firstAttribute="centerX" secondItem="z3n-Jo-Blz" secondAttribute="centerX" id="Inc-gi-HbJ"/>
+                            <constraint firstItem="Z1h-nR-noQ" firstAttribute="width" secondItem="z3n-Jo-Blz" secondAttribute="width" id="J61-Lo-Y7k"/>
                             <constraint firstAttribute="trailing" secondItem="Qh3-0t-3td" secondAttribute="trailing" constant="109" id="KZH-cS-Ryp"/>
                             <constraint firstItem="PQu-zr-mOP" firstAttribute="leading" secondItem="z3n-Jo-Blz" secondAttribute="leading" constant="109" id="KdS-46-ZNF"/>
                             <constraint firstItem="Jim-nh-Oae" firstAttribute="top" secondItem="aLG-Dn-0RJ" secondAttribute="bottom" id="NLO-bt-ZoN"/>
+                            <constraint firstItem="Z1h-nR-noQ" firstAttribute="centerX" secondItem="z3n-Jo-Blz" secondAttribute="centerX" id="NzO-aR-8pv"/>
+                            <constraint firstItem="Z1h-nR-noQ" firstAttribute="centerY" secondItem="z3n-Jo-Blz" secondAttribute="centerY" id="OUW-cr-kaX"/>
                             <constraint firstItem="crp-xG-YuM" firstAttribute="leading" secondItem="z3n-Jo-Blz" secondAttribute="leading" constant="20" id="R2w-UX-sYk"/>
                             <constraint firstItem="Ilu-pr-9cj" firstAttribute="top" secondItem="174-mk-ZKG" secondAttribute="bottom" constant="-103" id="SIY-2g-8yg"/>
                             <constraint firstItem="Qh3-0t-3td" firstAttribute="leading" secondItem="z3n-Jo-Blz" secondAttribute="leading" constant="109" id="TWz-lx-KkX"/>
@@ -234,6 +358,7 @@
                             <constraint firstItem="5Bd-55-Jlw" firstAttribute="width" secondItem="Ilu-pr-9cj" secondAttribute="width" id="mbp-C7-fiC"/>
                             <constraint firstItem="174-mk-ZKG" firstAttribute="centerX" secondItem="z3n-Jo-Blz" secondAttribute="centerX" id="nyH-HB-KEW"/>
                             <constraint firstItem="3mm-kl-BAu" firstAttribute="leading" secondItem="aLG-Dn-0RJ" secondAttribute="leading" id="oxj-2I-6NA"/>
+                            <constraint firstItem="Z1h-nR-noQ" firstAttribute="height" secondItem="z3n-Jo-Blz" secondAttribute="height" id="pyC-FY-nzN"/>
                             <constraint firstAttribute="trailing" secondItem="aLG-Dn-0RJ" secondAttribute="trailing" constant="70" id="qe5-Xe-Rkw"/>
                             <constraint firstAttribute="trailing" secondItem="Jim-nh-Oae" secondAttribute="trailing" constant="20" id="svC-Iw-Gki"/>
                             <constraint firstItem="RaW-hh-QkF" firstAttribute="leading" secondItem="3mm-kl-BAu" secondAttribute="leading" id="tlr-xu-RDX"/>
@@ -249,15 +374,29 @@
                     </view>
                     <connections>
                         <outlet property="avatarImageView" destination="Ilu-pr-9cj" id="2lz-At-uXk"/>
+                        <outlet property="changePasswordView" destination="Z1h-nR-noQ" id="tg6-Ja-NWq"/>
+                        <outlet property="currentPasswordLabel" destination="W7S-17-Ntb" id="oJn-vm-zHV"/>
+                        <outlet property="currentPasswordTextField" destination="Npz-8P-s6J" id="UJF-nE-2fM"/>
+                        <outlet property="doneChangingPasswordButton" destination="1UB-mm-Xh9" id="ISw-FL-I6S"/>
                         <outlet property="emailErrorLabel" destination="crp-xG-YuM" id="dZW-FQ-s7A"/>
                         <outlet property="emailTextField" destination="3mm-kl-BAu" id="8i2-N4-gPM"/>
+                        <outlet property="newPasswordLabel" destination="JoT-2r-a4v" id="EQ2-OZ-YrH"/>
+                        <outlet property="newPasswordTextField" destination="VE9-KD-eGd" id="igg-eU-kua"/>
+                        <outlet property="passwordLabel" destination="PQu-zr-mOP" id="ORJ-36-wsv"/>
                         <outlet property="passwordTextField" destination="RaW-hh-QkF" id="1q2-oE-IcF"/>
+                        <outlet property="reenterNewPasswordLabel" destination="IND-sa-6We" id="6av-0b-hdv"/>
+                        <outlet property="reenterNewPasswordTextField" destination="evI-Pk-N1M" id="56W-eH-QjA"/>
                         <outlet property="saveChangesButton" destination="khR-Ak-dil" id="NUc-V1-GFv"/>
                         <outlet property="usernameErrorLabel" destination="Jim-nh-Oae" id="0do-dX-Exk"/>
                         <outlet property="usernameTextField" destination="aLG-Dn-0RJ" id="ERK-gi-4nm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XvU-Rk-kvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="uuY-SJ-1Ae">
+                    <connections>
+                        <action selector="tapOutsideChangePasswordDialog:" destination="V5g-hq-06q" id="bP0-AS-vCE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="709.60000000000002" y="1402.8485757121441"/>
         </scene>

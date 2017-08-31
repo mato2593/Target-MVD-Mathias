@@ -18,10 +18,24 @@ class UserProfileViewController: UIViewController {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   
+  @IBOutlet weak var passwordLabel: UILabel!
   @IBOutlet weak var usernameErrorLabel: UILabel!
   @IBOutlet weak var emailErrorLabel: UILabel!
   
   @IBOutlet weak var saveChangesButton: UIButton!
+  
+  // Change Password Dialog
+  @IBOutlet weak var changePasswordView: UIView!
+  
+  @IBOutlet weak var currentPasswordLabel: UILabel!
+  @IBOutlet weak var newPasswordLabel: UILabel!
+  @IBOutlet weak var reenterNewPasswordLabel: UILabel!
+  
+  @IBOutlet weak var currentPasswordTextField: UITextField!
+  @IBOutlet weak var newPasswordTextField: UITextField!
+  @IBOutlet weak var reenterNewPasswordTextField: UITextField!
+  
+  @IBOutlet weak var doneChangingPasswordButton: UIButton!
   
   // MARK: Constants
   let imagePicker = UIImagePickerController()
@@ -35,6 +49,30 @@ class UserProfileViewController: UIViewController {
   var username = ""
   var email = ""
   
+  lazy var goBackToHomeNavigationItem: UIBarButtonItem = {
+    return UIBarButtonItem(image: #imageLiteral(resourceName: "ForwardArrow"), style: .plain, target: self, action: #selector(goBackToHome))
+  }()
+  
+  var showingChangePasswordDialog = false {
+    didSet {
+      if showingChangePasswordDialog {
+        currentPasswordTextField.text = ""
+        newPasswordTextField.text = ""
+        reenterNewPasswordTextField.text = ""
+      }
+      
+      UIView.transition(with: changePasswordView,
+                        duration: 0.35,
+                        options: .transitionCrossDissolve,
+                        animations: {
+                          self.changePasswordView.isHidden = !self.showingChangePasswordDialog
+                        },
+                        completion: nil)
+      
+      goBackToHomeNavigationItem.isEnabled = !showingChangePasswordDialog
+    }
+  }
+  
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,6 +80,8 @@ class UserProfileViewController: UIViewController {
     setupNavigationBar()
     
     setupView()
+    
+    setLetterSpacing()
     
     getUserData()
   }
@@ -71,20 +111,45 @@ class UserProfileViewController: UIViewController {
     UserAPI.updateUser(
       name: usernameChanged ? usernameTextField.text : nil,
       email: emailChanged ? emailTextField.text : nil,
-      password: passwordChanged ? passwordTextField.text : nil,
       avatar64: imageChanged ? avatarImageView.image : nil,
       success: {
         self.resetInitialValues()
         self.hideSpinner()
         self.disableSaveChangesButton()
       }) { (error) in
+        self.hideSpinner()
         self.showMessageError(title: "Error", errorMessage: error.domain)
       }
   }
   
+  @IBAction func tapOnDoneChangingPasswordButton(_ sender: Any) {
+    do {
+      try validatePasswordChange()
+      showSpinner(message: "Changing password...")
+      UserAPI.resetPassword(currentPasswordTextField.text!, newPassword: newPasswordTextField.text!, success: {
+        self.hideSpinner()
+        self.showingChangePasswordDialog = false
+      }) { error in
+        self.hideSpinner()
+        self.showMessageError(title: "Error", errorMessage: error.domain)
+      }
+    } catch ResetPasswordErrors.emptyField {
+      showMessageError(title: "Error", errorMessage: "Some fields are empty")
+    } catch ResetPasswordErrors.passwordTooWeak {
+      showMessageError(title: "Error", errorMessage: "The new password must be at least 8 characters long")
+    } catch ResetPasswordErrors.passwordsDontMatch {
+      showMessageError(title: "Error", errorMessage: "Password confirmation doesn't match the new password")
+    } catch {
+      print("Something went wrong!")
+    }
+  }
+  
+  @IBAction func tapOutsideChangePasswordDialog(_ sender: Any) {
+    showingChangePasswordDialog = false
+  }
+  
   // MARK: Functions
   func setupNavigationBar() {
-    let goBackToHomeNavigationItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ForwardArrow"), style: .plain, target: self, action:#selector(UserProfileViewController.goBackToHome))
     goBackToHomeNavigationItem.tintColor = .black
     
     navigationItem.setRightBarButton(goBackToHomeNavigationItem, animated: false)
@@ -103,17 +168,35 @@ class UserProfileViewController: UIViewController {
     disableSaveChangesButton()
   }
   
+  private func setLetterSpacing() {
+    let defaultSpacing: CGFloat = 1.6
+    
+    currentPasswordLabel.setSpacing(ofLine: 1.6, ofCharacter: defaultSpacing)
+    newPasswordLabel.setSpacing(ofCharacter: defaultSpacing)
+    reenterNewPasswordLabel.setSpacing(ofCharacter: defaultSpacing)
+    doneChangingPasswordButton.titleLabel?.setSpacing(ofCharacter: defaultSpacing)
+  }
+  
   func getUserData() {
     let user = UserDataManager.getUserObject()
     
+    setupView(forUser: user)
+    
+    username = user?.username ?? ""
+    email = user?.email ?? ""
+  }
+  
+  func setupView(forUser user: User?) {
     usernameTextField.text = user?.username
     emailTextField.text = user?.email
     SDImageCache.shared().removeImage(forKey: user?.image?.absoluteString, withCompletion: {
       self.avatarImageView.sd_setImage(with: user?.image, placeholderImage: #imageLiteral(resourceName: "UserAvatarPlaceholder"), options: .refreshCached)
     })
     
-    username = user?.username ?? ""
-    email = user?.email ?? ""
+    if UserDataManager.isUserFromFacebook() {
+      passwordTextField.isHidden = true
+      passwordLabel.isHidden = true
+    }
   }
   
   func disableSaveChangesButton() {
@@ -162,9 +245,33 @@ class UserProfileViewController: UIViewController {
     UIHelper.hideErrorInForm(textField: usernameTextField, errorLabel: usernameErrorLabel)
     UIHelper.hideErrorInForm(textField: emailTextField, errorLabel: emailErrorLabel)
   }
+  
+  func validatePasswordChange() throws {
+    let currentPassword = currentPasswordTextField.text ?? ""
+    let newPassword = newPasswordTextField.text ?? ""
+    let passwordConfirmation = reenterNewPasswordTextField.text ?? ""
+    
+    if currentPassword.isEmpty || newPassword.isEmpty || passwordConfirmation.isEmpty {
+      throw ResetPasswordErrors.emptyField
+    } else if !newPassword.isValidPassword() {
+      throw ResetPasswordErrors.passwordTooWeak
+    } else if newPassword != passwordConfirmation {
+      throw ResetPasswordErrors.passwordsDontMatch
+    }
+  }
+  
 }
 
 extension UserProfileViewController: UITextFieldDelegate {
+  
+  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    if textField == passwordTextField {
+      showingChangePasswordDialog = true
+      return false
+    }
+    
+    return true
+  }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     switch textField {

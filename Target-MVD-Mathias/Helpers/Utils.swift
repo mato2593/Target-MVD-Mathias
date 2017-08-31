@@ -12,3 +12,9 @@ enum UserDataErrors: Error {
   case emptyUsername
   case invalidEmail
 }
+
+enum ResetPasswordErrors: Error {
+  case emptyField
+  case passwordTooWeak
+  case passwordsDontMatch
+}
