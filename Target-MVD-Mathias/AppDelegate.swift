@@ -10,6 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import MBProgressHUD
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // -Facebook
     FBSDKSettings.setAppID(ConfigurationManager.getValue(for: "FacebookKey"))
     FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    
+    // -GoogleMaps
+    GMSServices.provideAPIKey(ConfigurationManager.getValue(for: "GoogleMapsKey")!)
     
     IQKeyboardManager.sharedManager().enable = true
     spinner = UIHelper.initSpinner()
