@@ -34,7 +34,6 @@ class HomeViewController: UIViewController {
   }
   
   // MARK: Functions
-  
   private func setLetterSpacing() {
     let defaultSpacing: CGFloat = 1.6
     
@@ -47,16 +46,6 @@ class HomeViewController: UIViewController {
     
     locationManager.delegate = self
     locationManager.startUpdatingLocation()
-  }
-  
-  // MARK: Actions
-  
-  @IBAction func tapOnGetMyProfile(_ sender: Any) {
-    UserAPI.getMyProfile({ (json) in
-      print(json)
-    }) { (error) in
-      print(error)
-    }
   }
 
 }
