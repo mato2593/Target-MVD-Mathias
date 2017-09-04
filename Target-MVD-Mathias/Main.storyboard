@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -41,11 +42,20 @@
                                             <action selector="tapOnMyLocationButton:" destination="K4y-mn-w4p" eventType="touchUpInside" id="YYu-KJ-hBR"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TargetLocation" translatesAutoresizingMaskIntoConstraints="NO" id="jvc-f3-DwK">
+                                        <rect key="frame" x="166" y="211.5" width="42" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="MD4-eD-J6C"/>
+                                            <constraint firstAttribute="width" constant="42" id="sLQ-zw-xDe"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="J8s-GP-JHA" secondAttribute="trailing" constant="20" id="YN3-5g-mr2"/>
+                                    <constraint firstItem="jvc-f3-DwK" firstAttribute="centerX" secondItem="lmI-cP-6Sq" secondAttribute="centerX" id="b8L-GJ-XoY"/>
                                     <constraint firstAttribute="bottom" secondItem="J8s-GP-JHA" secondAttribute="bottom" constant="20" id="da5-PR-hi5"/>
+                                    <constraint firstAttribute="bottom" secondItem="jvc-f3-DwK" secondAttribute="bottom" multiplier="2:1" id="mrj-8g-Lmp"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTG-5P-Mc5" userLabel="Create New Target View">
@@ -64,15 +74,25 @@
                                             <constraint firstAttribute="height" constant="30" id="d6W-1T-2Ac"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQx-cD-le7">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                        <connections>
+                                            <action selector="tapOnCreateNewTargetButton:" destination="K4y-mn-w4p" eventType="touchUpInside" id="ZtR-Jx-9bG"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="58l-xF-ewx" secondAttribute="trailing" constant="60" id="5cM-qh-FAG"/>
+                                    <constraint firstItem="AQx-cD-le7" firstAttribute="leading" secondItem="gTG-5P-Mc5" secondAttribute="leading" id="6ro-2a-GeT"/>
+                                    <constraint firstItem="AQx-cD-le7" firstAttribute="top" secondItem="gTG-5P-Mc5" secondAttribute="top" id="D69-s7-ciW"/>
                                     <constraint firstAttribute="height" constant="80" id="Q0H-Qn-ZNo"/>
+                                    <constraint firstAttribute="trailing" secondItem="AQx-cD-le7" secondAttribute="trailing" id="VbS-dZ-Ums"/>
                                     <constraint firstItem="58l-xF-ewx" firstAttribute="leading" secondItem="gTG-5P-Mc5" secondAttribute="leading" constant="60" id="WeI-rc-czS"/>
                                     <constraint firstItem="58l-xF-ewx" firstAttribute="top" secondItem="Mhd-Rb-Eza" secondAttribute="bottom" constant="12" id="ehA-Z8-kIp"/>
                                     <constraint firstAttribute="bottom" secondItem="58l-xF-ewx" secondAttribute="bottom" constant="11" id="iWn-PZ-58x"/>
                                     <constraint firstItem="Mhd-Rb-Eza" firstAttribute="top" secondItem="gTG-5P-Mc5" secondAttribute="top" constant="12" id="lkV-SJ-7zw"/>
+                                    <constraint firstAttribute="bottom" secondItem="AQx-cD-le7" secondAttribute="bottom" id="vjd-D7-anw"/>
                                     <constraint firstItem="Mhd-Rb-Eza" firstAttribute="centerX" secondItem="gTG-5P-Mc5" secondAttribute="centerX" id="zM6-1q-fOB"/>
                                 </constraints>
                             </view>
@@ -104,6 +124,7 @@
                         <outlet property="createNewTargetLabel" destination="58l-xF-ewx" id="ruu-w9-sdu"/>
                         <outlet property="mapViewContainer" destination="lmI-cP-6Sq" id="QBb-Fp-dEs"/>
                         <outlet property="myLocationButton" destination="J8s-GP-JHA" id="RTY-hr-pEw"/>
+                        <outlet property="newTargetLocationImageView" destination="jvc-f3-DwK" id="p7q-id-DnB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCL-Vt-8BE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -470,6 +491,7 @@
         <image name="ChatIcon" width="28" height="23"/>
         <image name="NewTarget" width="32" height="32"/>
         <image name="ProfileBackground" width="286" height="144"/>
+        <image name="TargetLocation" width="42" height="49"/>
         <image name="UserAvatarPlaceholder" width="83" height="83"/>
         <image name="UserProfile" width="23" height="23"/>
     </resources>

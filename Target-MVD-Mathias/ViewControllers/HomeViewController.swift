@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var mapViewContainer: UIView!
   @IBOutlet weak var createNewTargetLabel: UILabel!
   @IBOutlet weak var myLocationButton: UIButton!
+  @IBOutlet weak var newTargetLocationImageView: UIImageView!
   
   // MARK: Variables
   var locationManager = CLLocationManager()
@@ -42,6 +43,11 @@ class HomeViewController: UIViewController {
     mapView.animate(to: camera)
   }
   
+  @IBAction func tapOnCreateNewTargetButton(_ sender: Any) {
+    let coordinates = mapView.camera.target
+    print(coordinates)
+  }
+  
   // MARK: Functions
   private func setLetterSpacing() {
     let defaultSpacing: CGFloat = 1.6
@@ -53,6 +59,7 @@ class HomeViewController: UIViewController {
     mapView.settings.compassButton = true
     mapViewContainer.addSubview(mapView)
     mapViewContainer.bringSubview(toFront: myLocationButton)
+    mapViewContainer.bringSubview(toFront: newTargetLocationImageView)
     
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
