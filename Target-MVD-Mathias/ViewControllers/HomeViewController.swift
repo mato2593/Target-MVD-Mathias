@@ -41,10 +41,11 @@ class HomeViewController: UIViewController {
   }
   
   private func setupMap() {
-    mapView.isMyLocationEnabled = true
+    mapView.settings.compassButton = true
     mapViewContainer.addSubview(mapView)
     
     locationManager.delegate = self
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
     locationManager.startUpdatingLocation()
   }
 
@@ -53,15 +54,23 @@ class HomeViewController: UIViewController {
 extension HomeViewController: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    locationManager.stopUpdatingLocation()
-    
     let location = locations.last
-    let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!,
-                                          longitude: (location?.coordinate.longitude)!,
-                                          zoom: 16.0)
     
-    mapView.animate(to: camera)
-    mapView.settings.myLocationButton = true
+    if let coordinates = location?.coordinate {
+      locationManager.stopUpdatingLocation()
+      
+      let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude,
+                                            longitude: coordinates.longitude,
+                                            zoom: 16.0)
+      
+      let locationMarker = GMSMarker(position: coordinates)
+      locationMarker.icon = #imageLiteral(resourceName: "UserLocation")
+      locationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+      locationMarker.isFlat = true
+      locationMarker.map = mapView
+      
+      mapView.animate(to: camera)
+    }
   }
   
 }
