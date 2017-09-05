@@ -452,7 +452,7 @@
 					};
 					9B5AFAD91C7205EB002347D6 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 434VZ3V823;
+						DevelopmentTeam = PF387KAY5G;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -873,7 +873,7 @@
 				BASE_URL = "https://target-mvd-api.herokuapp.com/api/v1";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 434VZ3V823;
+				DEVELOPMENT_TEAM = PF387KAY5G;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/frameworks",
@@ -881,7 +881,7 @@
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.toptier.TargetMVD;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.toptier.TargetMVD-Mathias";
 				PRODUCT_NAME = swiftbase;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -900,7 +900,7 @@
 				BASE_URL = "https://target-mvd-api.herokuapp.com/api/v1";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 434VZ3V823;
+				DEVELOPMENT_TEAM = PF387KAY5G;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/frameworks",
@@ -908,7 +908,7 @@
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.toptier.TargetMVD;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.toptier.TargetMVD-Mathias";
 				PRODUCT_NAME = swiftbase;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -974,7 +974,7 @@
 				BASE_URL = "https://target-mvd-api.herokuapp.com/api/v1";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 434VZ3V823;
+				DEVELOPMENT_TEAM = PF387KAY5G;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/frameworks",
@@ -982,7 +982,7 @@
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.toptier.TargetMVD;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.toptier.TargetMVD-Mathias";
 				PRODUCT_NAME = swiftbase;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
