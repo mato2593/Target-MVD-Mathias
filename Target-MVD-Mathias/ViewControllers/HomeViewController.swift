@@ -45,6 +45,7 @@ class HomeViewController: UIViewController {
   
   @IBAction func tapOnCreateNewTargetButton(_ sender: Any) {
     let coordinates = mapView.camera.target
+    // TODO: create a new Target with this coordinates
     print(coordinates)
   }
   
