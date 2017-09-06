@@ -17,6 +17,13 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var myLocationButton: UIButton!
   @IBOutlet weak var newTargetLocationImageView: UIImageView!
   
+  // Target Form
+  @IBOutlet weak var targetFormContainer: UIView!
+  @IBOutlet weak var targetAreaLengthTextField: UITextField!
+  @IBOutlet weak var targetTitleTextField: UITextField!
+  @IBOutlet weak var targetTopicTextField: UITextField!
+  @IBOutlet weak var saveTargetButton: UIButton!
+  
   // MARK: Variables
   var locationManager = CLLocationManager()
   var userLocation = CLLocationCoordinate2D()
@@ -35,6 +42,7 @@ class HomeViewController: UIViewController {
     makeNavigationBarTransparent()
     setLetterSpacing()
     setupMap()
+    setupNewTargetFormView()
   }
   
   // MARK: Actions
@@ -47,6 +55,14 @@ class HomeViewController: UIViewController {
     let coordinates = mapView.camera.target
     // TODO: create a new Target with this coordinates
     print(coordinates)
+    
+    UIView.transition(with: targetFormContainer,
+                      duration: 0.35,
+                      options: .transitionFlipFromBottom,
+                      animations: {
+                        self.targetFormContainer.isHidden = false
+                      },
+                      completion: nil)
   }
   
   // MARK: Functions
@@ -54,6 +70,7 @@ class HomeViewController: UIViewController {
     let defaultSpacing: CGFloat = 1.6
     
     createNewTargetLabel.setSpacing(ofCharacter: defaultSpacing)
+    saveTargetButton.titleLabel?.setSpacing(ofCharacter: defaultSpacing)
   }
   
   private func setupMap() {
@@ -67,6 +84,12 @@ class HomeViewController: UIViewController {
     locationManager.startUpdatingLocation()
   }
 
+  private func setupNewTargetFormView() {
+    let textFields: [UITextField] = [targetAreaLengthTextField, targetTitleTextField, targetTopicTextField]
+    UIHelper.stylizePlaceholdersFor(textFields, color: .black)
+    
+    targetTitleTextField.addLeftPadding()
+  }
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
