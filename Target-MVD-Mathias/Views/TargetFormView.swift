@@ -38,6 +38,11 @@ class TargetFormView: UIView {
   // MARK: Variables
   var targetFormType = TargetFormType.creation
   weak var delegate: TargetFormDelegate?
+  var firstTimeOpeningPicker = true
+  
+  // MARK: Constants
+  let areas: DictionaryLiteral = ["50 m": 50, "100 m": 100, "250 m": 250, "500 m": 500]
+  let areasPickerView = UIPickerView()
   
   // MARK: Initializers
   override init(frame: CGRect) {
@@ -98,6 +103,17 @@ class TargetFormView: UIView {
   private func setupTextFields() {
     let textFields: [UITextField] = [areaLengthTextField, titleTextField, topicTextField]
     UIHelper.stylizePlaceholdersFor(textFields, color: .black)
+    
+    areasPickerView.delegate = self
+    areasPickerView.dataSource = self
+    
+    areaLengthTextField.inputView = areasPickerView
+    
+    areasPickerView.selectRow(0, inComponent: 0, animated: false)
+    pickerView(areasPickerView, didSelectRow: 0, inComponent: 0)
+    
+    topicTextField.delegate = self
+    
     titleTextField.addLeftPadding()
   }
   
@@ -121,6 +137,42 @@ class TargetFormView: UIView {
     
     areaLengthTitleLabel.text = areaLengthTitle
     topicTitleLabel.text = topicTitle
+  }
+  
+}
+
+extension TargetFormView: UIPickerViewDelegate {
+  
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return areas.count
+  }
+  
+}
+
+extension TargetFormView: UIPickerViewDataSource {
+  
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return areas[row].key
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    areaLengthTextField.text = areas[row].key
+  }
+  
+}
+
+extension TargetFormView: UITextFieldDelegate {
+  
+  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    if textField == topicTextField {
+      return false
+    }
+    
+    return true
   }
   
 }

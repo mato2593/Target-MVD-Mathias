@@ -147,7 +147,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zbo-2P-3JE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xEC-KC-o6Y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xEC-KC-o6Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -277,7 +277,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNB-7D-C5E" userLabel="Log Out Button">
-                                <rect key="frame" x="112" y="523" width="150" height="32"/>
+                                <rect key="frame" x="112" y="523" width="150" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="A8d-iE-tWy"/>
                                 </constraints>
@@ -318,13 +318,13 @@
                                         <rect key="frame" x="45" y="82" width="284" height="459"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ENTER YOUR CURRENT PASSWORD TO EDIT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7S-17-Ntb" userLabel="Current Password Label">
-                                                <rect key="frame" x="12" y="20" width="260" height="15"/>
+                                                <rect key="frame" x="12" y="20" width="260" height="13"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Npz-8P-s6J" userLabel="Current Password Text Field">
-                                                <rect key="frame" x="25" y="48" width="234" height="37"/>
+                                                <rect key="frame" x="25" y="46" width="234" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="MWT-Qn-Bwk"/>
                                                 </constraints>
@@ -333,7 +333,7 @@
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW PASSWORD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoT-2r-a4v" userLabel="New Password Label">
-                                                <rect key="frame" x="12" y="103" width="260" height="20"/>
+                                                <rect key="frame" x="12" y="101" width="260" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="SYp-sx-K1l"/>
                                                 </constraints>
@@ -342,7 +342,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VE9-KD-eGd" userLabel="New Password Text Field">
-                                                <rect key="frame" x="25" y="128" width="234" height="37"/>
+                                                <rect key="frame" x="25" y="126" width="234" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="20G-LT-fGd"/>
                                                 </constraints>
@@ -351,7 +351,7 @@
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REENTER NEW PASSWORD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IND-sa-6We" userLabel="Reenter New Password Label">
-                                                <rect key="frame" x="12" y="183" width="260" height="20"/>
+                                                <rect key="frame" x="12" y="181" width="260" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="3rm-oo-J0Y"/>
                                                 </constraints>
@@ -360,7 +360,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evI-Pk-N1M" userLabel="Reenter New Password Text Field">
-                                                <rect key="frame" x="25" y="208" width="234" height="37"/>
+                                                <rect key="frame" x="25" y="206" width="234" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="NQE-Ua-gY3"/>
                                                 </constraints>
