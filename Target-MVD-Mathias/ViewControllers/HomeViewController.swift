@@ -17,12 +17,7 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var myLocationButton: UIButton!
   @IBOutlet weak var newTargetLocationImageView: UIImageView!
   
-  // Target Form
-  @IBOutlet weak var targetFormContainer: UIView!
-  @IBOutlet weak var targetAreaLengthTextField: UITextField!
-  @IBOutlet weak var targetTitleTextField: UITextField!
-  @IBOutlet weak var targetTopicTextField: UITextField!
-  @IBOutlet weak var saveTargetButton: UIButton!
+  @IBOutlet weak var targetFormView: TargetFormView!
   
   // MARK: Variables
   var locationManager = CLLocationManager()
@@ -42,7 +37,7 @@ class HomeViewController: UIViewController {
     makeNavigationBarTransparent()
     setLetterSpacing()
     setupMap()
-    setupNewTargetFormView()
+    setupTargetForm()
   }
   
   // MARK: Actions
@@ -56,13 +51,12 @@ class HomeViewController: UIViewController {
     // TODO: create a new Target with this coordinates
     print(coordinates)
     
-    UIView.transition(with: targetFormContainer,
+    targetFormView.targetFormType = .creation
+    UIView.transition(with: targetFormView,
                       duration: 0.35,
-                      options: .transitionFlipFromBottom,
                       animations: {
-                        self.targetFormContainer.isHidden = false
-                      },
-                      completion: nil)
+                        self.targetFormView.center.y -= self.targetFormView.frame.size.height
+                      })
   }
   
   // MARK: Functions
@@ -70,7 +64,6 @@ class HomeViewController: UIViewController {
     let defaultSpacing: CGFloat = 1.6
     
     createNewTargetLabel.setSpacing(ofCharacter: defaultSpacing)
-    saveTargetButton.titleLabel?.setSpacing(ofCharacter: defaultSpacing)
   }
   
   private func setupMap() {
@@ -83,12 +76,9 @@ class HomeViewController: UIViewController {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     locationManager.startUpdatingLocation()
   }
-
-  private func setupNewTargetFormView() {
-    let textFields: [UITextField] = [targetAreaLengthTextField, targetTitleTextField, targetTopicTextField]
-    UIHelper.stylizePlaceholdersFor(textFields, color: .black)
-    
-    targetTitleTextField.addLeftPadding()
+  
+  private func setupTargetForm() {
+    targetFormView.delegate = self
   }
 }
 
@@ -115,6 +105,42 @@ extension HomeViewController: CLLocationManagerDelegate {
       
       mapView.animate(to: camera)
     }
+  }
+  
+}
+
+extension HomeViewController: TargetFormDelegate {
+  
+  func saveTarget(area: Int, title: String, topic: String) {
+    UIView.transition(with: targetFormView,
+                      duration: 0.35,
+                      animations: {
+                        self.targetFormView.center.y += self.targetFormView.frame.size.height
+    })
+  }
+  
+  func editTarget(area: Int, title: String, topic: String) {
+    UIView.transition(with: targetFormView,
+                      duration: 0.35,
+                      animations: {
+                        self.targetFormView.center.y += self.targetFormView.frame.size.height
+    })
+  }
+  
+  func cancelTargetCreation() {
+    UIView.transition(with: targetFormView,
+                      duration: 0.35,
+                      animations: {
+                        self.targetFormView.center.y += self.targetFormView.frame.size.height
+    })
+  }
+  
+  func deleteTarget() {
+    UIView.transition(with: targetFormView,
+                      duration: 0.35,
+                      animations: {
+                        self.targetFormView.center.y += self.targetFormView.frame.size.height
+    })
   }
   
 }

@@ -42,6 +42,8 @@
 		E8FBB1BF1DD21A32000D6740 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBB1BE1DD21A32000D6740 /* Session.swift */; };
 		E8FBB1C11DD21D18000D6740 /* SessionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBB1C01DD21D18000D6740 /* SessionDataManager.swift */; };
 		F502AAC81F60441A0019ED96 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F502AAC71F60441A0019ED96 /* UITextFieldExtension.swift */; };
+		F502AACA1F6081590019ED96 /* TargetFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F502AAC91F6081590019ED96 /* TargetFormView.xib */; };
+		F502AACD1F6084C10019ED96 /* TargetFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F502AACC1F6084C10019ED96 /* TargetFormView.swift */; };
 		F502D6EC1F3B636F00474060 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F502D6EB1F3B636F00474060 /* Onboarding.storyboard */; };
 		F5330BC91F4F3274000937CE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5330BC81F4F3274000937CE /* Utils.swift */; };
 		F53ED73C1F3CA2F2007C6D43 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */; };
@@ -120,6 +122,8 @@
 		E8FBB1BE1DD21A32000D6740 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		E8FBB1C01DD21D18000D6740 /* SessionDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDataManager.swift; sourceTree = "<group>"; };
 		F502AAC71F60441A0019ED96 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		F502AAC91F6081590019ED96 /* TargetFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TargetFormView.xib; sourceTree = "<group>"; };
+		F502AACC1F6084C10019ED96 /* TargetFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetFormView.swift; sourceTree = "<group>"; };
 		F502D6EB1F3B636F00474060 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		F5330BC81F4F3274000937CE /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 		E8290BFB1D832D4100599960 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F502AACB1F6084790019ED96 /* TargetForm */,
 				9B715A451E28083600C0C039 /* PlaceholderTextView.swift */,
 			);
 			path = Views;
@@ -365,6 +370,15 @@
 				F502AAC71F60441A0019ED96 /* UITextFieldExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F502AACB1F6084790019ED96 /* TargetForm */ = {
+			isa = PBXGroup;
+			children = (
+				F502AAC91F6081590019ED96 /* TargetFormView.xib */,
+				F502AACC1F6084C10019ED96 /* TargetFormView.swift */,
+			);
+			name = TargetForm;
 			sourceTree = "<group>";
 		};
 		F553AA171F4CAA7900F54DA8 /* Segues */ = {
@@ -505,6 +519,7 @@
 				F5631F161F41EAC100CA49BD /* OpenSans-Bold.ttf in Resources */,
 				F502D6EC1F3B636F00474060 /* Onboarding.storyboard in Resources */,
 				F5631F1F1F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf in Resources */,
+				F502AACA1F6081590019ED96 /* TargetFormView.xib in Resources */,
 				F5631F1B1F41EAC100CA49BD /* OpenSans-Light.ttf in Resources */,
 				F5631F1D1F41EAC100CA49BD /* OpenSans-Regular.ttf in Resources */,
 				F5631F191F41EAC100CA49BD /* OpenSans-ExtraBoldItalic.ttf in Resources */,
@@ -676,6 +691,7 @@
 				F577F6741F3E2F2300D11F6C /* ErrorExtension.swift in Sources */,
 				E8B30E021E72FF8000131DCF /* UIStoryboardExtension.swift in Sources */,
 				9B3AA3A11ED4D014005A4D26 /* HomeViewController.swift in Sources */,
+				F502AACD1F6084C10019ED96 /* TargetFormView.swift in Sources */,
 				9B77E0751E2FB66F0020E450 /* UserDataManager.swift in Sources */,
 				9B0C72741C738D3400BAF3B1 /* APIClient.swift in Sources */,
 				F5F7F4551F4B5FB9002A9054 /* UserProfileViewController.swift in Sources */,
