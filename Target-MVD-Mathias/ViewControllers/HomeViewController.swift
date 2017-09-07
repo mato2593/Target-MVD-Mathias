@@ -40,6 +40,13 @@ class HomeViewController: UIViewController {
     setupTargetForm()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    targetFormView.center.y += self.targetFormView.frame.size.height
+    targetFormView.isHidden = false
+  }
+  
   // MARK: Actions
   @IBAction func tapOnMyLocationButton(_ sender: Any) {
     let camera = GMSCameraPosition.camera(withTarget: userLocation, zoom: 16.0)
