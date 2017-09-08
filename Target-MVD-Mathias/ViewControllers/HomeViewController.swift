@@ -31,6 +31,15 @@ class HomeViewController: UIViewController {
     return GMSMapView.map(withFrame: self.mapViewContainer.bounds, camera: camera)
   }()
   
+  lazy var locationMarker: GMSMarker = {
+    let locationMarker = GMSMarker()
+    locationMarker.icon = #imageLiteral(resourceName: "UserLocation")
+    locationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+    locationMarker.isFlat = true
+    locationMarker.map = self.mapView
+    return locationMarker
+  }()
+  
   var topics: [Topic] = []
   
   // MARK: Lifecycle
@@ -91,7 +100,6 @@ class HomeViewController: UIViewController {
   
   private func setupTargetForm() {
     targetFormView.delegate = self
-    topicsTableView.delegate = self
   }
   
   private func getTargetTopics() {
@@ -182,14 +190,16 @@ extension HomeViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell: UITableViewCell = {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
-        return UITableViewCell(style: .default, reuseIdentifier: "cell")
+    let cell: TopicTableViewCell = {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "topicCell") as? TopicTableViewCell else {
+        return TopicTableViewCell(style: .default, reuseIdentifier: "topicCell")
       }
       return cell
     }()
     
-    cell.textLabel?.text = topics[indexPath.row].label
+    let topic = topics[indexPath.row]
+    
+    cell.setup(withTopic: topic)
     
     return cell
   }
@@ -199,7 +209,6 @@ extension HomeViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     targetFormView.topic = topics[indexPath.row].label
-    print(topics[indexPath.row].label)
     tableView.deselectRow(at: indexPath, animated: false)
     
     UIView.transition(with: topicsTableView,

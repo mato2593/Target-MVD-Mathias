@@ -79,7 +79,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="What do you want to talk about?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MKj-7D-B4P" userLabel="Select Label Text Field">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="What do you want to talk about?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MKj-7D-B4P" userLabel="Select Topic Text Field">
                             <rect key="frame" x="35" y="170" width="305" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="dln-CC-KaN"/>
@@ -87,6 +87,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="Ii9-Fl-lQD"/>
+                            </connections>
                         </textField>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5c2-f3-HQo">
                             <rect key="frame" x="35" y="240" width="305" height="40"/>

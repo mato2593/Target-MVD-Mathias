@@ -7,10 +7,14 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
         <array key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
         </array>
@@ -103,12 +107,66 @@
                                     <constraint firstAttribute="height" constant="310" id="mv2-Gx-cVf"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sVb-yZ-eOs">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sVb-yZ-eOs">
                                 <rect key="frame" x="0.0" y="667" width="375" height="360"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="360" id="Nlc-LH-akd"/>
                                 </constraints>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="topicCell" rowHeight="40" id="YZa-sP-7PW" customClass="TopicTableViewCell" customModule="swiftbase" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YZa-sP-7PW" id="odj-4b-sTI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FootbalExample" translatesAutoresizingMaskIntoConstraints="NO" id="k1q-RC-7rP">
+                                                    <rect key="frame" x="15" y="10" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Ig2-ln-e21"/>
+                                                        <constraint firstAttribute="width" constant="20" id="lz4-wQ-S6l"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Football" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2p-yB-U3M">
+                                                    <rect key="frame" x="50" y="10.5" width="302" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="IIB-9A-uRm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1p-bF-EAR" userLabel="Separator View">
+                                                    <rect key="frame" x="0.0" y="39.5" width="375" height="0.5"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="JAc-rF-z74"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="k1q-RC-7rP" firstAttribute="leading" secondItem="odj-4b-sTI" secondAttribute="leading" constant="15" id="5Xa-ue-mbN"/>
+                                                <constraint firstItem="k1q-RC-7rP" firstAttribute="centerY" secondItem="odj-4b-sTI" secondAttribute="centerY" id="89O-GM-5Bj"/>
+                                                <constraint firstAttribute="bottom" secondItem="Y1p-bF-EAR" secondAttribute="bottom" id="DTh-49-isD"/>
+                                                <constraint firstAttribute="trailing" secondItem="Y1p-bF-EAR" secondAttribute="trailing" id="ImX-sg-70l"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="B2p-yB-U3M" secondAttribute="trailing" constant="15" id="OIC-Cg-zor"/>
+                                                <constraint firstItem="B2p-yB-U3M" firstAttribute="centerY" secondItem="odj-4b-sTI" secondAttribute="centerY" id="VOe-TC-I9P"/>
+                                                <constraint firstItem="B2p-yB-U3M" firstAttribute="leading" secondItem="k1q-RC-7rP" secondAttribute="trailing" constant="15" id="Yg5-BU-TSZ"/>
+                                                <constraint firstItem="Y1p-bF-EAR" firstAttribute="leading" secondItem="odj-4b-sTI" secondAttribute="leading" id="dp7-ys-1r8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="topicIconImageView" destination="k1q-RC-7rP" id="435-3R-2tZ"/>
+                                            <outlet property="topicTitleLabel" destination="B2p-yB-U3M" id="lbe-up-Qbv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="K4y-mn-w4p" id="DBR-gR-jbU"/>
+                                    <outlet property="delegate" destination="K4y-mn-w4p" id="mTC-ur-eXT"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,7 +216,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zbo-2P-3JE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xEC-KC-o6Y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xEC-KC-o6Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -511,6 +569,7 @@
     </scenes>
     <resources>
         <image name="ChatIcon" width="28" height="23"/>
+        <image name="FootbalExample" width="16" height="16"/>
         <image name="NewTarget" width="32" height="32"/>
         <image name="ProfileBackground" width="286" height="144"/>
         <image name="TargetLocation" width="42" height="49"/>

@@ -62,6 +62,7 @@
 		F5631F1E1F41EAC100CA49BD /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F141F41EAC100CA49BD /* OpenSans-Semibold.ttf */; };
 		F5631F1F1F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F151F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf */; };
 		F577F6741F3E2F2300D11F6C /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F577F6731F3E2F2300D11F6C /* ErrorExtension.swift */; };
+		F59A8F561F63196400C17889 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A8F551F63196400C17889 /* TopicTableViewCell.swift */; };
 		F5BBC4721F61E3DF00ADC5BE /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BBC4711F61E3DF00ADC5BE /* Topic.swift */; };
 		F5F7F4551F4B5FB9002A9054 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F7F4541F4B5FB9002A9054 /* UserProfileViewController.swift */; };
 		FA54D5881E11C59600F0DBEA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54D5871E11C59600F0DBEA /* FirstViewController.swift */; };
@@ -145,6 +146,7 @@
 		F5631F141F41EAC100CA49BD /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		F5631F151F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		F577F6731F3E2F2300D11F6C /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
+		F59A8F551F63196400C17889 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		F5BBC4711F61E3DF00ADC5BE /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		F5F7F4541F4B5FB9002A9054 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		FA54D5871E11C59600F0DBEA /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -359,6 +361,7 @@
 		E8290BFB1D832D4100599960 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F59A8F541F63192C00C17889 /* TableViewCells */,
 				F502AACB1F6084790019ED96 /* TargetForm */,
 				9B715A451E28083600C0C039 /* PlaceholderTextView.swift */,
 			);
@@ -413,6 +416,14 @@
 				F5631F151F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		F59A8F541F63192C00C17889 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				F59A8F551F63196400C17889 /* TopicTableViewCell.swift */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -708,6 +719,7 @@
 				9BD01E361F01641E007255E3 /* DictionaryExtension.swift in Sources */,
 				E8290C021D8330A800599960 /* StringExtension.swift in Sources */,
 				E81171921DE5EFB7003D3DF5 /* UIViewControllerExtension.swift in Sources */,
+				F59A8F561F63196400C17889 /* TopicTableViewCell.swift in Sources */,
 				9B3AA3991ED35007005A4D26 /* SignInViewController.swift in Sources */,
 				E8FBB1BF1DD21A32000D6740 /* Session.swift in Sources */,
 				9B77E0731E2FB6350020E450 /* User.swift in Sources */,

@@ -40,7 +40,11 @@ class TargetFormView: UIView {
   var targetFormType = TargetFormType.creation
   weak var delegate: TargetFormDelegate?
   var firstTimeOpeningPicker = true
-  var topic = ""
+  var topic = "" {
+    didSet {
+      topicTextField.text = topic
+    }
+  }
   
   // MARK: Constants
   let areas: DictionaryLiteral = ["50 m": 50, "100 m": 100, "250 m": 250, "500 m": 500]
@@ -113,8 +117,6 @@ class TargetFormView: UIView {
     
     areasPickerView.selectRow(0, inComponent: 0, animated: false)
     pickerView(areasPickerView, didSelectRow: 0, inComponent: 0)
-    
-    topicTextField.delegate = self
     
     titleTextField.addLeftPadding()
   }
