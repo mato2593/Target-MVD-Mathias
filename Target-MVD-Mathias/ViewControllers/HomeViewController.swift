@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
   
   lazy var mapView: GMSMapView = {
     // Create a GMSCameraPosition that tells the map to display
-    // coordinate -34.906334,-56.184856, at zoom level 16.
+    // coordinate 0,0, at zoom level 1.
     let camera = GMSCameraPosition.camera(withLatitude: 0, longitude: 0, zoom: 1.0)
     return GMSMapView.map(withFrame: self.mapViewContainer.bounds, camera: camera)
   }()
@@ -85,6 +85,7 @@ class HomeViewController: UIViewController {
     
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.requestWhenInUseAuthorization()
     locationManager.startUpdatingLocation()
   }
   
@@ -118,12 +119,7 @@ extension HomeViewController: CLLocationManagerDelegate {
                                             longitude: coordinates.longitude,
                                             zoom: 16.0)
       
-      let locationMarker = GMSMarker(position: coordinates)
-      locationMarker.icon = #imageLiteral(resourceName: "UserLocation")
-      locationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-      locationMarker.isFlat = true
-      locationMarker.opacity = 0.67
-      locationMarker.map = mapView
+      locationMarker.position = coordinates
       
       mapView.animate(to: camera)
     }
