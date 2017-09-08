@@ -13,6 +13,7 @@ protocol TargetFormDelegate: class {
   func editTarget(area: Int, title: String, topic: String)
   func deleteTarget()
   func cancelTargetCreation()
+  func didTapOnSelectTopicField()
 }
 
 enum TargetFormType: String {
@@ -39,6 +40,7 @@ class TargetFormView: UIView {
   var targetFormType = TargetFormType.creation
   weak var delegate: TargetFormDelegate?
   var firstTimeOpeningPicker = true
+  var topic = ""
   
   // MARK: Constants
   let areas: DictionaryLiteral = ["50 m": 50, "100 m": 100, "250 m": 250, "500 m": 500]
@@ -169,6 +171,11 @@ extension TargetFormView: UITextFieldDelegate {
   
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
     if textField == topicTextField {
+      guard let delegate = delegate else {
+        preconditionFailure("Delegate not set")
+      }
+      
+      delegate.didTapOnSelectTopicField()
       return false
     }
     

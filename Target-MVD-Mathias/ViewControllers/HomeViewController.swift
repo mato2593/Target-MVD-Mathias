@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var newTargetLocationImageView: UIImageView!
   
   @IBOutlet weak var targetFormView: TargetFormView!
+  @IBOutlet weak var topicsTableView: UITableView!
   
   // MARK: Variables
   var locationManager = CLLocationManager()
@@ -30,6 +31,8 @@ class HomeViewController: UIViewController {
     return GMSMapView.map(withFrame: self.mapViewContainer.bounds, camera: camera)
   }()
   
+  var topics: [Topic] = []
+  
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,6 +41,7 @@ class HomeViewController: UIViewController {
     setLetterSpacing()
     setupMap()
     setupTargetForm()
+    getTargetTopics()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -86,7 +90,18 @@ class HomeViewController: UIViewController {
   
   private func setupTargetForm() {
     targetFormView.delegate = self
+    topicsTableView.delegate = self
   }
+  
+  private func getTargetTopics() {
+    TargetAPI.topics(success: { topics in
+      self.topics = topics
+      self.topicsTableView.reloadData()
+    }) { error in
+      print(error.domain)
+    }
+  }
+  
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
@@ -147,6 +162,54 @@ extension HomeViewController: TargetFormDelegate {
                       duration: 0.35,
                       animations: {
                         self.targetFormView.center.y += self.targetFormView.frame.size.height
+    })
+  }
+  
+  func didTapOnSelectTopicField() {
+    UIView.transition(with: topicsTableView,
+                      duration: 0.35,
+                      animations: {
+                        self.topicsTableView.center.y -= self.topicsTableView.frame.size.height
+    })
+  }
+  
+}
+
+extension HomeViewController: UITableViewDataSource {
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return topics.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell: UITableViewCell = {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+        return UITableViewCell(style: .default, reuseIdentifier: "cell")
+      }
+      return cell
+    }()
+    
+    cell.textLabel?.text = topics[indexPath.row].label
+    
+    return cell
+  }
+}
+
+extension HomeViewController: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    targetFormView.topic = topics[indexPath.row].label
+    print(topics[indexPath.row].label)
+    tableView.deselectRow(at: indexPath, animated: false)
+    
+    UIView.transition(with: topicsTableView,
+                      duration: 0.35,
+                      animations: {
+                        self.topicsTableView.center.y += self.topicsTableView.frame.size.height
     })
   }
   
