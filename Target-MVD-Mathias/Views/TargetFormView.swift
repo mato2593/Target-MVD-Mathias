@@ -14,6 +14,7 @@ protocol TargetFormDelegate: class {
   func deleteTarget()
   func cancelTargetCreation()
   func didTapOnSelectTopicField()
+  func didChangeTargetArea(_ area: Int)
 }
 
 enum TargetFormType: String {
@@ -31,8 +32,13 @@ class TargetFormView: UIView {
   
   @IBOutlet weak var areaLengthTextField: UITextField!
   @IBOutlet weak var titleTextField: UITextField!
-  @IBOutlet weak var topicTextField: UITextField!
 
+  @IBOutlet weak var selectTopicPlaceholderLabel: UILabel!
+  @IBOutlet weak var topicStackView: UIStackView!
+  @IBOutlet weak var topicImageView: UIImageView!
+  @IBOutlet weak var topicLabel: UILabel!
+  @IBOutlet weak var selectTopicButton: UIButton!
+  
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var saveTargetButton: UIButton!
   
@@ -40,9 +46,17 @@ class TargetFormView: UIView {
   var targetFormType = TargetFormType.creation
   weak var delegate: TargetFormDelegate?
   var firstTimeOpeningPicker = true
-  var topic = "" {
+  var topic = Topic() {
     didSet {
-      topicTextField.text = topic
+      if !topic.label.isEmpty {
+        topicImageView.sd_setImage(with: topic.icon)
+        selectTopicPlaceholderLabel.isHidden = true
+        topicStackView.isHidden = false
+        topicLabel.text = topic.label
+      } else {
+        selectTopicPlaceholderLabel.isHidden = false
+        topicStackView.isHidden = true
+      }
     }
   }
   
@@ -62,6 +76,14 @@ class TargetFormView: UIView {
   }
   
   // MARK: Actions
+  @IBAction func tapOnSelectTopicButton(_ sender: Any) {
+    guard let delegate = delegate else {
+      preconditionFailure("Delegate not set")
+    }
+    
+    delegate.didTapOnSelectTopicField()
+  }
+  
   @IBAction func tapOnCancelTargetCreationButton(_ sender: Any) {
     guard let delegate = delegate else {
       preconditionFailure("Delegate not set")
@@ -81,13 +103,12 @@ class TargetFormView: UIView {
     }
     
     let title = titleTextField.text ?? ""
-    let topic = topicTextField.text ?? ""
     
     switch targetFormType {
     case .creation:
-      delegate.saveTarget(area: 0, title: title, topic: topic)
+      delegate.saveTarget(area: 0, title: title, topic: topic.label)
     case .edition:
-      delegate.editTarget(area: 0, title: title, topic: topic)
+      delegate.editTarget(area: 0, title: title, topic: topic.label)
     }
   }
   
@@ -95,6 +116,7 @@ class TargetFormView: UIView {
   private func initView() {
     loadNib()
     setupTextFields()
+    setupSelectTopicButton()
     setupLetterSpacing()
     setupLabels()
   }
@@ -107,7 +129,7 @@ class TargetFormView: UIView {
   }
   
   private func setupTextFields() {
-    let textFields: [UITextField] = [areaLengthTextField, titleTextField, topicTextField]
+    let textFields: [UITextField] = [areaLengthTextField, titleTextField]
     UIHelper.stylizePlaceholdersFor(textFields, color: .black)
     
     areasPickerView.delegate = self
@@ -119,6 +141,10 @@ class TargetFormView: UIView {
     pickerView(areasPickerView, didSelectRow: 0, inComponent: 0)
     
     titleTextField.addLeftPadding()
+  }
+  
+  private func setupSelectTopicButton() {
+    selectTopicButton.addBorder(color: .black, weight: 1.0)
   }
   
   private func setupLetterSpacing() {
@@ -143,6 +169,13 @@ class TargetFormView: UIView {
     topicTitleLabel.text = topicTitle
   }
   
+  func resetFields() {
+    areasPickerView.selectRow(0, inComponent: 0, animated: false)
+    pickerView(areasPickerView, didSelectRow: 0, inComponent: 0)
+    
+    titleTextField.text = ""
+    topic = Topic()
+  }
 }
 
 extension TargetFormView: UIPickerViewDelegate {
@@ -165,23 +198,7 @@ extension TargetFormView: UIPickerViewDataSource {
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     areaLengthTextField.text = areas[row].key
-  }
-  
-}
-
-extension TargetFormView: UITextFieldDelegate {
-  
-  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-    if textField == topicTextField {
-      guard let delegate = delegate else {
-        preconditionFailure("Delegate not set")
-      }
-      
-      delegate.didTapOnSelectTopicField()
-      return false
-    }
-    
-    return true
+    delegate?.didChangeTargetArea(areas[row].value)
   }
   
 }

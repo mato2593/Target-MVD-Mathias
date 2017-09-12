@@ -24,6 +24,14 @@ class HomeViewController: UIViewController {
   var locationManager = CLLocationManager()
   var userLocation = CLLocationCoordinate2D()
   
+  lazy var targetCircle: GMSCircle = {
+    let targetCircle = GMSCircle()
+    targetCircle.fillColor = .transparentWhite
+    targetCircle.strokeColor = .macaroniAndCheese
+    
+    return targetCircle
+  }()
+  
   lazy var mapView: GMSMapView = {
     // Create a GMSCameraPosition that tells the map to display
     // coordinate 0,0, at zoom level 1.
@@ -41,6 +49,7 @@ class HomeViewController: UIViewController {
   }()
   
   var topics: [Topic] = []
+  var firstTimeUpdatingLocation = true
   
   // MARK: Lifecycle
   override func viewDidLoad() {
@@ -67,10 +76,9 @@ class HomeViewController: UIViewController {
   }
   
   @IBAction func tapOnCreateNewTargetButton(_ sender: Any) {
-    let coordinates = mapView.camera.target
-    // TODO: create a new Target with this coordinates
-    print(coordinates)
+    addTargetCircle(radius: 50)
     
+    targetFormView.resetFields()
     targetFormView.targetFormType = .creation
     UIView.transition(with: targetFormView,
                       duration: 0.35,
@@ -110,7 +118,14 @@ class HomeViewController: UIViewController {
       print(error.domain)
     }
   }
-  
+
+  fileprivate func addTargetCircle(radius: Int) {
+    let coordinates = mapView.camera.target
+    
+    targetCircle.position = coordinates
+    targetCircle.radius = CLLocationDistance(radius)
+    targetCircle.map = self.mapView
+  }
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
@@ -119,17 +134,16 @@ extension HomeViewController: CLLocationManagerDelegate {
     let location = locations.last
     
     if let coordinates = location?.coordinate {
-      locationManager.stopUpdatingLocation()
-      
       userLocation = coordinates
-      
-      let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude,
-                                            longitude: coordinates.longitude,
-                                            zoom: 16.0)
-      
       locationMarker.position = coordinates
       
-      mapView.animate(to: camera)
+      if firstTimeUpdatingLocation {
+        firstTimeUpdatingLocation = false
+        let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude,
+                                              longitude: coordinates.longitude,
+                                              zoom: 16.0)
+        mapView.animate(to: camera)
+      }
     }
   }
   
@@ -154,6 +168,7 @@ extension HomeViewController: TargetFormDelegate {
   }
   
   func cancelTargetCreation() {
+    targetCircle.map = nil
     UIView.transition(with: targetFormView,
                       duration: 0.35,
                       animations: {
@@ -175,6 +190,10 @@ extension HomeViewController: TargetFormDelegate {
                       animations: {
                         self.topicsTableView.center.y -= self.topicsTableView.frame.size.height
     })
+  }
+  
+  func didChangeTargetArea(_ area: Int) {
+    addTargetCircle(radius: area)
   }
   
 }
@@ -208,7 +227,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    targetFormView.topic = topics[indexPath.row].label
+    targetFormView.topic = topics[indexPath.row]
     tableView.deselectRow(at: indexPath, animated: false)
     
     UIView.transition(with: topicsTableView,
