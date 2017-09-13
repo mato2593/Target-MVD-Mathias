@@ -62,13 +62,6 @@ class HomeViewController: UIViewController {
     getTargetTopics()
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    targetFormView.center.y += self.targetFormView.frame.size.height
-    targetFormView.isHidden = false
-  }
-  
   // MARK: Actions
   @IBAction func tapOnMyLocationButton(_ sender: Any) {
     let camera = GMSCameraPosition.camera(withTarget: userLocation, zoom: 16.0)
@@ -77,14 +70,16 @@ class HomeViewController: UIViewController {
   
   @IBAction func tapOnCreateNewTargetButton(_ sender: Any) {
     addTargetCircle(radius: 50)
+    disableMapGestures()
     
     targetFormView.resetFields()
     targetFormView.targetFormType = .creation
-    UIView.transition(with: targetFormView,
-                      duration: 0.35,
-                      animations: {
-                        self.targetFormView.center.y -= self.targetFormView.frame.size.height
-                      })
+    
+    UIView.animate(withDuration: 0.35,
+                   animations: {
+                    let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
+                    self.targetFormView.transform = move
+    })
   }
   
   // MARK: Functions
@@ -126,6 +121,16 @@ class HomeViewController: UIViewController {
     targetCircle.radius = CLLocationDistance(radius)
     targetCircle.map = self.mapView
   }
+  
+  fileprivate func enableMapGestures() {
+    mapView.settings.scrollGestures = true
+    mapView.settings.tiltGestures = true
+  }
+  
+  private func disableMapGestures() {
+    mapView.settings.scrollGestures = false
+    mapView.settings.tiltGestures = false
+  }
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
@@ -151,37 +156,34 @@ extension HomeViewController: CLLocationManagerDelegate {
 
 extension HomeViewController: TargetFormDelegate {
   
-  func saveTarget(area: Int, title: String, topic: String) {
-    UIView.transition(with: targetFormView,
-                      duration: 0.35,
-                      animations: {
-                        self.targetFormView.center.y += self.targetFormView.frame.size.height
-    })
+  func saveTarget(area: Int, title: String, topic: Topic) {
+    showSpinner(message: "Creating target")
+    
+    let coordinates = mapView.camera.target
+    let newTarget = Target(radius: area, lat: coordinates.latitude, lng: coordinates.longitude, title: title, topic: topic, user: UserDataManager.getUserId())
+    
+    TargetAPI.createTarget(newTarget, success: { (target, _) in
+      self.hideSpinner()
+      self.showNewTarget(target)
+      self.hideTargetFormView()
+    }) { (error) in
+      self.hideSpinner()
+      self.showMessageError(title: "Error", errorMessage: error.domain)
+    }
+    
   }
   
   func editTarget(area: Int, title: String, topic: String) {
-    UIView.transition(with: targetFormView,
-                      duration: 0.35,
-                      animations: {
-                        self.targetFormView.center.y += self.targetFormView.frame.size.height
-    })
+    hideTargetFormView()
   }
   
   func cancelTargetCreation() {
     targetCircle.map = nil
-    UIView.transition(with: targetFormView,
-                      duration: 0.35,
-                      animations: {
-                        self.targetFormView.center.y += self.targetFormView.frame.size.height
-    })
+    hideTargetFormView()
   }
   
   func deleteTarget() {
-    UIView.transition(with: targetFormView,
-                      duration: 0.35,
-                      animations: {
-                        self.targetFormView.center.y += self.targetFormView.frame.size.height
-    })
+    hideTargetFormView()
   }
   
   func didTapOnSelectTopicField() {
@@ -196,6 +198,34 @@ extension HomeViewController: TargetFormDelegate {
     addTargetCircle(radius: area)
   }
   
+  private func hideTargetFormView() {
+    UIView.animate(withDuration: 0.35,
+                   animations: {
+                    self.targetFormView.transform = .identity
+    })
+    enableMapGestures()
+  }
+  
+  private func showNewTarget(_ target: Target) {
+    targetCircle.map = nil
+    
+    let newTargetMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: target.lat, longitude: target.lng))
+    
+    let markerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+    markerView.backgroundColor = UIColor.macaroniAndCheese.withAlphaComponent(0.7)
+    markerView.layer.cornerRadius = 30
+    markerView.layer.masksToBounds = true
+    
+    let markerImageView = UIImageView(frame: CGRect(x: 20, y: 20, width: 20, height: 20))
+    markerImageView.contentMode = .scaleAspectFit
+    markerImageView.sd_setImage(with: target.topic.icon)
+    markerView.addSubview(markerImageView)
+    
+    newTargetMarker.iconView = markerView
+    newTargetMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+    newTargetMarker.isFlat = true
+    newTargetMarker.map = mapView
+  }
 }
 
 extension HomeViewController: UITableViewDataSource {

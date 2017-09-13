@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TargetFormDelegate: class {
-  func saveTarget(area: Int, title: String, topic: String)
+  func saveTarget(area: Int, title: String, topic: Topic)
   func editTarget(area: Int, title: String, topic: String)
   func deleteTarget()
   func cancelTargetCreation()
@@ -45,7 +45,10 @@ class TargetFormView: UIView {
   // MARK: Variables
   var targetFormType = TargetFormType.creation
   weak var delegate: TargetFormDelegate?
+  
   var firstTimeOpeningPicker = true
+  var area = 50
+  
   var topic = Topic() {
     didSet {
       if !topic.label.isEmpty {
@@ -106,9 +109,9 @@ class TargetFormView: UIView {
     
     switch targetFormType {
     case .creation:
-      delegate.saveTarget(area: 0, title: title, topic: topic.label)
+      delegate.saveTarget(area: area, title: title, topic: topic)
     case .edition:
-      delegate.editTarget(area: 0, title: title, topic: topic.label)
+      delegate.editTarget(area: area, title: title, topic: topic.label)
     }
   }
   
@@ -198,6 +201,8 @@ extension TargetFormView: UIPickerViewDataSource {
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     areaLengthTextField.text = areas[row].key
+    area = areas[row].value
+    
     delegate?.didChangeTargetArea(areas[row].value)
   }
   

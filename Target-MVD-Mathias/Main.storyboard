@@ -100,8 +100,8 @@
                                     <constraint firstItem="Mhd-Rb-Eza" firstAttribute="centerX" secondItem="gTG-5P-Mc5" secondAttribute="centerX" id="zM6-1q-fOB"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVH-av-leb" userLabel="Target Form View" customClass="TargetFormView" customModule="swiftbase" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="357" width="375" height="310"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVH-av-leb" userLabel="Target Form View" customClass="TargetFormView" customModule="swiftbase" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="667" width="375" height="310"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="310" id="mv2-Gx-cVf"/>
@@ -180,7 +180,7 @@
                             <constraint firstAttribute="trailing" secondItem="gTG-5P-Mc5" secondAttribute="trailing" id="Pg2-Fq-VCO"/>
                             <constraint firstItem="gTG-5P-Mc5" firstAttribute="top" secondItem="lmI-cP-6Sq" secondAttribute="bottom" id="UDU-69-n7H"/>
                             <constraint firstAttribute="trailing" secondItem="GVH-av-leb" secondAttribute="trailing" id="Y5a-f4-cah"/>
-                            <constraint firstItem="GVH-av-leb" firstAttribute="bottom" secondItem="YnO-i4-MwY" secondAttribute="bottom" id="d0R-GY-ZFn"/>
+                            <constraint firstItem="GVH-av-leb" firstAttribute="top" secondItem="YnO-i4-MwY" secondAttribute="bottom" id="d0R-GY-ZFn"/>
                             <constraint firstItem="lmI-cP-6Sq" firstAttribute="top" secondItem="b07-nt-cIs" secondAttribute="bottom" id="l91-hp-6Jd"/>
                             <constraint firstItem="gRs-YP-uAr" firstAttribute="top" secondItem="sVb-yZ-eOs" secondAttribute="top" id="mAI-Oq-mAP"/>
                             <constraint firstItem="sVb-yZ-eOs" firstAttribute="leading" secondItem="YnO-i4-MwY" secondAttribute="leading" id="o5G-kg-01X"/>
@@ -216,7 +216,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zbo-2P-3JE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xEC-KC-o6Y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xEC-KC-o6Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
