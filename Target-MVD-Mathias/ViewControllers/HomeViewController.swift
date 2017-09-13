@@ -33,8 +33,6 @@ class HomeViewController: UIViewController {
   }()
   
   lazy var mapView: GMSMapView = {
-    // Create a GMSCameraPosition that tells the map to display
-    // coordinate 0,0, at zoom level 1.
     let camera = GMSCameraPosition.camera(withLatitude: 0, longitude: 0, zoom: 1.0)
     return GMSMapView.map(withFrame: self.mapViewContainer.bounds, camera: camera)
   }()

@@ -49,16 +49,30 @@ class TargetFormView: UIView {
   var firstTimeOpeningPicker = true
   var area = 50
   
+  var title = "" {
+    didSet {
+      let trimmedTitle = title.trimmingCharacters(in: .whitespaces)
+      
+      if trimmedTitle.isEmpty {
+        disableSaveTargetButton()
+      } else {
+        tryEnablingSaveTargetButton()
+      }
+    }
+  }
+  
   var topic = Topic() {
     didSet {
-      if !topic.label.isEmpty {
+      if topic.id > 0 {
         topicImageView.sd_setImage(with: topic.icon)
         selectTopicPlaceholderLabel.isHidden = true
         topicStackView.isHidden = false
         topicLabel.text = topic.label
+        tryEnablingSaveTargetButton()
       } else {
         selectTopicPlaceholderLabel.isHidden = false
         topicStackView.isHidden = true
+        disableSaveTargetButton()
       }
     }
   }
@@ -122,6 +136,7 @@ class TargetFormView: UIView {
     setupSelectTopicButton()
     setupLetterSpacing()
     setupLabels()
+    disableSaveTargetButton()
   }
   
   private func loadNib() {
@@ -177,8 +192,37 @@ class TargetFormView: UIView {
     pickerView(areasPickerView, didSelectRow: 0, inComponent: 0)
     
     titleTextField.text = ""
+    title = ""
     topic = Topic()
   }
+  
+  func disableSaveTargetButton() {
+    saveTargetButton.isEnabled = false
+    saveTargetButton.layer.backgroundColor = UIColor.gray.cgColor
+  }
+  
+  func tryEnablingSaveTargetButton() {
+    let trimmedTitle = title.trimmingCharacters(in: .whitespaces)
+    
+    if !trimmedTitle.isEmpty && topic.id > 0{
+      enableSaveTargetButton()
+    }
+  }
+  
+  func enableSaveTargetButton() {
+    saveTargetButton.isEnabled = true
+    saveTargetButton.layer.backgroundColor = UIColor.black.cgColor
+  }
+}
+
+extension TargetFormView: UITextFieldDelegate {
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    if textField == titleTextField {
+      title = titleTextField.text ?? ""
+    }
+  }
+  
 }
 
 extension TargetFormView: UIPickerViewDelegate {
