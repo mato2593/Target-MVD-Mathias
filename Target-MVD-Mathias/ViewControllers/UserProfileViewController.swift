@@ -160,7 +160,7 @@ class UserProfileViewController: UIViewController {
   func setupView() {
     avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width/2
     avatarImageView.layer.masksToBounds = true
-    avatarImageView.addBorder(color: .black, weight: 3.0)
+    avatarImageView.addBorder(color: .black, weight: 1)
     imagePicker.delegate = self
     
     passwordTextField.attributedPlaceholder = NSAttributedString(string: "********", attributes: [NSForegroundColorAttributeName: UIColor.black])
