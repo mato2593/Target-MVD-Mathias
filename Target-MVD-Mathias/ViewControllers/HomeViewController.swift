@@ -103,7 +103,7 @@ class HomeViewController: UIViewController {
     targetFormView.delegate = self
   }
   
-  private func getTargetTopics() {
+  fileprivate func getTargetTopics() {
     TargetAPI.topics(success: { topics in
       self.topics = topics
       self.topicsTableView.reloadData()
@@ -185,11 +185,19 @@ extension HomeViewController: TargetFormDelegate {
   }
   
   func didTapOnSelectTopicField() {
-    UIView.transition(with: topicsTableView,
-                      duration: 0.35,
-                      animations: {
-                        self.topicsTableView.center.y -= self.topicsTableView.frame.size.height
-    })
+    if topics.isEmpty {
+      let alert = UIAlertController(title: nil, message: "Error fetching topics", preferredStyle: UIAlertControllerStyle.alert)
+      alert.addAction(UIAlertAction(title: "Try again", style: .default) { _ in
+        self.getTargetTopics()
+      })
+      present(alert, animated: true, completion: nil)
+    } else {
+      UIView.transition(with: topicsTableView,
+                        duration: 0.35,
+                        animations: {
+                          self.topicsTableView.center.y -= self.topicsTableView.frame.size.height
+      })
+    }
   }
   
   func didChangeTargetArea(_ area: Int) {

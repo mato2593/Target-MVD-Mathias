@@ -204,7 +204,7 @@ class TargetFormView: UIView {
   func tryEnablingSaveTargetButton() {
     let trimmedTitle = title.trimmingCharacters(in: .whitespaces)
     
-    if !trimmedTitle.isEmpty && topic.id > 0{
+    if !trimmedTitle.isEmpty && topic.id > 0 {
       enableSaveTargetButton()
     }
   }
