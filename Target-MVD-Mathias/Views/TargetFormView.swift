@@ -225,7 +225,7 @@ extension TargetFormView: UITextFieldDelegate {
   
 }
 
-extension TargetFormView: UIPickerViewDelegate {
+extension TargetFormView: UIPickerViewDataSource {
   
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
@@ -237,7 +237,7 @@ extension TargetFormView: UIPickerViewDelegate {
   
 }
 
-extension TargetFormView: UIPickerViewDataSource {
+extension TargetFormView: UIPickerViewDelegate {
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return areas[row].key

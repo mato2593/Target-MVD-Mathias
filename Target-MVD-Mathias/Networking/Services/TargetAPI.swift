@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class TargetAPI {
   
-  fileprivate static let topicsUrl = "/topics"
+  fileprivate static let topicsUrl = "/topics/"
   fileprivate static let usersUrl = "/users/"
   fileprivate static let targetsUrl = "/targets/"
   
