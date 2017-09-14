@@ -16,5 +16,7 @@ extension UIColor {
   }
   
   static let tomato = UIColor(r: 224, g: 36, b: 36)
+  static let macaroniAndCheese = UIColor(r: 239, g: 198, b: 56)
+  static let transparentWhite = UIColor(r: 255, g: 255, b: 255, alpha: 0.7)
   
 }
