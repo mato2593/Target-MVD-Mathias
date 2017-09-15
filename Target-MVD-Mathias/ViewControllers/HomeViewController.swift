@@ -115,7 +115,9 @@ class HomeViewController: UIViewController {
       }
       
     }) { error in
-      print(error.domain)
+      self.showMessageError(errorMessage: error.domain, actionTitle: "Try again") { _ in
+        self.getTargets()
+      }
     }
   }
   
@@ -223,11 +225,9 @@ extension HomeViewController: TargetFormDelegate {
   
   func didTapOnSelectTopicField() {
     if topics.isEmpty {
-      let alert = UIAlertController(title: nil, message: "Error fetching topics", preferredStyle: UIAlertControllerStyle.alert)
-      alert.addAction(UIAlertAction(title: "Try again", style: .default) { _ in
+      showMessageError(errorMessage: "Error fetching topics", actionTitle: "Try again") { _ in
         self.getTargetTopics()
-      })
-      present(alert, animated: true, completion: nil)
+      }
     } else {
       UIView.transition(with: topicsTableView,
                         duration: 0.35,
