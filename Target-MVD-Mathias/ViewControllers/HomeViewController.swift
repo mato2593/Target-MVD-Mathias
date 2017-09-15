@@ -59,8 +59,13 @@ class HomeViewController: UIViewController {
     setLetterSpacing()
     setupMap()
     setupTargetForm()
-    getTargets()
     getTargetTopics()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    getTargets()
   }
   
   // MARK: Actions
@@ -115,9 +120,7 @@ class HomeViewController: UIViewController {
       }
       
     }) { error in
-      self.showMessageError(errorMessage: error.domain, actionTitle: "Try again") { _ in
-        self.getTargets()
-      }
+      self.showMessageError(errorMessage: error.domain)
     }
   }
   
@@ -253,7 +256,7 @@ extension HomeViewController: TargetFormDelegate {
     targetCircle.map = nil
     
     targets.append(target)
-    self.addTargetToMap(target)
+    addTargetToMap(target)
   }
 }
 
