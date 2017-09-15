@@ -46,6 +46,8 @@ class HomeViewController: UIViewController {
     return locationMarker
   }()
   
+  var targets: [Target] = []
+  var targetsMarkers: [GMSMarker] = []
   var topics: [Topic] = []
   var firstTimeUpdatingLocation = true
   
@@ -57,6 +59,7 @@ class HomeViewController: UIViewController {
     setLetterSpacing()
     setupMap()
     setupTargetForm()
+    getTargets()
     getTargetTopics()
   }
   
@@ -103,6 +106,19 @@ class HomeViewController: UIViewController {
     targetFormView.delegate = self
   }
   
+  private func getTargets() {
+    TargetAPI.targets(success: { targets in
+      self.targets = targets
+      
+      for target in targets {
+        self.addTargetToMap(target)
+      }
+      
+    }) { error in
+      print(error.domain)
+    }
+  }
+  
   fileprivate func getTargetTopics() {
     TargetAPI.topics(success: { topics in
       self.topics = topics
@@ -110,6 +126,27 @@ class HomeViewController: UIViewController {
     }) { error in
       print(error.domain)
     }
+  }
+  
+  fileprivate func addTargetToMap(_ target: Target) {
+    let targetMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: target.lat, longitude: target.lng))
+    
+    let markerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+    markerView.backgroundColor = UIColor.macaroniAndCheese.withAlphaComponent(0.7)
+    markerView.layer.cornerRadius = 30
+    markerView.layer.masksToBounds = true
+    
+    let markerImageView = UIImageView(frame: CGRect(x: 20, y: 20, width: 20, height: 20))
+    markerImageView.contentMode = .scaleAspectFit
+    markerImageView.sd_setImage(with: target.topic.icon)
+    markerView.addSubview(markerImageView)
+    
+    targetMarker.iconView = markerView
+    targetMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+    targetMarker.isFlat = true
+    targetMarker.map = mapView
+    
+    targetsMarkers.append(targetMarker)
   }
 
   fileprivate func addTargetCircle(radius: Int) {
@@ -215,22 +252,8 @@ extension HomeViewController: TargetFormDelegate {
   private func showNewTarget(_ target: Target) {
     targetCircle.map = nil
     
-    let newTargetMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: target.lat, longitude: target.lng))
-    
-    let markerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-    markerView.backgroundColor = UIColor.macaroniAndCheese.withAlphaComponent(0.7)
-    markerView.layer.cornerRadius = 30
-    markerView.layer.masksToBounds = true
-    
-    let markerImageView = UIImageView(frame: CGRect(x: 20, y: 20, width: 20, height: 20))
-    markerImageView.contentMode = .scaleAspectFit
-    markerImageView.sd_setImage(with: target.topic.icon)
-    markerView.addSubview(markerImageView)
-    
-    newTargetMarker.iconView = markerView
-    newTargetMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-    newTargetMarker.isFlat = true
-    newTargetMarker.map = mapView
+    targets.append(target)
+    self.addTargetToMap(target)
   }
 }
 
