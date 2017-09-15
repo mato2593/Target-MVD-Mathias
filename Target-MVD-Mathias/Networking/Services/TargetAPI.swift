@@ -62,4 +62,23 @@ class TargetAPI {
     }
   }
   
+  class func targets(success: @escaping (_ response: [Target]) -> Void, failure: @escaping (_ error: Error) -> Void) {
+    let url = usersUrl + "\(UserDataManager.getUserId())" + targetsUrl
+    
+    APIClient.sendGetRequest(url, success: { (response) in
+      let json = JSON(response)
+      let targetsArray = json["targets"].arrayValue
+      
+      var targets: [Target] = []
+      
+      for target in targetsArray {
+        targets.append(Target.parse(fromJSON: target))
+      }
+      
+      success(targets)
+    }) { error in
+      failure(error)
+    }
+  }
+  
 }
