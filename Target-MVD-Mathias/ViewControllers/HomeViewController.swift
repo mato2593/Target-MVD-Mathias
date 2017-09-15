@@ -75,17 +75,21 @@ class HomeViewController: UIViewController {
   }
   
   @IBAction func tapOnCreateNewTargetButton(_ sender: Any) {
-    addTargetCircle(radius: 50)
-    disableMapGestures()
-    
-    targetFormView.resetFields()
-    targetFormView.targetFormType = .creation
-    
-    UIView.animate(withDuration: 0.35,
-                   animations: {
-                    let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
-                    self.targetFormView.transform = move
-    })
+    if targets.count < 10 {
+      addTargetCircle(radius: 50)
+      disableMapGestures()
+      
+      targetFormView.resetFields()
+      targetFormView.targetFormType = .creation
+      
+      UIView.animate(withDuration: 0.35,
+                     animations: {
+                      let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
+                      self.targetFormView.transform = move
+      })
+    } else {
+      showMessageError(errorMessage: "You have exceeded the maximum amount of targets, please remove one before creating a new target.")
+    }
   }
   
   // MARK: Functions
