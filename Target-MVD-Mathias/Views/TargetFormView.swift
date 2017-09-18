@@ -43,7 +43,11 @@ class TargetFormView: UIView {
   @IBOutlet weak var saveTargetButton: UIButton!
   
   // MARK: Variables
-  var targetFormType = TargetFormType.creation
+  var targetFormType = TargetFormType.creation {
+    didSet {
+      setupLabelsAndButtons()
+    }
+  }
   weak var delegate: TargetFormDelegate?
   
   var firstTimeOpeningPicker = true
@@ -73,6 +77,24 @@ class TargetFormView: UIView {
         selectTopicPlaceholderLabel.isHidden = false
         topicStackView.isHidden = true
         disableSaveTargetButton()
+      }
+    }
+  }
+  
+  var target: Target? = nil {
+    didSet {
+      if let target = target {
+        for (index, area) in areas.enumerated() {
+          if area.value == target.radius {
+            areasPickerView.selectRow(index, inComponent: 0, animated: false)
+            pickerView(areasPickerView, didSelectRow: index, inComponent: 0)
+            break
+          }
+        }
+        
+        title = target.title
+        titleTextField.text = target.title
+        topic = target.topic
       }
     }
   }
@@ -135,7 +157,7 @@ class TargetFormView: UIView {
     setupTextFields()
     setupSelectTopicButton()
     setupLetterSpacing()
-    setupLabels()
+    setupLabelsAndButtons()
     disableSaveTargetButton()
   }
   
@@ -170,21 +192,29 @@ class TargetFormView: UIView {
     saveTargetButton.titleLabel?.setSpacing(ofCharacter: 1.6)
   }
   
-  private func setupLabels() {
+  private func setupLabelsAndButtons() {
     var areaLengthTitle: String
     var topicTitle: String
+    var cancelButtonTitle: String
+    var saveButtonTitle: String
     
     switch targetFormType {
     case .creation:
       areaLengthTitle = "SPECIFY AREA LENGTH"
       topicTitle = "SELECT A TOPIC"
+      cancelButtonTitle = "CANCEL"
+      saveButtonTitle = "SAVE TARGET"
     case .edition:
       areaLengthTitle = "AREA LENGTH"
       topicTitle = "TOPIC"
+      cancelButtonTitle = "DELETE"
+      saveButtonTitle = "SAVE"
     }
     
     areaLengthTitleLabel.text = areaLengthTitle
     topicTitleLabel.text = topicTitle
+    cancelButton.setTitle(cancelButtonTitle, for: .normal)
+    saveTargetButton.setTitle(saveButtonTitle, for: .normal)
   }
   
   func resetFields() {
@@ -194,6 +224,7 @@ class TargetFormView: UIView {
     titleTextField.text = ""
     title = ""
     topic = Topic()
+    target = nil
   }
   
   func disableSaveTargetButton() {
@@ -247,7 +278,9 @@ extension TargetFormView: UIPickerViewDelegate {
     areaLengthTextField.text = areas[row].key
     area = areas[row].value
     
-    delegate?.didChangeTargetArea(areas[row].value)
+    if targetFormType == .creation {
+      delegate?.didChangeTargetArea(areas[row].value)
+    }
   }
   
 }

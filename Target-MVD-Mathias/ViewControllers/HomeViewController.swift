@@ -81,15 +81,7 @@ class HomeViewController: UIViewController {
     if targets.count < 10 {
       addTargetCircle(radius: 50)
       disableMapGestures()
-      
-      targetFormView.resetFields()
-      targetFormView.targetFormType = .creation
-      
-      UIView.animate(withDuration: 0.35,
-                     animations: {
-                      let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
-                      self.targetFormView.transform = move
-      })
+      showTargetForm(withFormType: .creation)
     } else {
       showMessageError(errorMessage: "You have exceeded the maximum amount of targets, please remove one before creating a new target.")
     }
@@ -104,6 +96,7 @@ class HomeViewController: UIViewController {
   
   private func setupMap() {
     mapView.settings.compassButton = true
+    mapView.delegate = self
     mapViewContainer.addSubview(mapView)
     mapViewContainer.bringSubview(toFront: myLocationButton)
     mapViewContainer.bringSubview(toFront: newTargetLocationImageView)
@@ -157,6 +150,7 @@ class HomeViewController: UIViewController {
     targetMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
     targetMarker.isFlat = true
     targetMarker.map = mapView
+    targetMarker.userData = target
     
     targetsMarkers.append(targetMarker)
   }
@@ -167,6 +161,26 @@ class HomeViewController: UIViewController {
     targetCircle.position = coordinates
     targetCircle.radius = CLLocationDistance(radius)
     targetCircle.map = self.mapView
+  }
+  
+  fileprivate func showTargetForm(withFormType formType: TargetFormType, target: Target? = nil) {
+    targetFormView.resetFields()
+    targetFormView.targetFormType = formType
+    targetFormView.target = target
+    
+    UIView.animate(withDuration: 0.35,
+                   animations: {
+                    let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
+                    self.targetFormView.transform = move
+    })
+  }
+  
+  fileprivate func hideTargetFormView() {
+    UIView.animate(withDuration: 0.35,
+                   animations: {
+                    self.targetFormView.transform = .identity
+    })
+    enableMapGestures()
   }
   
   fileprivate func enableMapGestures() {
@@ -253,14 +267,6 @@ extension HomeViewController: TargetFormDelegate {
     addTargetCircle(radius: area)
   }
   
-  private func hideTargetFormView() {
-    UIView.animate(withDuration: 0.35,
-                   animations: {
-                    self.targetFormView.transform = .identity
-    })
-    enableMapGestures()
-  }
-  
   private func showNewTarget(_ target: Target) {
     targetCircle.map = nil
     
@@ -302,6 +308,18 @@ extension HomeViewController: UITableViewDelegate {
                       animations: {
                         self.topicsTableView.center.y += self.topicsTableView.frame.size.height
     })
+  }
+  
+}
+
+extension HomeViewController: GMSMapViewDelegate {
+  
+  func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+    if let target = marker.userData as? Target {
+      showTargetForm(withFormType: .edition, target: target)
+    }
+    
+    return false
   }
   
 }
