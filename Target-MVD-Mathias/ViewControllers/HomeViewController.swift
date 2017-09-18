@@ -33,7 +33,10 @@ class HomeViewController: UIViewController {
   }()
   
   lazy var mapView: GMSMapView = {
-    let camera = GMSCameraPosition.camera(withLatitude: 0, longitude: 0, zoom: 1.0)
+    let coordinates = UserDataManager.getLastLocation()
+    let zoom = coordinates.latitude != 0 && coordinates.longitude != 0 ? 16.0 : 1.0
+    
+    let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: Float(zoom))
     return GMSMapView.map(withFrame: self.mapViewContainer.bounds, camera: camera)
   }()
   
@@ -193,6 +196,8 @@ extension HomeViewController: CLLocationManagerDelegate {
                                               zoom: 16.0)
         mapView.animate(to: camera)
       }
+      
+      UserDataManager.storeLastLocation(coordinates)
     }
   }
   
