@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class UserDataManager: NSObject {
   
@@ -77,4 +78,18 @@ class UserDataManager: NSObject {
     return self.getAccessToken() != nil
   }
   
+  // MARK: User location
+  
+  class func storeLastLocation(_ coordinates: CLLocationCoordinate2D) {
+    let defaults = UserDefaults.standard
+    defaults.set(coordinates.latitude, forKey: "last-user-location-lat")
+    defaults.set(coordinates.longitude, forKey: "last-user-location-lng")
+  }
+  
+  class func getLastLocation() -> CLLocationCoordinate2D {
+    let defaults = UserDefaults.standard
+    let lat = defaults.double(forKey: "last-user-location-lat")
+    let lng = defaults.double(forKey: "last-user-location-lng")
+    return CLLocationCoordinate2D(latitude: lat, longitude: lng)
+  }
 }

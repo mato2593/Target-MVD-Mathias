@@ -33,7 +33,10 @@ class HomeViewController: UIViewController {
   }()
   
   lazy var mapView: GMSMapView = {
-    let camera = GMSCameraPosition.camera(withLatitude: 0, longitude: 0, zoom: 1.0)
+    let coordinates = UserDataManager.getLastLocation()
+    let zoom = coordinates.latitude != 0 && coordinates.longitude != 0 ? 16.0 : 1.0
+    
+    let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: Float(zoom))
     return GMSMapView.map(withFrame: self.mapViewContainer.bounds, camera: camera)
   }()
   
@@ -75,17 +78,21 @@ class HomeViewController: UIViewController {
   }
   
   @IBAction func tapOnCreateNewTargetButton(_ sender: Any) {
-    addTargetCircle(radius: 50)
-    disableMapGestures()
-    
-    targetFormView.resetFields()
-    targetFormView.targetFormType = .creation
-    
-    UIView.animate(withDuration: 0.35,
-                   animations: {
-                    let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
-                    self.targetFormView.transform = move
-    })
+    if targets.count < 10 {
+      addTargetCircle(radius: 50)
+      disableMapGestures()
+      
+      targetFormView.resetFields()
+      targetFormView.targetFormType = .creation
+      
+      UIView.animate(withDuration: 0.35,
+                     animations: {
+                      let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
+                      self.targetFormView.transform = move
+      })
+    } else {
+      showMessageError(errorMessage: "You have exceeded the maximum amount of targets, please remove one before creating a new target.")
+    }
   }
   
   // MARK: Functions
@@ -189,6 +196,8 @@ extension HomeViewController: CLLocationManagerDelegate {
                                               zoom: 16.0)
         mapView.animate(to: camera)
       }
+      
+      UserDataManager.storeLastLocation(coordinates)
     }
   }
   
