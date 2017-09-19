@@ -322,4 +322,10 @@ extension HomeViewController: GMSMapViewDelegate {
     return false
   }
   
+  func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+    if targetFormView.targetFormType == .edition {
+      hideTargetFormView()
+    }
+  }
+  
 }
