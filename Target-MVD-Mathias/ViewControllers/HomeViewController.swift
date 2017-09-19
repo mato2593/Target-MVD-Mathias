@@ -53,6 +53,7 @@ class HomeViewController: UIViewController {
   var targetsMarkers: [GMSMarker] = []
   var topics: [Topic] = []
   var firstTimeUpdatingLocation = true
+  var selectedTargetMarker: GMSMarker? = nil
   
   // MARK: Lifecycle
   override func viewDidLoad() {
@@ -136,17 +137,7 @@ class HomeViewController: UIViewController {
   fileprivate func addTargetToMap(_ target: Target) {
     let targetMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: target.lat, longitude: target.lng))
     
-    let markerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-    markerView.backgroundColor = UIColor.macaroniAndCheese.withAlphaComponent(0.7)
-    markerView.layer.cornerRadius = 30
-    markerView.layer.masksToBounds = true
-    
-    let markerImageView = UIImageView(frame: CGRect(x: 20, y: 20, width: 20, height: 20))
-    markerImageView.contentMode = .scaleAspectFit
-    markerImageView.sd_setImage(with: target.topic.icon)
-    markerView.addSubview(markerImageView)
-    
-    targetMarker.iconView = markerView
+    targetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: target.topic.icon)
     targetMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
     targetMarker.isFlat = true
     targetMarker.map = mapView
@@ -176,6 +167,11 @@ class HomeViewController: UIViewController {
   }
   
   fileprivate func hideTargetFormView() {
+    if targetFormView.formType == .edition, let targetMarker = selectedTargetMarker, let selectedTarget = targetMarker.userData as? Target {
+      targetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: selectedTarget.topic.icon)
+      selectedTargetMarker = nil
+    }
+    
     UIView.animate(withDuration: 0.35,
                    animations: {
                     self.targetFormView.transform = .identity
@@ -191,6 +187,20 @@ class HomeViewController: UIViewController {
   private func disableMapGestures() {
     mapView.settings.scrollGestures = false
     mapView.settings.tiltGestures = false
+  }
+  
+  fileprivate func targetMarkerView(withColor color: UIColor, icon: URL?) -> UIView {
+    let markerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+    markerView.backgroundColor = color.withAlphaComponent(0.7)
+    markerView.layer.cornerRadius = 30
+    markerView.layer.masksToBounds = true
+    
+    let markerImageView = UIImageView(frame: CGRect(x: 20, y: 20, width: 20, height: 20))
+    markerImageView.contentMode = .scaleAspectFit
+    markerImageView.sd_setImage(with: icon)
+    markerView.addSubview(markerImageView)
+    
+    return markerView
   }
 }
 
@@ -316,6 +326,13 @@ extension HomeViewController: GMSMapViewDelegate {
   
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let target = marker.userData as? Target {
+      
+      if let selectedTargetMarker = selectedTargetMarker {
+        selectedTargetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: target.topic.icon)
+      }
+      
+      selectedTargetMarker = marker
+      selectedTargetMarker?.iconView = targetMarkerView(withColor: .brightSkyBlue, icon: target.topic.icon)
       showTargetForm(withFormType: .edition, target: target)
     }
     
