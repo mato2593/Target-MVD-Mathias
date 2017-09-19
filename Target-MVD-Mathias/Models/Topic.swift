@@ -35,7 +35,7 @@ class Topic: NSObject, NSCoding {
   
   // MARK: Parser
   class func parse(fromJSON json: JSON) -> Topic {
-    let id = json["topics_id"].int ?? json["id"].intValue
+    let id = json["topic_id"].int ?? json["id"].intValue
     
     return Topic(id:    id,
                  label: json["label"].stringValue,
