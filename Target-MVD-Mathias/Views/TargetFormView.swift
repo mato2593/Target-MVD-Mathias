@@ -43,7 +43,7 @@ class TargetFormView: UIView {
   @IBOutlet weak var saveTargetButton: UIButton!
   
   // MARK: Variables
-  var targetFormType = TargetFormType.creation {
+  var formType = TargetFormType.creation {
     didSet {
       setupLabelsAndButtons()
     }
@@ -51,7 +51,13 @@ class TargetFormView: UIView {
   weak var delegate: TargetFormDelegate?
   
   var firstTimeOpeningPicker = true
-  var area = 50
+  var area = 50 {
+    didSet {
+      if formType == .edition {
+        tryEnablingSaveTargetButton()
+      }
+    }
+  }
   
   var title = "" {
     didSet {
@@ -128,7 +134,7 @@ class TargetFormView: UIView {
       preconditionFailure("Delegate not set")
     }
     
-    switch targetFormType {
+    switch formType {
     case .creation:
       delegate.cancelTargetCreation()
     case .edition:
@@ -143,7 +149,7 @@ class TargetFormView: UIView {
     
     let title = titleTextField.text ?? ""
     
-    switch targetFormType {
+    switch formType {
     case .creation:
       delegate.saveTarget(area: area, title: title, topic: topic)
     case .edition:
@@ -198,7 +204,7 @@ class TargetFormView: UIView {
     var cancelButtonTitle: String
     var saveButtonTitle: String
     
-    switch targetFormType {
+    switch formType {
     case .creation:
       areaLengthTitle = "SPECIFY AREA LENGTH"
       topicTitle = "SELECT A TOPIC"
@@ -235,8 +241,10 @@ class TargetFormView: UIView {
   func tryEnablingSaveTargetButton() {
     let trimmedTitle = title.trimmingCharacters(in: .whitespaces)
     
-    if !trimmedTitle.isEmpty && topic.id > 0 {
+    if !trimmedTitle.isEmpty && topic.id > 0 && (formType == .creation || targetEdited()) {
       enableSaveTargetButton()
+    } else {
+      disableSaveTargetButton()
     }
   }
   
@@ -244,6 +252,17 @@ class TargetFormView: UIView {
     saveTargetButton.isEnabled = true
     saveTargetButton.layer.backgroundColor = UIColor.black.cgColor
   }
+  
+  private func targetEdited() -> Bool {
+    var targetEdited = false
+    
+    if let target = target {
+      targetEdited = target.title != title || target.radius != area || target.topic != topic
+    }
+    
+    return targetEdited
+  }
+  
 }
 
 extension TargetFormView: UITextFieldDelegate {
@@ -278,7 +297,7 @@ extension TargetFormView: UIPickerViewDelegate {
     areaLengthTextField.text = areas[row].key
     area = areas[row].value
     
-    if targetFormType == .creation {
+    if formType == .creation {
       delegate?.didChangeTargetArea(areas[row].value)
     }
   }

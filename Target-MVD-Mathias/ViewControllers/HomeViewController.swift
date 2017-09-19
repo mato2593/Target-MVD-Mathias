@@ -164,8 +164,8 @@ class HomeViewController: UIViewController {
   }
   
   fileprivate func showTargetForm(withFormType formType: TargetFormType, target: Target? = nil) {
+    targetFormView.formType = formType
     targetFormView.resetFields()
-    targetFormView.targetFormType = formType
     targetFormView.target = target
     
     UIView.animate(withDuration: 0.35,
@@ -323,7 +323,7 @@ extension HomeViewController: GMSMapViewDelegate {
   }
   
   func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-    if targetFormView.targetFormType == .edition {
+    if targetFormView.formType == .edition {
       hideTargetFormView()
     }
   }
