@@ -33,6 +33,15 @@ class Topic: NSObject, NSCoding {
     aCoder.encode(self.icon?.absoluteString, forKey: "topic-icon")
   }
   
+  // MARK: Equatable
+  static func ==(lhs: Topic, rhs: Topic) -> Bool {
+    return (lhs.id == rhs.id) && (lhs.label == rhs.label) && (lhs.icon == rhs.icon)
+  }
+  
+  static func !=(lhs: Topic, rhs: Topic) -> Bool {
+    return (lhs.id != rhs.id) || (lhs.label != rhs.label) || (lhs.icon != rhs.icon)
+  }
+  
   // MARK: Parser
   class func parse(fromJSON json: JSON) -> Topic {
     let id = json["topic_id"].int ?? json["id"].intValue
