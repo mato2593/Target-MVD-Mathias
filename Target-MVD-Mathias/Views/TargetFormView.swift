@@ -10,7 +10,7 @@ import UIKit
 
 protocol TargetFormDelegate: class {
   func saveTarget(area: Int, title: String, topic: Topic)
-  func editTarget(area: Int, title: String, topic: String)
+  func editTarget(area: Int, title: String, topic: Topic)
   func deleteTarget()
   func cancelTargetCreation()
   func didTapOnSelectTopicField()
@@ -153,7 +153,7 @@ class TargetFormView: UIView {
     case .creation:
       delegate.saveTarget(area: area, title: title, topic: topic)
     case .edition:
-      delegate.editTarget(area: area, title: title, topic: topic.label)
+      delegate.editTarget(area: area, title: title, topic: topic)
     }
   }
   

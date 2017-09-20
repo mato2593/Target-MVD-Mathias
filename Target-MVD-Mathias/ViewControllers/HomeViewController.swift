@@ -53,7 +53,8 @@ class HomeViewController: UIViewController {
   var targetsMarkers: [GMSMarker] = []
   var topics: [Topic] = []
   var firstTimeUpdatingLocation = true
-  var selectedTargetMarker: GMSMarker? = nil
+  var selectedTargetMarker: GMSMarker?
+  var showingTopicsTableView = false
   
   // MARK: Lifecycle
   override func viewDidLoad() {
@@ -246,8 +247,34 @@ extension HomeViewController: TargetFormDelegate {
     
   }
   
-  func editTarget(area: Int, title: String, topic: String) {
-    hideTargetFormView()
+  func editTarget(area: Int, title: String, topic: Topic) {
+    if let selectedTargetMarker = selectedTargetMarker, let targetToEdit = selectedTargetMarker.userData as? Target {
+      guard let indexOfTargetToEdit = targets.index(of: targetToEdit) else {
+        preconditionFailure("Target to edit not found")
+      }
+      
+      targetToEdit.radius = area
+      targetToEdit.title = title
+      targetToEdit.topic = topic
+      
+      showSpinner(message: "Updating Target...")
+      
+      TargetAPI.updateTarget(target: targetToEdit, success: { (target, _) in
+        self.targets.remove(at: indexOfTargetToEdit)
+        self.targets.append(target)
+        
+        let targetMarker = self.targetsMarkers[indexOfTargetToEdit]
+        targetMarker.map = nil
+        self.targetsMarkers.remove(at: indexOfTargetToEdit)
+        
+        self.addTargetToMap(target)
+        self.hideSpinner()
+        self.hideTargetFormView()
+      }) { error in
+        self.hideSpinner()
+        self.showMessageError(errorMessage: error.domain)
+      }
+    }
   }
   
   func cancelTargetCreation() {
@@ -270,6 +297,8 @@ extension HomeViewController: TargetFormDelegate {
                         animations: {
                           self.topicsTableView.center.y -= self.topicsTableView.frame.size.height
       })
+      
+      showingTopicsTableView = true
     }
   }
   
@@ -318,6 +347,8 @@ extension HomeViewController: UITableViewDelegate {
                       animations: {
                         self.topicsTableView.center.y += self.topicsTableView.frame.size.height
     })
+    
+    showingTopicsTableView = false
   }
   
 }
@@ -340,7 +371,7 @@ extension HomeViewController: GMSMapViewDelegate {
   }
   
   func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-    if targetFormView.formType == .edition {
+    if targetFormView.formType == .edition && !showingTopicsTableView {
       hideTargetFormView()
     }
   }
