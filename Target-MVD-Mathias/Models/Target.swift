@@ -62,4 +62,13 @@ class Target: NSObject, NSCoding {
                   user: json["user"].intValue)
   }
   
+  class func parse(fromJSONArray jsonArray: [JSON]) -> [Target] {
+    var targets: [Target] = []
+    
+    for json in jsonArray {
+      targets.append(parse(fromJSON: json))
+    }
+    
+    return targets
+  }
 }

@@ -53,6 +53,8 @@ class HomeViewController: UIViewController {
   var targetsMarkers: [GMSMarker] = []
   var topics: [Topic] = []
   var firstTimeUpdatingLocation = true
+  var selectedTargetMarker: GMSMarker?
+  var showingTopicsTableView = false
   
   // MARK: Lifecycle
   override func viewDidLoad() {
@@ -81,15 +83,7 @@ class HomeViewController: UIViewController {
     if targets.count < 10 {
       addTargetCircle(radius: 50)
       disableMapGestures()
-      
-      targetFormView.resetFields()
-      targetFormView.targetFormType = .creation
-      
-      UIView.animate(withDuration: 0.35,
-                     animations: {
-                      let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
-                      self.targetFormView.transform = move
-      })
+      showTargetForm(withFormType: .creation)
     } else {
       showMessageError(errorMessage: "You have exceeded the maximum amount of targets, please remove one before creating a new target.")
     }
@@ -104,6 +98,7 @@ class HomeViewController: UIViewController {
   
   private func setupMap() {
     mapView.settings.compassButton = true
+    mapView.delegate = self
     mapViewContainer.addSubview(mapView)
     mapViewContainer.bringSubview(toFront: myLocationButton)
     mapViewContainer.bringSubview(toFront: newTargetLocationImageView)
@@ -143,20 +138,11 @@ class HomeViewController: UIViewController {
   fileprivate func addTargetToMap(_ target: Target) {
     let targetMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: target.lat, longitude: target.lng))
     
-    let markerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-    markerView.backgroundColor = UIColor.macaroniAndCheese.withAlphaComponent(0.7)
-    markerView.layer.cornerRadius = 30
-    markerView.layer.masksToBounds = true
-    
-    let markerImageView = UIImageView(frame: CGRect(x: 20, y: 20, width: 20, height: 20))
-    markerImageView.contentMode = .scaleAspectFit
-    markerImageView.sd_setImage(with: target.topic.icon)
-    markerView.addSubview(markerImageView)
-    
-    targetMarker.iconView = markerView
+    targetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: target.topic.icon)
     targetMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
     targetMarker.isFlat = true
     targetMarker.map = mapView
+    targetMarker.userData = target
     
     targetsMarkers.append(targetMarker)
   }
@@ -169,6 +155,31 @@ class HomeViewController: UIViewController {
     targetCircle.map = self.mapView
   }
   
+  fileprivate func showTargetForm(withFormType formType: TargetFormType, target: Target? = nil) {
+    targetFormView.formType = formType
+    targetFormView.resetFields()
+    targetFormView.target = target
+    
+    UIView.animate(withDuration: 0.35,
+                   animations: {
+                    let move = CGAffineTransform(translationX: 0, y: -self.targetFormView.frame.size.height)
+                    self.targetFormView.transform = move
+    })
+  }
+  
+  fileprivate func hideTargetFormView() {
+    if targetFormView.formType == .edition, let targetMarker = selectedTargetMarker, let selectedTarget = targetMarker.userData as? Target {
+      targetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: selectedTarget.topic.icon)
+      selectedTargetMarker = nil
+    }
+    
+    UIView.animate(withDuration: 0.35,
+                   animations: {
+                    self.targetFormView.transform = .identity
+    })
+    enableMapGestures()
+  }
+  
   fileprivate func enableMapGestures() {
     mapView.settings.scrollGestures = true
     mapView.settings.tiltGestures = true
@@ -177,6 +188,20 @@ class HomeViewController: UIViewController {
   private func disableMapGestures() {
     mapView.settings.scrollGestures = false
     mapView.settings.tiltGestures = false
+  }
+  
+  fileprivate func targetMarkerView(withColor color: UIColor, icon: URL?) -> UIView {
+    let markerView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+    markerView.backgroundColor = color.withAlphaComponent(0.7)
+    markerView.layer.cornerRadius = 30
+    markerView.layer.masksToBounds = true
+    
+    let markerImageView = UIImageView(frame: CGRect(x: 20, y: 20, width: 20, height: 20))
+    markerImageView.contentMode = .scaleAspectFit
+    markerImageView.sd_setImage(with: icon)
+    markerView.addSubview(markerImageView)
+    
+    return markerView
   }
 }
 
@@ -200,7 +225,6 @@ extension HomeViewController: CLLocationManagerDelegate {
       UserDataManager.storeLastLocation(coordinates)
     }
   }
-  
 }
 
 extension HomeViewController: TargetFormDelegate {
@@ -222,8 +246,34 @@ extension HomeViewController: TargetFormDelegate {
     
   }
   
-  func editTarget(area: Int, title: String, topic: String) {
-    hideTargetFormView()
+  func editTarget(area: Int, title: String, topic: Topic) {
+    if let selectedTargetMarker = selectedTargetMarker, let targetToEdit = selectedTargetMarker.userData as? Target {
+      guard let indexOfTargetToEdit = targets.index(of: targetToEdit) else {
+        preconditionFailure("Target to edit not found")
+      }
+      
+      targetToEdit.radius = area
+      targetToEdit.title = title
+      targetToEdit.topic = topic
+      
+      showSpinner(message: "Updating Target...")
+      
+      TargetAPI.updateTarget(target: targetToEdit, success: { (target, _) in
+        self.targets.remove(at: indexOfTargetToEdit)
+        self.targets.append(target)
+        
+        let targetMarker = self.targetsMarkers[indexOfTargetToEdit]
+        targetMarker.map = nil
+        self.targetsMarkers.remove(at: indexOfTargetToEdit)
+        
+        self.addTargetToMap(target)
+        self.hideSpinner()
+        self.hideTargetFormView()
+      }) { error in
+        self.hideSpinner()
+        self.showMessageError(errorMessage: error.domain)
+      }
+    }
   }
   
   func cancelTargetCreation() {
@@ -246,19 +296,13 @@ extension HomeViewController: TargetFormDelegate {
                         animations: {
                           self.topicsTableView.center.y -= self.topicsTableView.frame.size.height
       })
+      
+      showingTopicsTableView = true
     }
   }
   
   func didChangeTargetArea(_ area: Int) {
     addTargetCircle(radius: area)
-  }
-  
-  private func hideTargetFormView() {
-    UIView.animate(withDuration: 0.35,
-                   animations: {
-                    self.targetFormView.transform = .identity
-    })
-    enableMapGestures()
   }
   
   private func showNewTarget(_ target: Target) {
@@ -302,6 +346,31 @@ extension HomeViewController: UITableViewDelegate {
                       animations: {
                         self.topicsTableView.center.y += self.topicsTableView.frame.size.height
     })
+    
+    showingTopicsTableView = false
+  }
+}
+
+extension HomeViewController: GMSMapViewDelegate {
+  
+  func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+    if let target = marker.userData as? Target {
+      
+      if let selectedTargetMarker = selectedTargetMarker {
+        selectedTargetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: target.topic.icon)
+      }
+      
+      selectedTargetMarker = marker
+      selectedTargetMarker?.iconView = targetMarkerView(withColor: .brightSkyBlue, icon: target.topic.icon)
+      showTargetForm(withFormType: .edition, target: target)
+    }
+    
+    return false
   }
   
+  func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+    if targetFormView.formType == .edition && !showingTopicsTableView {
+      hideTargetFormView()
+    }
+  }
 }

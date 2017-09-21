@@ -10,7 +10,7 @@ import UIKit
 
 protocol TargetFormDelegate: class {
   func saveTarget(area: Int, title: String, topic: Topic)
-  func editTarget(area: Int, title: String, topic: String)
+  func editTarget(area: Int, title: String, topic: Topic)
   func deleteTarget()
   func cancelTargetCreation()
   func didTapOnSelectTopicField()
@@ -43,11 +43,21 @@ class TargetFormView: UIView {
   @IBOutlet weak var saveTargetButton: UIButton!
   
   // MARK: Variables
-  var targetFormType = TargetFormType.creation
+  var formType = TargetFormType.creation {
+    didSet {
+      setupLabelsAndButtons()
+    }
+  }
   weak var delegate: TargetFormDelegate?
   
   var firstTimeOpeningPicker = true
-  var area = 50
+  var area = 50 {
+    didSet {
+      if formType == .edition {
+        tryEnablingSaveTargetButton()
+      }
+    }
+  }
   
   var title = "" {
     didSet {
@@ -73,6 +83,24 @@ class TargetFormView: UIView {
         selectTopicPlaceholderLabel.isHidden = false
         topicStackView.isHidden = true
         disableSaveTargetButton()
+      }
+    }
+  }
+  
+  var target: Target? = nil {
+    didSet {
+      if let target = target {
+        for (index, area) in areas.enumerated() {
+          if area.value == target.radius {
+            areasPickerView.selectRow(index, inComponent: 0, animated: false)
+            pickerView(areasPickerView, didSelectRow: index, inComponent: 0)
+            break
+          }
+        }
+        
+        title = target.title
+        titleTextField.text = target.title
+        topic = target.topic
       }
     }
   }
@@ -106,7 +134,7 @@ class TargetFormView: UIView {
       preconditionFailure("Delegate not set")
     }
     
-    switch targetFormType {
+    switch formType {
     case .creation:
       delegate.cancelTargetCreation()
     case .edition:
@@ -121,11 +149,11 @@ class TargetFormView: UIView {
     
     let title = titleTextField.text ?? ""
     
-    switch targetFormType {
+    switch formType {
     case .creation:
       delegate.saveTarget(area: area, title: title, topic: topic)
     case .edition:
-      delegate.editTarget(area: area, title: title, topic: topic.label)
+      delegate.editTarget(area: area, title: title, topic: topic)
     }
   }
   
@@ -135,7 +163,7 @@ class TargetFormView: UIView {
     setupTextFields()
     setupSelectTopicButton()
     setupLetterSpacing()
-    setupLabels()
+    setupLabelsAndButtons()
     disableSaveTargetButton()
   }
   
@@ -170,21 +198,29 @@ class TargetFormView: UIView {
     saveTargetButton.titleLabel?.setSpacing(ofCharacter: 1.6)
   }
   
-  private func setupLabels() {
+  private func setupLabelsAndButtons() {
     var areaLengthTitle: String
     var topicTitle: String
+    var cancelButtonTitle: String
+    var saveButtonTitle: String
     
-    switch targetFormType {
+    switch formType {
     case .creation:
       areaLengthTitle = "SPECIFY AREA LENGTH"
       topicTitle = "SELECT A TOPIC"
+      cancelButtonTitle = "CANCEL"
+      saveButtonTitle = "SAVE TARGET"
     case .edition:
       areaLengthTitle = "AREA LENGTH"
       topicTitle = "TOPIC"
+      cancelButtonTitle = "DELETE"
+      saveButtonTitle = "SAVE"
     }
     
     areaLengthTitleLabel.text = areaLengthTitle
     topicTitleLabel.text = topicTitle
+    cancelButton.setTitle(cancelButtonTitle, for: .normal)
+    saveTargetButton.setTitle(saveButtonTitle, for: .normal)
   }
   
   func resetFields() {
@@ -194,6 +230,7 @@ class TargetFormView: UIView {
     titleTextField.text = ""
     title = ""
     topic = Topic()
+    target = nil
   }
   
   func disableSaveTargetButton() {
@@ -204,14 +241,26 @@ class TargetFormView: UIView {
   func tryEnablingSaveTargetButton() {
     let trimmedTitle = title.trimmingCharacters(in: .whitespaces)
     
-    if !trimmedTitle.isEmpty && topic.id > 0 {
+    if !trimmedTitle.isEmpty && topic.id > 0 && (formType == .creation || targetEdited()) {
       enableSaveTargetButton()
+    } else {
+      disableSaveTargetButton()
     }
   }
   
   func enableSaveTargetButton() {
     saveTargetButton.isEnabled = true
     saveTargetButton.layer.backgroundColor = UIColor.black.cgColor
+  }
+  
+  private func targetEdited() -> Bool {
+    var targetEdited = false
+    
+    if let target = target {
+      targetEdited = target.title != title || target.radius != area || target.topic != topic
+    }
+    
+    return targetEdited
   }
 }
 
@@ -222,7 +271,6 @@ extension TargetFormView: UITextFieldDelegate {
       title = titleTextField.text ?? ""
     }
   }
-  
 }
 
 extension TargetFormView: UIPickerViewDataSource {
@@ -234,7 +282,6 @@ extension TargetFormView: UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return areas.count
   }
-  
 }
 
 extension TargetFormView: UIPickerViewDelegate {
@@ -247,7 +294,8 @@ extension TargetFormView: UIPickerViewDelegate {
     areaLengthTextField.text = areas[row].key
     area = areas[row].value
     
-    delegate?.didChangeTargetArea(areas[row].value)
+    if formType == .creation {
+      delegate?.didChangeTargetArea(areas[row].value)
+    }
   }
-  
 }
