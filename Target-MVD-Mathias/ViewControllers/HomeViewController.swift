@@ -225,7 +225,6 @@ extension HomeViewController: CLLocationManagerDelegate {
       UserDataManager.storeLastLocation(coordinates)
     }
   }
-  
 }
 
 extension HomeViewController: TargetFormDelegate {
@@ -350,7 +349,6 @@ extension HomeViewController: UITableViewDelegate {
     
     showingTopicsTableView = false
   }
-  
 }
 
 extension HomeViewController: GMSMapViewDelegate {
@@ -375,5 +373,4 @@ extension HomeViewController: GMSMapViewDelegate {
       hideTargetFormView()
     }
   }
-  
 }

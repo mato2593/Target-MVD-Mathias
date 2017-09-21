@@ -50,11 +50,7 @@ class TargetAPI {
       let target = Target.parse(fromJSON: json["target"])
       
       let compatibleTargetsArray = json["matches"].arrayValue
-      var compatibleTargets: [Target] = []
-      
-      for compatibleTarget in compatibleTargetsArray {
-        compatibleTargets.append(Target.parse(fromJSON: compatibleTarget))
-      }
+      let compatibleTargets = Target.parse(fromJSONArray: compatibleTargetsArray)
       
       success(target, compatibleTargets)
     }) { (error) in
@@ -97,16 +93,11 @@ class TargetAPI {
       let target = Target.parse(fromJSON: json["target"])
       
       let compatibleTargetsArray = json["matches"].arrayValue
-      var compatibleTargets: [Target] = []
-      
-      for compatibleTarget in compatibleTargetsArray {
-        compatibleTargets.append(Target.parse(fromJSON: compatibleTarget))
-      }
+      let compatibleTargets = Target.parse(fromJSONArray: compatibleTargetsArray)
       
       success(target, compatibleTargets)
     }) { (error) in
       failure(error)
     }
   }
-  
 }

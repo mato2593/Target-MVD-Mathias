@@ -262,7 +262,6 @@ class TargetFormView: UIView {
     
     return targetEdited
   }
-  
 }
 
 extension TargetFormView: UITextFieldDelegate {
@@ -272,7 +271,6 @@ extension TargetFormView: UITextFieldDelegate {
       title = titleTextField.text ?? ""
     }
   }
-  
 }
 
 extension TargetFormView: UIPickerViewDataSource {
@@ -284,7 +282,6 @@ extension TargetFormView: UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return areas.count
   }
-  
 }
 
 extension TargetFormView: UIPickerViewDelegate {
@@ -301,5 +298,4 @@ extension TargetFormView: UIPickerViewDelegate {
       delegate?.didChangeTargetArea(areas[row].value)
     }
   }
-  
 }
