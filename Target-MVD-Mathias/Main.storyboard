@@ -196,6 +196,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ChatIcon" id="YwX-IA-yCy">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="eLh-YU-6Jz" kind="show" id="Pkv-BD-aTH"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -210,6 +213,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCL-Vt-8BE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="709.60000000000002" y="661.61919040479768"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="FSe-jp-84y">
+            <objects>
+                <viewController id="eLh-YU-6Jz" customClass="ChatsViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xf5-y2-Yot"/>
+                        <viewControllerLayoutGuide type="bottom" id="yb2-e9-dke"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Pa-wR-MFj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chat" id="Usl-X4-InU">
+                        <barButtonItem key="leftBarButtonItem" image="HomeNavButton" id="ACa-Y8-Skh">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="tapOnMapBarButtonItem:" destination="eLh-YU-6Jz" id="4IM-Je-IMt"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="UserProfile" id="4du-o4-7wh">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m5X-FG-bTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1647" y="662"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TXa-6s-tgt">
@@ -570,6 +602,7 @@
     <resources>
         <image name="ChatIcon" width="28" height="23"/>
         <image name="FootbalExample" width="16" height="16"/>
+        <image name="HomeNavButton" width="19" height="23"/>
         <image name="NewTarget" width="32" height="32"/>
         <image name="ProfileBackground" width="286" height="144"/>
         <image name="TargetLocation" width="42" height="49"/>
