@@ -100,4 +100,14 @@ class TargetAPI {
       failure(error)
     }
   }
+  
+  class func removeTarget(target: Target, success: @escaping (_ target: Target) -> Void, failure: @escaping (_ error: Error) -> Void) {
+    let url = usersUrl + "\(UserDataManager.getUserId())" + targetsUrl + "\(target.id)"
+    
+    APIClient.sendDeleteRequest(url, success: { response in
+      success(Target.parse(fromJSON: JSON(response)))
+    }) { error in
+      failure(error)
+    }
+  }
 }

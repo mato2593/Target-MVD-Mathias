@@ -282,6 +282,23 @@ extension HomeViewController: TargetFormDelegate {
   }
   
   func deleteTarget() {
+    if let selectedTargetMarker = selectedTargetMarker, let targetToDelete = selectedTargetMarker.userData as? Target {
+      guard let indexOfTargetToDelete = targets.index(of: targetToDelete) else {
+        preconditionFailure("Target to delete not found")
+      }
+      
+      showSpinner(message: "Deleting target")
+      
+      TargetAPI.removeTarget(target: targetToDelete, success: { _ in
+        selectedTargetMarker.map = nil
+        self.targets.remove(at: indexOfTargetToDelete)
+        self.targetsMarkers.remove(at: indexOfTargetToDelete)
+        self.hideSpinner()
+      }) { error in
+        self.hideSpinner()
+        self.showMessageError(title: "Error", errorMessage: error.domain)
+      }
+    }
     hideTargetFormView()
   }
   
