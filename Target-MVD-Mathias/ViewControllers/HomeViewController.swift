@@ -294,12 +294,12 @@ extension HomeViewController: TargetFormDelegate {
         self.targets.remove(at: indexOfTargetToDelete)
         self.targetsMarkers.remove(at: indexOfTargetToDelete)
         self.hideSpinner()
+        self.hideTargetFormView()
       }) { error in
         self.hideSpinner()
         self.showMessageError(title: "Error", errorMessage: error.domain)
       }
     }
-    hideTargetFormView()
   }
   
   func didTapOnSelectTopicField() {
