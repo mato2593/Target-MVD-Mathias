@@ -75,6 +75,29 @@ class HomeViewController: UIViewController {
     }
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case .some("HomeToChatsSegue"):
+      if let viewControllers = navigationController?.viewControllers {
+        for viewController in viewControllers {
+          if let viewController = viewController as? ChatsViewController {
+            viewController.removeFromParentViewController()
+          }
+        }
+      }
+    case .some("HomeToUserProfile"):
+      if let viewControllers = navigationController?.viewControllers {
+        for viewController in viewControllers {
+          if let viewController = viewController as? UserProfileViewController {
+            viewController.removeFromParentViewController()
+          }
+        }
+      }
+    default:
+      break
+    }
+  }
+  
   // MARK: Actions
   @IBAction func tapOnMyLocationButton(_ sender: Any) {
     let camera = GMSCameraPosition.camera(withTarget: userLocation, zoom: 16.0)

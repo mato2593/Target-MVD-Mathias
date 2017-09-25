@@ -17,30 +17,27 @@ class ChatsViewController: UIViewController {
     // Do any additional setup after loading the view.
   }
   
-  // MARK: Actions
-  @IBAction func tapOnMapBarButtonItem(_ sender: Any) {
-    var homeViewController: HomeViewController?
-    
-    if let viewControllers = navigationController?.viewControllers {
-      for viewController in viewControllers {
-        if let viewController = viewController as? HomeViewController {
-          viewController.removeFromParentViewController()
-          homeViewController = viewController
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let identifier = segue.identifier, identifier == "ChatsToUserProfile" {
+      if let viewControllers = navigationController?.viewControllers {
+        for viewController in viewControllers {
+          if let viewController = viewController as? UserProfileViewController {
+            viewController.removeFromParentViewController()
+          }
         }
       }
     }
+  }
+  
+  // MARK: Actions
+  @IBAction func tapOnMapBarButtonItem(_ sender: Any) {
+    var homeViewController = getViewControllerFromNavigationStack(type: HomeViewController.self)
     
     if homeViewController == nil {
       homeViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
     }
     
-    let transition = CATransition()
-    transition.duration = 0.35
-    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-    transition.type = kCATransitionPush
-    transition.subtype = kCATransitionFromLeft
-    
-    navigationController!.view.layer.add(transition, forKey: kCATransition)
+    navigationController?.setPushFromLeftTransition()
     navigationController?.pushViewController(homeViewController!, animated: true)
   }
 }

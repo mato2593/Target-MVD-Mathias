@@ -45,6 +45,7 @@
 		F502AACA1F6081590019ED96 /* TargetFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F502AAC91F6081590019ED96 /* TargetFormView.xib */; };
 		F502AACD1F6084C10019ED96 /* TargetFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F502AACC1F6084C10019ED96 /* TargetFormView.swift */; };
 		F502D6EC1F3B636F00474060 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F502D6EB1F3B636F00474060 /* Onboarding.storyboard */; };
+		F50BE97F1F79A2F100A7E2EC /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50BE97E1F79A2F000A7E2EC /* UINavigationControllerExtension.swift */; };
 		F5330BC91F4F3274000937CE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5330BC81F4F3274000937CE /* Utils.swift */; };
 		F534CC481F62F31D005C0258 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534CC471F62F31D005C0258 /* Target.swift */; };
 		F53ED73C1F3CA2F2007C6D43 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */; };
@@ -130,6 +131,7 @@
 		F502AAC91F6081590019ED96 /* TargetFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TargetFormView.xib; sourceTree = "<group>"; };
 		F502AACC1F6084C10019ED96 /* TargetFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetFormView.swift; sourceTree = "<group>"; };
 		F502D6EB1F3B636F00474060 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		F50BE97E1F79A2F000A7E2EC /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		F5330BC81F4F3274000937CE /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F534CC471F62F31D005C0258 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				F577F6731F3E2F2300D11F6C /* ErrorExtension.swift */,
 				F544F4341F44C39500F247E8 /* UILabelExtension.swift */,
 				F502AAC71F60441A0019ED96 /* UITextFieldExtension.swift */,
+				F50BE97E1F79A2F000A7E2EC /* UINavigationControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 			files = (
 				E8290BFE1D832D9200599960 /* UIViewExtension.swift in Sources */,
 				9BD409101CE9F19E005223C9 /* UIHelper.swift in Sources */,
+				F50BE97F1F79A2F100A7E2EC /* UINavigationControllerExtension.swift in Sources */,
 				9B186ED81CA30DEF002CADE5 /* PaginatedTableView.swift in Sources */,
 				9B88CC651CAB2DCE00AE60C5 /* PaginatedCollectionView.swift in Sources */,
 				F544F4351F44C39500F247E8 /* UILabelExtension.swift in Sources */,

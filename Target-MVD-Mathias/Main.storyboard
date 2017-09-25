@@ -191,13 +191,13 @@
                         <barButtonItem key="leftBarButtonItem" image="UserProfile" id="mhM-ES-wBK">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="V5g-hq-06q" kind="show" customClass="SegueFromLeft" customModule="swiftbase" customModuleProvider="target" id="yIq-bF-Pw2"/>
+                                <segue destination="V5g-hq-06q" kind="show" identifier="HomeToUserProfile" customClass="SegueFromLeft" customModule="swiftbase" customModuleProvider="target" id="yIq-bF-Pw2"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ChatIcon" id="YwX-IA-yCy">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="eLh-YU-6Jz" kind="show" id="Pkv-BD-aTH"/>
+                                <segue destination="eLh-YU-6Jz" kind="show" identifier="HomeToChatsSegue" id="Pkv-BD-aTH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -217,7 +217,7 @@
         <!--Chat-->
         <scene sceneID="FSe-jp-84y">
             <objects>
-                <viewController id="eLh-YU-6Jz" customClass="ChatsViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatsViewController" id="eLh-YU-6Jz" customClass="ChatsViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xf5-y2-Yot"/>
                         <viewControllerLayoutGuide type="bottom" id="yb2-e9-dke"/>
@@ -236,6 +236,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="UserProfile" id="4du-o4-7wh">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="V5g-hq-06q" kind="show" identifier="ChatsToUserProfile" id="Xe0-ql-1lV"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
@@ -248,7 +251,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zbo-2P-3JE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xEC-KC-o6Y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xEC-KC-o6Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -264,7 +267,7 @@
         <!--Profile-->
         <scene sceneID="XqE-sZ-UO2">
             <objects>
-                <viewController title="Profile" id="V5g-hq-06q" customClass="UserProfileViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserProfileViewController" title="Profile" id="V5g-hq-06q" customClass="UserProfileViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gqd-wz-EtI"/>
                         <viewControllerLayoutGuide type="bottom" id="yVO-SX-4by"/>
@@ -596,7 +599,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="709.60000000000002" y="1402.8485757121441"/>
+            <point key="canvasLocation" x="750" y="1420"/>
         </scene>
     </scenes>
     <resources>
@@ -609,4 +612,7 @@
         <image name="UserAvatarPlaceholder" width="83" height="83"/>
         <image name="UserProfile" width="23" height="23"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Xe0-ql-1lV"/>
+    </inferredMetricsTieBreakers>
 </document>
