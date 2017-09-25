@@ -70,7 +70,9 @@ class HomeViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    getTargets()
+    if targets.isEmpty {
+      getTargets()
+    }
   }
   
   // MARK: Actions
@@ -373,8 +375,8 @@ extension HomeViewController: GMSMapViewDelegate {
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let target = marker.userData as? Target {
       
-      if let selectedTargetMarker = selectedTargetMarker {
-        selectedTargetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: target.topic.icon)
+      if let selectedTargetMarker = selectedTargetMarker, let selectedTarget = selectedTargetMarker.userData as? Target {
+        selectedTargetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: selectedTarget.topic.icon)
       }
       
       selectedTargetMarker = marker

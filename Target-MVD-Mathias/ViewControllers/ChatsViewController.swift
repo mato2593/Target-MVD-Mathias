@@ -19,7 +19,20 @@ class ChatsViewController: UIViewController {
   
   // MARK: Actions
   @IBAction func tapOnMapBarButtonItem(_ sender: Any) {
-    let homeViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+    var homeViewController: HomeViewController?
+    
+    if let viewControllers = navigationController?.viewControllers {
+      for viewController in viewControllers {
+        if let viewController = viewController as? HomeViewController {
+          viewController.removeFromParentViewController()
+          homeViewController = viewController
+        }
+      }
+    }
+    
+    if homeViewController == nil {
+      homeViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+    }
     
     let transition = CATransition()
     transition.duration = 0.35
