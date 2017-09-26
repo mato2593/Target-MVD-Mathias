@@ -10,6 +10,9 @@ import UIKit
 
 class ChatsViewController: UIViewController {
   
+  // MARK: Outlets
+  @IBOutlet weak var chatsTableView: UITableView!
+  
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,4 +43,26 @@ class ChatsViewController: UIViewController {
     navigationController?.setPushFromLeftTransition()
     navigationController?.pushViewController(homeViewController!, animated: true)
   }
+}
+
+extension ChatsViewController: UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 5
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell: ChatTableViewCell = {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell") as? ChatTableViewCell else {
+        return ChatTableViewCell(style: .default, reuseIdentifier: "ChatCell")
+      }
+      return cell
+    }()
+    
+    cell.setupView()
+    
+    return cell
+
+  }
+  
 }
