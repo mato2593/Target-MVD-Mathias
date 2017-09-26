@@ -65,12 +65,7 @@ class TargetAPI {
       let json = JSON(response)
       let targetsArray = json["targets"].arrayValue
       
-      var targets: [Target] = []
-      
-      for target in targetsArray {
-        targets.append(Target.parse(fromJSON: target))
-      }
-      
+      let targets = Target.parse(fromJSONArray: targetsArray)
       success(targets)
     }) { error in
       failure(error)

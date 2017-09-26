@@ -16,7 +16,7 @@ class User: NSObject, NSCoding {
   var gender: String
   var image: URL?
   
-  init(id: Int, username: String = "", email: String, image: String = "", gender: String = "") {
+  init(id: Int = 0, username: String = "", email: String = "", image: String = "", gender: String = "") {
     self.id = id
     self.username = username
     self.email = email
