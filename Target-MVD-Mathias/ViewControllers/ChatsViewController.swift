@@ -13,11 +13,20 @@ class ChatsViewController: UIViewController {
   // MARK: Outlets
   @IBOutlet weak var chatsTableView: UITableView!
   
+  // MARK: Variables
+  var matches: [Match] = []
+  
   // MARK: Lifecycle
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    // Do any additional setup after loading the view.
+  override func viewWillAppear(_ animated: Bool) {
+    showSpinner()
+    MatchesAPI.matches(success: { matches in
+      self.matches = matches
+      self.chatsTableView.reloadData()
+      self.hideSpinner()
+    }) { error in
+      self.hideSpinner()
+      self.showMessageError(title: "Error", errorMessage: error.domain)
+    }
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,7 +57,7 @@ class ChatsViewController: UIViewController {
 extension ChatsViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return matches.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,7 +68,8 @@ extension ChatsViewController: UITableViewDataSource {
       return cell
     }()
     
-    cell.setupView()
+    let match = matches[indexPath.row]
+    cell.setup(withMatch: match)
     
     return cell
 
