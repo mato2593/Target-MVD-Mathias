@@ -16,17 +16,26 @@ class ChatsViewController: UIViewController {
   // MARK: Variables
   var matches: [Match] = []
   
+  // MARK: Constants
+  let refreshControl = UIRefreshControl()
+  
   // MARK: Lifecycle
-  override func viewWillAppear(_ animated: Bool) {
-    showSpinner()
-    MatchesAPI.matches(success: { matches in
-      self.matches = matches
-      self.chatsTableView.reloadData()
-      self.hideSpinner()
-    }) { error in
-      self.hideSpinner()
-      self.showMessageError(title: "Error", errorMessage: error.domain)
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    if #available(iOS 10.0, *) {
+      chatsTableView.refreshControl = refreshControl
+    } else {
+      chatsTableView.addSubview(refreshControl)
     }
+    
+    refreshControl.addTarget(self, action: #selector(fetchMatches), for: .valueChanged)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    fetchMatches()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,6 +60,19 @@ class ChatsViewController: UIViewController {
     
     navigationController?.setPushFromLeftTransition()
     navigationController?.pushViewController(homeViewController!, animated: true)
+  }
+  
+  // MARK: Functions
+  func fetchMatches() {
+    refreshControl.beginRefreshing()
+    MatchesAPI.matches(success: { matches in
+      self.refreshControl.endRefreshing()
+      self.matches = matches
+      self.chatsTableView.reloadData()
+    }) { error in
+      self.refreshControl.endRefreshing()
+      self.showMessageError(title: "Error", errorMessage: error.domain)
+    }
   }
 }
 

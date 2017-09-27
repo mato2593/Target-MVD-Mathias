@@ -34,7 +34,7 @@ class ChatTableViewCell: UITableViewCell {
   private func setupAvatarImageView(image: URL?) {
     userAvatarImageView.layer.cornerRadius = userAvatarImageView.frame.size.width/2
     userAvatarImageView.layer.masksToBounds = true
-    userAvatarImageView.sd_setImage(with: image)
+    userAvatarImageView.sd_setImage(with: image, placeholderImage: #imageLiteral(resourceName: "UserAvatarPlaceholder"))
   }
   
   private func setupUnreadMessagesView(withUnreadMessages unread: Int) {
