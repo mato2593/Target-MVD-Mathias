@@ -50,7 +50,10 @@ class UserProfileViewController: UIViewController {
   var email = ""
   
   lazy var goBackToHomeNavigationItem: UIBarButtonItem = {
-    return UIBarButtonItem(image: #imageLiteral(resourceName: "ForwardArrow"), style: .plain, target: self, action: #selector(goBackToHome))
+    return UIBarButtonItem(image: #imageLiteral(resourceName: "HomeNavButton"), style: .plain, target: self, action: #selector(goBackToHome))
+  }()
+  lazy var goToChatsNavigationItem: UIBarButtonItem = {
+    return UIBarButtonItem(image: #imageLiteral(resourceName: "ChatIcon"), style: .plain, target: self, action: #selector(goToChats))
   }()
   
   var showingChangePasswordDialog = false {
@@ -70,6 +73,7 @@ class UserProfileViewController: UIViewController {
                         completion: nil)
       
       goBackToHomeNavigationItem.isEnabled = !showingChangePasswordDialog
+      goToChatsNavigationItem.isEnabled = !showingChangePasswordDialog
     }
   }
   
@@ -151,8 +155,10 @@ class UserProfileViewController: UIViewController {
   // MARK: Functions
   func setupNavigationBar() {
     goBackToHomeNavigationItem.tintColor = .black
+    goToChatsNavigationItem.tintColor = .black
     
     navigationItem.setRightBarButton(goBackToHomeNavigationItem, animated: false)
+    navigationItem.setLeftBarButton(goToChatsNavigationItem, animated: false)
     
     makeNavigationBarTransparent()
   }
@@ -216,8 +222,24 @@ class UserProfileViewController: UIViewController {
   }
   
   func goBackToHome() {
-    let homeViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+    var homeViewController = getViewControllerFromNavigationStack(type: HomeViewController.self)
+    
+    if homeViewController == nil {
+      homeViewController = UIStoryboard.instantiateViewController(HomeViewController.self)
+    }
+    
     navigationController?.pushViewController(homeViewController!, animated: true)
+  }
+  
+  func goToChats() {
+    var chatsViewController = getViewControllerFromNavigationStack(type: ChatsViewController.self)
+    
+    if chatsViewController == nil {
+      chatsViewController = UIStoryboard.instantiateViewController(ChatsViewController.self)
+    }
+    
+    navigationController?.setPushFromLeftTransition()
+    navigationController?.pushViewController(chatsViewController!, animated: true)
   }
   
   func areTextFieldsValid(_ textFields: [UITextField]) -> Bool {

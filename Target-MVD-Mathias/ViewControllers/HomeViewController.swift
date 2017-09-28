@@ -70,7 +70,28 @@ class HomeViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    getTargets()
+    if targets.isEmpty {
+      getTargets()
+    }
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case .some("HomeToChatsSegue"):
+      if let viewControllers = navigationController?.viewControllers {
+        for viewController in viewControllers where viewController is ChatsViewController {
+          viewController.removeFromParentViewController()
+        }
+      }
+    case .some("HomeToUserProfile"):
+      if let viewControllers = navigationController?.viewControllers {
+        for viewController in viewControllers where viewController is UserProfileViewController {
+          viewController.removeFromParentViewController()
+        }
+      }
+    default:
+      break
+    }
   }
   
   // MARK: Actions
@@ -294,12 +315,12 @@ extension HomeViewController: TargetFormDelegate {
         self.targets.remove(at: indexOfTargetToDelete)
         self.targetsMarkers.remove(at: indexOfTargetToDelete)
         self.hideSpinner()
+        self.hideTargetFormView()
       }) { error in
         self.hideSpinner()
         self.showMessageError(title: "Error", errorMessage: error.domain)
       }
     }
-    hideTargetFormView()
   }
   
   func didTapOnSelectTopicField() {
@@ -373,8 +394,8 @@ extension HomeViewController: GMSMapViewDelegate {
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let target = marker.userData as? Target {
       
-      if let selectedTargetMarker = selectedTargetMarker {
-        selectedTargetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: target.topic.icon)
+      if let selectedTargetMarker = selectedTargetMarker, let selectedTarget = selectedTargetMarker.userData as? Target {
+        selectedTargetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: selectedTarget.topic.icon)
       }
       
       selectedTargetMarker = marker

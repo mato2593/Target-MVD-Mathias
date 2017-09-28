@@ -31,4 +31,19 @@ extension UIViewController {
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.isTranslucent = true
   }
+  
+  func getViewControllerFromNavigationStack<T: UIViewController>(type: T.Type) -> T? {
+    var viewController: T?
+    
+    if let viewControllers = navigationController?.viewControllers {
+      for vc in viewControllers {
+        if let vc = vc as? T {
+          vc.removeFromParentViewController()
+          viewController = vc
+        }
+      }
+    }
+    
+    return viewController
+  }
 }
