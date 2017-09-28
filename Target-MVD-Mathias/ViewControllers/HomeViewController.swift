@@ -79,18 +79,14 @@ class HomeViewController: UIViewController {
     switch segue.identifier {
     case .some("HomeToChatsSegue"):
       if let viewControllers = navigationController?.viewControllers {
-        for viewController in viewControllers {
-          if let viewController = viewController as? ChatsViewController {
-            viewController.removeFromParentViewController()
-          }
+        for viewController in viewControllers where viewController is ChatsViewController {
+          viewController.removeFromParentViewController()
         }
       }
     case .some("HomeToUserProfile"):
       if let viewControllers = navigationController?.viewControllers {
-        for viewController in viewControllers {
-          if let viewController = viewController as? UserProfileViewController {
-            viewController.removeFromParentViewController()
-          }
+        for viewController in viewControllers where viewController is UserProfileViewController {
+          viewController.removeFromParentViewController()
         }
       }
     default:

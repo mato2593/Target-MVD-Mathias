@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Match: NSObject, NSCoding {
+class Match: NSObject {
   
   var id: Int
   var topic: Topic
@@ -29,28 +29,6 @@ class Match: NSObject, NSCoding {
     self.unread = unread
     self.lastMessages = lastMessages
     self.active = active
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    self.id = aDecoder.decodeInteger(forKey: "match-id")
-    self.topic = aDecoder.decodeObject(forKey: "match-topic") as? Topic ?? Topic()
-    self.user = aDecoder.decodeObject(forKey: "match-user") as? User ?? User()
-    self.title = aDecoder.decodeObject(forKey: "match-title") as? String ?? ""
-    self.channelId = aDecoder.decodeObject(forKey: "match-channel-id") as? String ?? ""
-    self.unread = aDecoder.decodeInteger(forKey: "match-unread")
-    self.lastMessages = aDecoder.decodeObject(forKey: "match-last-messages") as? [String] ?? []
-    self.active = aDecoder.decodeBool(forKey: "match-active")
-  }
-  
-  func encode(with aCoder: NSCoder) {
-    aCoder.encode(self.id, forKey: "match-id")
-    aCoder.encode(self.topic, forKey: "match-topic")
-    aCoder.encode(self.user, forKey: "match-user")
-    aCoder.encode(self.title, forKey: "match-title")
-    aCoder.encode(self.channelId, forKey: "match-channel-id")
-    aCoder.encode(self.unread, forKey: "match-unread")
-    aCoder.encode(self.lastMessages, forKey: "match-last-messages")
-    aCoder.encode(self.active, forKey: "match-active")
   }
   
   // MARK: Parser

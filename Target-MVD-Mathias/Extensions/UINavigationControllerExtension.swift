@@ -20,5 +20,4 @@ extension UINavigationController {
     
     view.layer.add(transition, forKey: kCATransition)
   }
-  
 }

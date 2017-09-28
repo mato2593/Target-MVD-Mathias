@@ -43,10 +43,4 @@ class ChatTableViewCell: UITableViewCell {
     unreadMessagesView.isHidden = unread < 1
     unreadMessagesLabel.text = "\(unread)"
   }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
-  }
-  
 }

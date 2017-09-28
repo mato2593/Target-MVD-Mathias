@@ -26,5 +26,4 @@ class MatchesAPI {
       failure(error)
     }
   }
-  
 }

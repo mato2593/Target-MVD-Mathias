@@ -39,13 +39,9 @@ class ChatsViewController: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let identifier = segue.identifier, identifier == "ChatsToUserProfile" {
-      if let viewControllers = navigationController?.viewControllers {
-        for viewController in viewControllers {
-          if let viewController = viewController as? UserProfileViewController {
-            viewController.removeFromParentViewController()
-          }
-        }
+    if let identifier = segue.identifier, identifier == "ChatsToUserProfile", let viewControllers = navigationController?.viewControllers {
+      for viewController in viewControllers where viewController is UserProfileViewController {
+        viewController.removeFromParentViewController()
       }
     }
   }
@@ -94,7 +90,5 @@ extension ChatsViewController: UITableViewDataSource {
     cell.setup(withMatch: match)
     
     return cell
-
   }
-  
 }
