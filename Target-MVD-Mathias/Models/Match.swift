@@ -47,12 +47,6 @@ class Match: NSObject {
   }
   
   class func parse(fromJSONArray jsonArray: [JSON]) -> [Match] {
-    var matches: [Match] = []
-    
-    for json in jsonArray {
-      matches.append(parse(fromJSON: json))
-    }
-    
-    return matches
+    return jsonArray.map { parse(fromJSON: $0) }
   }
 }
