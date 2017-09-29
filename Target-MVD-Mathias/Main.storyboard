@@ -38,17 +38,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmI-cP-6Sq" userLabel="Map View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="523"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8s-GP-JHA">
-                                        <rect key="frame" x="315" y="463" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="JJG-uA-ZEl"/>
-                                            <constraint firstAttribute="height" constant="40" id="ucg-dM-Q1f"/>
-                                        </constraints>
-                                        <state key="normal" image="NewTarget"/>
-                                        <connections>
-                                            <action selector="tapOnMyLocationButton:" destination="K4y-mn-w4p" eventType="touchUpInside" id="YYu-KJ-hBR"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TargetLocation" translatesAutoresizingMaskIntoConstraints="NO" id="jvc-f3-DwK">
                                         <rect key="frame" x="166" y="211.5" width="42" height="50"/>
                                         <constraints>
@@ -59,9 +48,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="J8s-GP-JHA" secondAttribute="trailing" constant="20" id="YN3-5g-mr2"/>
                                     <constraint firstItem="jvc-f3-DwK" firstAttribute="centerX" secondItem="lmI-cP-6Sq" secondAttribute="centerX" id="b8L-GJ-XoY"/>
-                                    <constraint firstAttribute="bottom" secondItem="J8s-GP-JHA" secondAttribute="bottom" constant="20" id="da5-PR-hi5"/>
                                     <constraint firstAttribute="bottom" secondItem="jvc-f3-DwK" secondAttribute="bottom" multiplier="2:1" id="mrj-8g-Lmp"/>
                                 </constraints>
                             </view>
@@ -207,7 +194,6 @@
                     <connections>
                         <outlet property="createNewTargetLabel" destination="58l-xF-ewx" id="ruu-w9-sdu"/>
                         <outlet property="mapViewContainer" destination="lmI-cP-6Sq" id="QBb-Fp-dEs"/>
-                        <outlet property="myLocationButton" destination="J8s-GP-JHA" id="RTY-hr-pEw"/>
                         <outlet property="newTargetLocationImageView" destination="jvc-f3-DwK" id="p7q-id-DnB"/>
                         <outlet property="targetFormView" destination="GVH-av-leb" id="GFu-t3-Log"/>
                         <outlet property="topicsTableView" destination="sVb-yZ-eOs" id="NI7-6r-kbu"/>
@@ -736,6 +722,6 @@
         <image name="UserProfile" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xe0-ql-1lV"/>
+        <segue reference="yIq-bF-Pw2"/>
     </inferredMetricsTieBreakers>
 </document>

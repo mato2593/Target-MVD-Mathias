@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
   // MARK: Outlets
   @IBOutlet weak var mapViewContainer: UIView!
   @IBOutlet weak var createNewTargetLabel: UILabel!
-  @IBOutlet weak var myLocationButton: UIButton!
   @IBOutlet weak var newTargetLocationImageView: UIImageView!
   
   @IBOutlet weak var targetFormView: TargetFormView!
@@ -22,7 +21,6 @@ class HomeViewController: UIViewController {
   
   // MARK: Variables
   var locationManager = CLLocationManager()
-  var userLocation = CLLocationCoordinate2D()
   
   lazy var targetCircle: GMSCircle = {
     let targetCircle = GMSCircle()
@@ -38,15 +36,6 @@ class HomeViewController: UIViewController {
     
     let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: Float(zoom))
     return GMSMapView.map(withFrame: self.mapViewContainer.bounds, camera: camera)
-  }()
-  
-  lazy var locationMarker: GMSMarker = {
-    let locationMarker = GMSMarker()
-    locationMarker.icon = #imageLiteral(resourceName: "UserLocation")
-    locationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-    locationMarker.isFlat = true
-    locationMarker.map = self.mapView
-    return locationMarker
   }()
   
   var targets: [Target] = []
@@ -95,14 +84,8 @@ class HomeViewController: UIViewController {
   }
   
   // MARK: Actions
-  @IBAction func tapOnMyLocationButton(_ sender: Any) {
-    let camera = GMSCameraPosition.camera(withTarget: userLocation, zoom: 16.0)
-    mapView.animate(to: camera)
-  }
-  
   @IBAction func tapOnCreateNewTargetButton(_ sender: Any) {
     if targets.count < 10 {
-      addTargetCircle(radius: 50)
       disableMapGestures()
       showTargetForm(withFormType: .creation)
     } else {
@@ -118,16 +101,18 @@ class HomeViewController: UIViewController {
   }
   
   private func setupMap() {
+    mapView.isMyLocationEnabled = true
     mapView.settings.compassButton = true
     mapView.delegate = self
     mapViewContainer.addSubview(mapView)
-    mapViewContainer.bringSubview(toFront: myLocationButton)
     mapViewContainer.bringSubview(toFront: newTargetLocationImageView)
     
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     locationManager.requestWhenInUseAuthorization()
     locationManager.startUpdatingLocation()
+    
+    addTargetCircle()
   }
   
   private func setupTargetForm() {
@@ -168,11 +153,11 @@ class HomeViewController: UIViewController {
     targetsMarkers.append(targetMarker)
   }
 
-  fileprivate func addTargetCircle(radius: Int) {
+  fileprivate func addTargetCircle() {
     let coordinates = mapView.camera.target
     
     targetCircle.position = coordinates
-    targetCircle.radius = CLLocationDistance(radius)
+    targetCircle.radius = 50
     targetCircle.map = self.mapView
   }
   
@@ -232,15 +217,13 @@ extension HomeViewController: CLLocationManagerDelegate {
     let location = locations.last
     
     if let coordinates = location?.coordinate {
-      userLocation = coordinates
-      locationMarker.position = coordinates
-      
       if firstTimeUpdatingLocation {
         firstTimeUpdatingLocation = false
         let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude,
                                               longitude: coordinates.longitude,
                                               zoom: 16.0)
         mapView.animate(to: camera)
+        mapView.settings.myLocationButton = true
       }
       
       UserDataManager.storeLastLocation(coordinates)
@@ -260,6 +243,7 @@ extension HomeViewController: TargetFormDelegate {
       self.hideSpinner()
       self.showNewTarget(target)
       self.hideTargetFormView()
+      self.targetCircle.radius = 50
     }) { (error) in
       self.hideSpinner()
       self.showMessageError(title: "Error", errorMessage: error.domain)
@@ -298,7 +282,7 @@ extension HomeViewController: TargetFormDelegate {
   }
   
   func cancelTargetCreation() {
-    targetCircle.map = nil
+    targetCircle.radius = 50
     hideTargetFormView()
   }
   
@@ -340,12 +324,10 @@ extension HomeViewController: TargetFormDelegate {
   }
   
   func didChangeTargetArea(_ area: Int) {
-    addTargetCircle(radius: area)
+    targetCircle.radius = CLLocationDistance(area)
   }
   
   private func showNewTarget(_ target: Target) {
-    targetCircle.map = nil
-    
     targets.append(target)
     addTargetToMap(target)
   }
@@ -390,6 +372,15 @@ extension HomeViewController: UITableViewDelegate {
 }
 
 extension HomeViewController: GMSMapViewDelegate {
+  
+  func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+    targetCircle.map = nil
+  }
+  
+  func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+    targetCircle.map = self.mapView
+    targetCircle.position = position.target
+  }
   
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let target = marker.userData as? Target {
