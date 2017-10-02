@@ -22,8 +22,8 @@ class HomeViewController: UIViewController {
   // MARK: Variables
   var locationManager = CLLocationManager()
   
-  lazy var targetCircle: GMSCircle = {
-    let targetCircle = GMSCircle()
+  lazy var targetCircle: MapCircle = {
+    let targetCircle = MapCircle()
     targetCircle.fillColor = .transparentWhite
     targetCircle.strokeColor = .macaroniAndCheese
     
@@ -374,12 +374,15 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: GMSMapViewDelegate {
   
   func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-    targetCircle.map = nil
+    targetCircle.hide()
+  }
+  
+  func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+    targetCircle.hide()
   }
   
   func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-    targetCircle.map = self.mapView
-    targetCircle.position = position.target
+    targetCircle.show(inMap: self.mapView, radiusGoal: 50, position: position.target)
   }
   
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
