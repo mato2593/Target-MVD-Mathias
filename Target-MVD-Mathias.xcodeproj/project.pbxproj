@@ -135,6 +135,7 @@
 		F502AAC91F6081590019ED96 /* TargetFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TargetFormView.xib; sourceTree = "<group>"; };
 		F502AACC1F6084C10019ED96 /* TargetFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetFormView.swift; sourceTree = "<group>"; };
 		F502D6EB1F3B636F00474060 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		F5064E611F82EAC400748840 /* swiftbase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swiftbase.entitlements; sourceTree = "<group>"; };
 		F50BE97E1F79A2F000A7E2EC /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		F5330BC81F4F3274000937CE /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F534CC471F62F31D005C0258 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 		9B0C72511C738C3100BAF3B1 /* Target-MVD-Mathias */ = {
 			isa = PBXGroup;
 			children = (
+				F5064E611F82EAC400748840 /* swiftbase.entitlements */,
 				F553AA171F4CAA7900F54DA8 /* Segues */,
 				F5631F0B1F41EAC100CA49BD /* Resources */,
 				E8290BFC1D832D6400599960 /* Extensions */,
@@ -507,9 +509,14 @@
 					};
 					9B5AFAD91C7205EB002347D6 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = PF387KAY5G;
+						DevelopmentTeam = WNU857N39T;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -940,8 +947,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "https://target-mvd-api.herokuapp.com/api/v1";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Target-MVD-Mathias/swiftbase.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = PF387KAY5G;
+				DEVELOPMENT_TEAM = WNU857N39T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/frameworks",
@@ -949,7 +957,7 @@
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.toptier.TargetMVD-Mathias";
+				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -967,8 +975,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "https://target-mvd-api.herokuapp.com/api/v1";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Target-MVD-Mathias/swiftbase.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = PF387KAY5G;
+				DEVELOPMENT_TEAM = WNU857N39T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/frameworks",
@@ -976,7 +985,7 @@
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.toptier.TargetMVD-Mathias";
+				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1041,8 +1050,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "https://target-mvd-api.herokuapp.com/api/v1";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Target-MVD-Mathias/swiftbase.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = PF387KAY5G;
+				DEVELOPMENT_TEAM = WNU857N39T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/frameworks",
@@ -1050,7 +1060,7 @@
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.toptier.TargetMVD-Mathias";
+				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
