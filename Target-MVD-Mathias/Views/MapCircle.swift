@@ -31,7 +31,7 @@ class MapCircle: GMSCircle {
     self.position = position
     radiusVariation = radiusGoal / 10
     
-    let interval = 0.005
+    let interval = 0.01
     timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(animateShowing), userInfo: nil, repeats: true)
   }
   
