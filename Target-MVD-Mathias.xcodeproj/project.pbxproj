@@ -66,6 +66,7 @@
 		F5631F1D1F41EAC100CA49BD /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F131F41EAC100CA49BD /* OpenSans-Regular.ttf */; };
 		F5631F1E1F41EAC100CA49BD /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F141F41EAC100CA49BD /* OpenSans-Semibold.ttf */; };
 		F5631F1F1F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F151F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf */; };
+		F5738C7D1F829785001B6EBE /* MapCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5738C7C1F829785001B6EBE /* MapCircle.swift */; };
 		F577F6741F3E2F2300D11F6C /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F577F6731F3E2F2300D11F6C /* ErrorExtension.swift */; };
 		F59A8F561F63196400C17889 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A8F551F63196400C17889 /* TopicTableViewCell.swift */; };
 		F5BBC4721F61E3DF00ADC5BE /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BBC4711F61E3DF00ADC5BE /* Topic.swift */; };
@@ -155,6 +156,7 @@
 		F5631F131F41EAC100CA49BD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		F5631F141F41EAC100CA49BD /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		F5631F151F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		F5738C7C1F829785001B6EBE /* MapCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCircle.swift; sourceTree = "<group>"; };
 		F577F6731F3E2F2300D11F6C /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		F59A8F551F63196400C17889 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		F5BBC4711F61E3DF00ADC5BE /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				F59A8F541F63192C00C17889 /* TableViewCells */,
 				F502AACB1F6084790019ED96 /* TargetForm */,
 				9B715A451E28083600C0C039 /* PlaceholderTextView.swift */,
+				F5738C7C1F829785001B6EBE /* MapCircle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 				F53ED73C1F3CA2F2007C6D43 /* UIColorExtension.swift in Sources */,
 				F502AAC81F60441A0019ED96 /* UITextFieldExtension.swift in Sources */,
 				F54129811F61DDE6003AD9CE /* TargetAPI.swift in Sources */,
+				F5738C7D1F829785001B6EBE /* MapCircle.swift in Sources */,
 				9B0C72711C738D3400BAF3B1 /* AppDelegate.swift in Sources */,
 				F534CC481F62F31D005C0258 /* Target.swift in Sources */,
 				E8FBB1C11DD21D18000D6740 /* SessionDataManager.swift in Sources */,
