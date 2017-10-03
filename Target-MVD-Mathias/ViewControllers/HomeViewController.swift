@@ -12,7 +12,7 @@ import GoogleMaps
 class HomeViewController: UIViewController {
   
   // MARK: Outlets
-  @IBOutlet weak var mapViewContainer: UIView!
+  @IBOutlet weak var mapView: GMSMapView!
   @IBOutlet weak var createNewTargetLabel: UILabel!
   @IBOutlet weak var newTargetLocationImageView: UIImageView!
   
@@ -28,14 +28,6 @@ class HomeViewController: UIViewController {
     targetCircle.strokeColor = .macaroniAndCheese
     
     return targetCircle
-  }()
-  
-  lazy var mapView: GMSMapView = {
-    let coordinates = UserDataManager.getLastLocation()
-    let zoom = coordinates.latitude != 0 && coordinates.longitude != 0 ? 16.0 : 1.0
-    
-    let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: Float(zoom))
-    return GMSMapView.map(withFrame: self.mapViewContainer.bounds, camera: camera)
   }()
   
   var targets: [Target] = []
@@ -101,11 +93,16 @@ class HomeViewController: UIViewController {
   }
   
   private func setupMap() {
+    let coordinates = UserDataManager.getLastLocation()
+    let zoom = coordinates.latitude != 0 && coordinates.longitude != 0 ? 16.0 : 1.0
+    
+    let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: Float(zoom))
+    
     mapView.isMyLocationEnabled = true
     mapView.settings.compassButton = true
     mapView.delegate = self
-    mapViewContainer.addSubview(mapView)
-    mapViewContainer.bringSubview(toFront: newTargetLocationImageView)
+    mapView.camera = camera
+    mapView.bringSubview(toFront: newTargetLocationImageView)
     
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyBest

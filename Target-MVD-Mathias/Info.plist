@@ -57,6 +57,10 @@
 	<string>Show your fucking location!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Enable this permition to change your avatar</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

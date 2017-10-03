@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import MBProgressHUD
 import GoogleMaps
+import OneSignal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if UserDataManager.userHasToken() {
       let vc = UIStoryboard.instantiateInitialViewController()
       self.window?.rootViewController = vc
+    }
+    
+    // -OneSignal
+    let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+    
+    OneSignal.initWithLaunchOptions(launchOptions,
+                                    appId: "95d62317-4dd4-4d36-8575-f9a556fbf1d0",
+                                    handleNotificationAction: nil,
+                                    settings: onesignalInitSettings)
+    
+    OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
+    
+    // Recommend moving the below line to prompt for push after informing the user about
+    //   how your app will use them.
+    OneSignal.promptForPushNotifications(userResponse: { accepted in
+      print("User accepted notifications: \(accepted)")
+    })
+    
+    // Sync hashed email if you have a login system or collect it.
+    //   Will be used to reach the user at the most optimal time of day.
+    if let user = UserDataManager.getUserObject() {
+      OneSignal.syncHashedEmail(user.email)
     }
     
     return true

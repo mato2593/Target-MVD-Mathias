@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmI-cP-6Sq" userLabel="Map View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmI-cP-6Sq" userLabel="Map View" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="523"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TargetLocation" translatesAutoresizingMaskIntoConstraints="NO" id="jvc-f3-DwK">
@@ -193,7 +193,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="createNewTargetLabel" destination="58l-xF-ewx" id="ruu-w9-sdu"/>
-                        <outlet property="mapViewContainer" destination="lmI-cP-6Sq" id="QBb-Fp-dEs"/>
+                        <outlet property="mapView" destination="lmI-cP-6Sq" id="gDF-lt-dsu"/>
                         <outlet property="newTargetLocationImageView" destination="jvc-f3-DwK" id="p7q-id-DnB"/>
                         <outlet property="targetFormView" destination="GVH-av-leb" id="GFu-t3-Log"/>
                         <outlet property="topicsTableView" destination="sVb-yZ-eOs" id="NI7-6r-kbu"/>
@@ -360,7 +360,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zbo-2P-3JE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xEC-KC-o6Y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xEC-KC-o6Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
