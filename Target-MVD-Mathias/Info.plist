@@ -34,7 +34,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>ConfigurationName</key>
-	<string>Release</string>
+	<string>Debug</string>
 	<key>FacebookAppID</key>
 	<string>109802899713362</string>
 	<key>FacebookDisplayName</key>

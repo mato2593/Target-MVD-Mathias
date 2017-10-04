@@ -17,18 +17,10 @@ target 'Target-MVD-Mathias' do
   # Google Maps SDK ---
   pod 'GoogleMaps'
   # ------
-  
-  # Push Notifications ---
-  pod 'OneSignal', '>= 2.5.2', '< 3.0'
-  # ------
 end
 
 target 'AcceptanceTests' do
   pod 'KIF', '~> 3.5.2', :configurations => ['Debug']
   pod 'KIF/IdentifierTests', '~> 3.5.2', :configurations => ['Debug']
   pod 'OHHTTPStubs/Swift', '~> 6.0.0', :configurations => ['Debug']
-end
-
-target 'OneSignalNotificationServiceExtension' do
-  pod 'OneSignal', '>= 2.5.2', '< 3.0'
 end
