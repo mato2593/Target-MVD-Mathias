@@ -57,6 +57,8 @@
 	<string>Show your location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Enable this permition to change your avatar</string>
+	<key>Pushwoosh_APPID</key>
+	<string>93802-8F110</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

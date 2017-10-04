@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Pushwoosh
 
 class UserAPI {
   
@@ -27,6 +28,7 @@ class UserAPI {
                                 let json = JSON(response)
                                 UserDataManager.storeUserObject(User.parse(fromJSON: json))
                                 UserDataManager.storeAccessToken(json["token"].stringValue)
+                                PushNotificationManager.push().registerForPushNotifications()
                                 success("")
     }) { (error) -> Void in
       failure(error)
@@ -70,6 +72,7 @@ class UserAPI {
                               success: { (response) -> Void in
                                 let json = JSON(response)
                                 UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                                PushNotificationManager.push().registerForPushNotifications()
                                 success(response)
     }) { (error) -> Void in
       failure(error)
@@ -92,6 +95,7 @@ class UserAPI {
                                 let json = JSON(response)
                                 UserDataManager.storeUserObject(User.parse(fromJSON: json))
                                 UserDataManager.storeAccessToken(json["token"].stringValue)
+                                PushNotificationManager.push().registerForPushNotifications()
                                 success(response)
     }) { (error) -> Void in
       failure(error)
@@ -130,6 +134,7 @@ class UserAPI {
                              success: { (responseObject) in
                               let json  = JSON(responseObject)
                               UserDataManager.storeUserObject(User.parse(fromJSON: json))
+                              PushNotificationManager.push().registerForPushNotifications()
                               success()
     }) { (error) -> Void in
       failure(error)
@@ -168,7 +173,7 @@ class UserAPI {
                                 UserDataManager.storeUserObject(User.parse(fromJSON: json))
                                 UserDataManager.setUserFromFacebook()
                                 UserDataManager.storeAccessToken(json["token"].stringValue)
-                                
+                                PushNotificationManager.push().registerForPushNotifications()
                                 success()
     }) { (error) -> Void in
       failure(error)
@@ -181,6 +186,7 @@ class UserAPI {
       UserDataManager.deleteUserObject()
       UserDataManager.deleteUserFromFacebook()
       UserDataManager.deleteAccessToken()
+      PushNotificationManager.push().unregisterForPushNotifications()
       success()
     }) { (error) -> Void in
       failure(error)

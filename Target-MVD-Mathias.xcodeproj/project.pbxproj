@@ -45,6 +45,8 @@
 		F502AACA1F6081590019ED96 /* TargetFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F502AAC91F6081590019ED96 /* TargetFormView.xib */; };
 		F502AACD1F6084C10019ED96 /* TargetFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F502AACC1F6084C10019ED96 /* TargetFormView.swift */; };
 		F502D6EC1F3B636F00474060 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F502D6EB1F3B636F00474060 /* Onboarding.storyboard */; };
+		F508BB871F855B2A00369F0C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F508BB861F855B2A00369F0C /* libz.tbd */; };
+		F508BB891F855B3A00369F0C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F508BB881F855B3A00369F0C /* libstdc++.tbd */; };
 		F50BE97F1F79A2F100A7E2EC /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50BE97E1F79A2F000A7E2EC /* UINavigationControllerExtension.swift */; };
 		F5330BC91F4F3274000937CE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5330BC81F4F3274000937CE /* Utils.swift */; };
 		F534CC481F62F31D005C0258 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534CC471F62F31D005C0258 /* Target.swift */; };
@@ -153,6 +155,8 @@
 		F502AACC1F6084C10019ED96 /* TargetFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetFormView.swift; sourceTree = "<group>"; };
 		F502D6EB1F3B636F00474060 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		F5064E611F82EAC400748840 /* swiftbase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swiftbase.entitlements; sourceTree = "<group>"; };
+		F508BB861F855B2A00369F0C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		F508BB881F855B3A00369F0C /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		F50BE97E1F79A2F000A7E2EC /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		F5330BC81F4F3274000937CE /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F534CC471F62F31D005C0258 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F508BB891F855B3A00369F0C /* libstdc++.tbd in Frameworks */,
+				F508BB871F855B2A00369F0C /* libz.tbd in Frameworks */,
 				A6A067D8E226E449844B3045 /* Pods_Target_MVD_Mathias.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +212,8 @@
 		890A62B589A2C6D1ECC57590 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F508BB881F855B3A00369F0C /* libstdc++.tbd */,
+				F508BB861F855B2A00369F0C /* libz.tbd */,
 				0F46D9D1E30A1DF28D531464 /* Pods_AcceptanceTests.framework */,
 				E7BE09550DD0D175ED550B32 /* Pods_Target_MVD_Mathias.framework */,
 				289FA0AA5DFA1D445B88B611 /* Pods_OneSignalNotificationServiceExtension.framework */,
@@ -913,7 +921,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -955,7 +963,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -979,7 +987,7 @@
 					"$(PROJECT_DIR)/frameworks",
 				);
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;
@@ -1006,7 +1014,7 @@
 					"$(PROJECT_DIR)/frameworks",
 				);
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;
@@ -1056,7 +1064,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1080,7 +1088,7 @@
 					"$(PROJECT_DIR)/frameworks",
 				);
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;
