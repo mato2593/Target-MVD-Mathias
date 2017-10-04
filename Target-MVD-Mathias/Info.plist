@@ -34,7 +34,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>ConfigurationName</key>
-	<string>Debug</string>
+	<string>Release</string>
 	<key>FacebookAppID</key>
 	<string>109802899713362</string>
 	<key>FacebookDisplayName</key>
@@ -54,7 +54,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Show your fucking location!</string>
+	<string>Show your location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Enable this permition to change your avatar</string>
 	<key>UIBackgroundModes</key>

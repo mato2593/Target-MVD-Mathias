@@ -186,4 +186,16 @@ class UserAPI {
       failure(error)
     }
   }
+  
+  // MARK: Push Notifications
+  class func updatePushToken(token: String) {
+    let url = usersUrl + "\(UserDataManager.getUserId())/push_tokens"
+    let parameters = [
+      "push_token": token
+      ] as [String: AnyObject]
+    
+    APIClient.sendPostRequest(url, params: parameters, success: { response in
+    }) { error in
+    }
+  }
 }
