@@ -58,7 +58,6 @@
 		F544F4351F44C39500F247E8 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F544F4341F44C39500F247E8 /* UILabelExtension.swift */; };
 		F54DA6201F87CF1B00B0D6C7 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */; };
 		F54DA6221F8805B200B0D6C7 /* NewMatchAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DA6211F8805B200B0D6C7 /* NewMatchAlertView.swift */; };
-		F54DA6281F882BA200B0D6C7 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DA6271F882BA200B0D6C7 /* NibView.swift */; };
 		F553AA191F4CAADA00F54DA8 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = F553AA181F4CAADA00F54DA8 /* SegueFromLeft.swift */; };
 		F562394A1F758E8A0092C3DC /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56239491F758E8A0092C3DC /* ChatsViewController.swift */; };
 		F5631F161F41EAC100CA49BD /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5631F0C1F41EAC100CA49BD /* OpenSans-Bold.ttf */; };
@@ -172,7 +171,6 @@
 		F544F4341F44C39500F247E8 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		F54DA6211F8805B200B0D6C7 /* NewMatchAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchAlertView.swift; path = NewMatchAlert/NewMatchAlertView.swift; sourceTree = "<group>"; };
-		F54DA6271F882BA200B0D6C7 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		F553AA181F4CAADA00F54DA8 /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
 		F56239491F758E8A0092C3DC /* ChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		F5631F0C1F41EAC100CA49BD /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -421,7 +419,6 @@
 				9B715A451E28083600C0C039 /* PlaceholderTextView.swift */,
 				F5738C7C1F829785001B6EBE /* MapCircle.swift */,
 				F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */,
-				F54DA6271F882BA200B0D6C7 /* NibView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -824,7 +821,6 @@
 				9BE3669F1F10175E007CAECD /* Base64Media.swift in Sources */,
 				9B88CC671CAB305900AE60C5 /* Constants.swift in Sources */,
 				F535FC701F7AAA68008BB9F8 /* ChatTableViewCell.swift in Sources */,
-				F54DA6281F882BA200B0D6C7 /* NibView.swift in Sources */,
 				F562394A1F758E8A0092C3DC /* ChatsViewController.swift in Sources */,
 				9B715A461E28083600C0C039 /* PlaceholderTextView.swift in Sources */,
 				F535FC741F7AE4B2008BB9F8 /* Match.swift in Sources */,

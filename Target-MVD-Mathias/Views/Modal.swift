@@ -17,22 +17,27 @@ protocol Modal {
   func dismiss(animated: Bool)
 }
 
-extension Modal where Self: NibView {
+extension Modal where Self: UIView {
   
   func show(animated: Bool) {
     self.backgroundView.alpha = 0
-    self.dialogView.center = CGPoint(x: self.center.x, y: self.frame.height + self.dialogView.frame.height / 2)
     UIApplication.shared.delegate?.window??.rootViewController?.view.addSubview(self)
+    
+    self.dialogView.layoutIfNeeded()
+    self.backgroundView.layoutIfNeeded()
+    self.layoutIfNeeded()
+    
+    self.dialogView.center = CGPoint(x: self.center.x, y: self.frame.height + self.dialogView.frame.height / 2)
     
     if animated {
       UIView.animate(withDuration: 0.35) {
-        self.backgroundView.alpha = 0.67
+        self.backgroundView.alpha = 0.4
       }
       UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: {
         self.dialogView.center  = self.center
       }, completion: nil)
     } else {
-      self.backgroundView.alpha = 0.67
+      self.backgroundView.alpha = 0.4
       self.dialogView.center  = self.center
     }
   }

@@ -8,13 +8,24 @@
 
 import UIKit
 
-class NewMatchAlertView: NibView, Modal {
+class NewMatchAlertView: UIView, Modal {
 
   // MARK: Outlets
+  @IBOutlet var contentView: UIView!
   @IBOutlet var backgroundView: UIView!
   @IBOutlet var dialogView: UIView!
   @IBOutlet weak var matchUserImageView: UIImageView!
   @IBOutlet weak var matchUserNameLabel: UILabel!
+  
+  // MARK: Initializers
+  init() {
+    super.init(frame: UIScreen.main.bounds)
+    loadView()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
   
   // MARK: Actions
   @IBAction func didTapStartChattingButton(_ sender: Any) {
@@ -23,5 +34,12 @@ class NewMatchAlertView: NibView, Modal {
   
   @IBAction func didTapSkipButton(_ sender: Any) {
     dismiss(animated: true)
+  }
+  
+  // MARK: Functions
+  func loadView() {
+    Bundle.main.loadNibNamed("NewMatchAlertView", owner: self, options: nil)
+    addSubview(contentView)
+    contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
   }
 }

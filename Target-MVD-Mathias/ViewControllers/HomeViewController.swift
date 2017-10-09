@@ -77,14 +77,12 @@ class HomeViewController: UIViewController {
   
   // MARK: Actions
   @IBAction func tapOnCreateNewTargetButton(_ sender: Any) {
-    let alert = NewMatchAlertView().loadViewFromNib() as? NewMatchAlertView
-    alert?.show(animated: true)
-//    if targets.count < 10 {
-//      disableMapGestures()
-//      showTargetForm(withFormType: .creation)
-//    } else {
-//      showMessageError(errorMessage: "You have exceeded the maximum amount of targets, please remove one before creating a new target.")
-//    }
+    if targets.count < 10 {
+      disableMapGestures()
+      showTargetForm(withFormType: .creation)
+    } else {
+      showMessageError(errorMessage: "You have exceeded the maximum amount of targets, please remove one before creating a new target.")
+    }
   }
   
   // MARK: Functions
