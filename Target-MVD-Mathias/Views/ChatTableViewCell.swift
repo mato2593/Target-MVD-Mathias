@@ -19,7 +19,7 @@ class ChatTableViewCell: UITableViewCell {
   @IBOutlet weak var unreadMessagesLabel: UILabel!
   
   // MARK: Setup
-  func setup(withMatch match: Match) {
+  func setup(withMatch match: MatchConversation) {
     setupAvatarImageView(image: match.user.image)
     
     userNameLabel.text = match.user.username

@@ -14,7 +14,7 @@ class ChatsViewController: UIViewController {
   @IBOutlet weak var chatsTableView: UITableView!
   
   // MARK: Variables
-  var matches: [Match] = []
+  var matches: [MatchConversation] = []
   
   // MARK: Constants
   let refreshControl = UIRefreshControl()

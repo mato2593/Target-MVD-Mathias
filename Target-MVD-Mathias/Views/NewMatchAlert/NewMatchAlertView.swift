@@ -17,14 +17,27 @@ class NewMatchAlertView: UIView, Modal {
   @IBOutlet weak var matchUserImageView: UIImageView!
   @IBOutlet weak var matchUserNameLabel: UILabel!
   
+  // MARK: Variables
+  var match: Match? = nil {
+    didSet {
+      matchUserImageView.sd_setImage(with: match?.user.image)
+      matchUserNameLabel.text = match?.user.username
+    }
+  }
+  
   // MARK: Initializers
-  init() {
+  init(withMatch match: Match) {
     super.init(frame: UIScreen.main.bounds)
     loadView()
+    
+    self.match = match
+    setupAvatarImageView(image: match.user.image)
+    matchUserNameLabel.text = match.user.username
   }
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    loadView()
   }
   
   // MARK: Actions
@@ -41,5 +54,11 @@ class NewMatchAlertView: UIView, Modal {
     Bundle.main.loadNibNamed("NewMatchAlertView", owner: self, options: nil)
     addSubview(contentView)
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+  }
+  
+  private func setupAvatarImageView(image: URL?) {
+    matchUserImageView.layer.cornerRadius = matchUserImageView.frame.size.width / 2
+    matchUserImageView.layer.masksToBounds = true
+    matchUserImageView.sd_setImage(with: image, placeholderImage: #imageLiteral(resourceName: "UserAvatarPlaceholder"))
   }
 }
