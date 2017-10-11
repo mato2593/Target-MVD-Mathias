@@ -34,11 +34,11 @@ extension Modal where Self: UIView {
         self.backgroundView.alpha = 0.4
       }
       UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: {
-        self.dialogView.center  = self.center
+        self.dialogView.center = self.center
       }, completion: nil)
     } else {
       self.backgroundView.alpha = 0.4
-      self.dialogView.center  = self.center
+      self.dialogView.center = self.center
     }
   }
   

@@ -10,13 +10,6 @@ import UIKit
 
 class ChatViewController: UIViewController {
   
-  // MARK: Lifecycle
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    // Do any additional setup after loading the view.
-  }
-  
   // MARK: Actions
   @IBAction func didTapOnBackNavigationItem(_ sender: Any) {
     dismiss(animated: true, completion: nil)
