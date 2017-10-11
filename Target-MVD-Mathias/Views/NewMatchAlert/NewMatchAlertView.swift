@@ -43,7 +43,7 @@ class NewMatchAlertView: UIView, Modal {
   // MARK: Actions
   @IBAction func didTapStartChattingButton(_ sender: Any) {
     let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
-    UIApplication.shared.delegate?.window??.rootViewController?.present(chatViewController!, animated: true, completion: nil)
+    UIApplication.shared.keyWindow?.rootViewController?.present(chatViewController!, animated: true, completion: nil)
     dismiss(animated: true)
   }
   

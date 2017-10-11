@@ -80,39 +80,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
   }
   
   func onPushAccepted(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
-    if let pushBody = pushNotification["u"] as? String, let data = pushBody.data(using: .utf8) {
-      do {
-        guard let body = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-          return
-        }
-        
-        if body.keys.contains("title") {
-          let json = JSON(body)
-          let match = Match.parse(fromJSON: json)
-          let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
-          window?.rootViewController?.present(chatViewController!, animated: false, completion: nil)
-        }
-      } catch {
-        return
+    if let pushBody = pushNotification["u"] as? String {
+      let json = JSON(parseJSON: pushBody)
+      
+      if json["title"].string != nil {
+        let match = Match.parse(fromJSON: json)
+        let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+        window?.rootViewController?.present(chatViewController!, animated: false, completion: nil)
       }
     }
   }
   
   func onPushReceived(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
-    if !onStart, let pushBody = pushNotification["u"] as? String, let data = pushBody.data(using: .utf8) {
-      do {
-        guard let body = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-          return
-        }
-        
-        if body.keys.contains("title") {
-          let json = JSON(body)
-          let match = Match.parse(fromJSON: json)
-          let alert = NewMatchAlertView(withMatch: match)
-          alert.show(animated: true)
-        }
-      } catch {
-        return
+    if !onStart, let pushBody = pushNotification["u"] as? String {
+      let json = JSON(parseJSON: pushBody)
+      
+      if json["title"].string != nil {
+        let match = Match.parse(fromJSON: json)
+        let alert = NewMatchAlertView(withMatch: match)
+        alert.show(animated: true)
       }
     }
   }

@@ -21,7 +21,7 @@ extension Modal where Self: UIView {
   
   func show(animated: Bool) {
     self.backgroundView.alpha = 0
-    UIApplication.shared.delegate?.window??.rootViewController?.view.addSubview(self)
+    UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(self)
 
     self.dialogView.layoutIfNeeded()
     self.backgroundView.layoutIfNeeded()
@@ -44,10 +44,8 @@ extension Modal where Self: UIView {
   
   func dismiss(animated: Bool) {
     if animated {
-      UIView.animate(withDuration: 0.35) {
-        self.backgroundView.alpha = 0
-      }
       UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: {
+        self.backgroundView.alpha = 0
         self.dialogView.center = CGPoint(x: self.center.x, y: self.frame.height + self.dialogView.frame.height/2)
       }, completion: { _ in
         self.removeFromSuperview()
