@@ -76,17 +76,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any],
                    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     PushNotificationManager.push().handlePushReceived(userInfo)
-    print("Notification received: \(userInfo)")
     completionHandler(UIBackgroundFetchResult.noData)
   }
   
   func onPushAccepted(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
-    print("Push notification accepted: \(pushNotification)")
+    if let pushBody = pushNotification["u"] as? String, let data = pushBody.data(using: .utf8) {
+      do {
+        guard let body = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+          return
+        }
+        
+        if body.keys.contains("title") {
+          let json = JSON(body)
+          let match = Match.parse(fromJSON: json)
+          let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+          window?.rootViewController?.present(chatViewController!, animated: false, completion: nil)
+        }
+      } catch {
+        return
+      }
+    }
   }
   
   func onPushReceived(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
-    print("Push notification received: \(pushNotification)")
-    
     if !onStart, let pushBody = pushNotification["u"] as? String, let data = pushBody.data(using: .utf8) {
       do {
         guard let body = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {

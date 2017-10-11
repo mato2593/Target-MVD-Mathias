@@ -22,7 +22,7 @@ extension Modal where Self: UIView {
   func show(animated: Bool) {
     self.backgroundView.alpha = 0
     UIApplication.shared.delegate?.window??.rootViewController?.view.addSubview(self)
-    
+
     self.dialogView.layoutIfNeeded()
     self.backgroundView.layoutIfNeeded()
     self.layoutIfNeeded()
