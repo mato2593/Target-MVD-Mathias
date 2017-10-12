@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NewMatchAlertViewDelegate: class {
-  func didTapStartChattingButton(withMatch match: MatchConversation?)
+  func didTapStartChattingButton(withMatches matches: [MatchConversation])
 }
 
 class NewMatchAlertView: UIView, Modal {
@@ -51,9 +51,7 @@ class NewMatchAlertView: UIView, Modal {
   // MARK: Actions
   @IBAction func didTapStartChattingButton(_ sender: Any) {
     dismiss(animated: true)
-    
-    let match = matches?.count == 1 ? matches?.first : nil
-    delegate?.didTapStartChattingButton(withMatch: match)
+    delegate?.didTapStartChattingButton(withMatches: matches!)
   }
   
   @IBAction func didTapSkipButton(_ sender: Any) {
@@ -61,7 +59,7 @@ class NewMatchAlertView: UIView, Modal {
   }
   
   // MARK: Functions
-  func loadView() {
+  private func loadView() {
     Bundle.main.loadNibNamed("NewMatchAlertView", owner: self, options: nil)
     addSubview(contentView)
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

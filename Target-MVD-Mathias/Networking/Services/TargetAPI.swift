@@ -48,9 +48,7 @@ class TargetAPI {
     APIClient.sendPostRequest(url, params: params as [String : AnyObject], success: { (response) in
       let json = JSON(response)
       let target = Target.parse(fromJSON: json["target"])
-      
-      let matchesArray = json["matches"].arrayValue
-      let matches = MatchConversation.parse(fromJSONArray: matchesArray)
+      let matches = MatchConversation.parse(fromJSONArray: json["matches"].arrayValue)
       
       success(target, matches)
     }) { (error) in
@@ -63,9 +61,8 @@ class TargetAPI {
     
     APIClient.sendGetRequest(url, success: { (response) in
       let json = JSON(response)
-      let targetsArray = json["targets"].arrayValue
+      let targets = Target.parse(fromJSONArray: json["targets"].arrayValue)
       
-      let targets = Target.parse(fromJSONArray: targetsArray)
       success(targets)
     }) { error in
       failure(error)
@@ -86,9 +83,7 @@ class TargetAPI {
     APIClient.sendPutRequest(url, params: params as [String : AnyObject], success: { (response) in
       let json = JSON(response)
       let target = Target.parse(fromJSON: json["target"])
-      
-      let matchesArray = json["matches"].arrayValue
-      let matches = MatchConversation.parse(fromJSONArray: matchesArray)
+      let matches = MatchConversation.parse(fromJSONArray: json["matches"].arrayValue)
       
       success(target, matches)
     }) { (error) in

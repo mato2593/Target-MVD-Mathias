@@ -420,10 +420,11 @@ extension HomeViewController: GMSMapViewDelegate {
 
 extension HomeViewController: NewMatchAlertViewDelegate {
   
-  func didTapStartChattingButton(withMatch match: MatchConversation?) {
+  func didTapStartChattingButton(withMatches matches: [MatchConversation]) {
     var viewControllerToPush: UIViewController?
+    let match = matches.count == 1 ? matches.first : nil
     
-    if let match = match {
+    if match != nil {
       viewControllerToPush = UIStoryboard.instantiateViewController(ChatViewController.self)
     } else {
       viewControllerToPush = UIStoryboard.instantiateViewController(ChatsViewController.self)
