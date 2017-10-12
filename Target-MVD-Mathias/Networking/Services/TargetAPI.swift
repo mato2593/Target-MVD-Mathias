@@ -32,7 +32,7 @@ class TargetAPI {
     }
   }
   
-  class func createTarget(_ target: Target, success: @escaping (_ target: Target, _ compatibleTargets: [Target]) -> Void, failure: @escaping (_ error: Error) -> Void) {
+  class func createTarget(_ target: Target, success: @escaping (_ target: Target, _ matches: [MatchConversation]) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "\(UserDataManager.getUserId())" + targetsUrl
     
     let params = [
@@ -49,10 +49,10 @@ class TargetAPI {
       let json = JSON(response)
       let target = Target.parse(fromJSON: json["target"])
       
-      let compatibleTargetsArray = json["matches"].arrayValue
-      let compatibleTargets = Target.parse(fromJSONArray: compatibleTargetsArray)
+      let matchesArray = json["matches"].arrayValue
+      let matches = MatchConversation.parse(fromJSONArray: matchesArray)
       
-      success(target, compatibleTargets)
+      success(target, matches)
     }) { (error) in
       failure(error)
     }
@@ -72,7 +72,7 @@ class TargetAPI {
     }
   }
   
-  class func updateTarget(target: Target, success: @escaping (_ target: Target, _ compatibleTargets: [Target]) -> Void, failure: @escaping (_ error: Error) -> Void) {
+  class func updateTarget(target: Target, success: @escaping (_ target: Target, _ matches: [MatchConversation]) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "\(UserDataManager.getUserId())" + targetsUrl + "\(target.id)"
     
     let params = [
@@ -87,10 +87,10 @@ class TargetAPI {
       let json = JSON(response)
       let target = Target.parse(fromJSON: json["target"])
       
-      let compatibleTargetsArray = json["matches"].arrayValue
-      let compatibleTargets = Target.parse(fromJSONArray: compatibleTargetsArray)
+      let matchesArray = json["matches"].arrayValue
+      let matches = MatchConversation.parse(fromJSONArray: matchesArray)
       
-      success(target, compatibleTargets)
+      success(target, matches)
     }) { (error) in
       failure(error)
     }

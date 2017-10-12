@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol NewMatchAlertViewDelegate: class {
+  func didTapStartChattingButton()
+}
+
 class NewMatchAlertView: UIView, Modal {
 
   // MARK: Outlets
@@ -18,21 +22,17 @@ class NewMatchAlertView: UIView, Modal {
   @IBOutlet weak var matchUserNameLabel: UILabel!
   
   // MARK: Variables
-  var match: Match? = nil {
-    didSet {
-      matchUserImageView.sd_setImage(with: match?.user.image)
-      matchUserNameLabel.text = match?.user.username
-    }
-  }
+  var matches: [MatchConversation]?
+  weak var delegate: NewMatchAlertViewDelegate?
   
   // MARK: Initializers
-  init(withMatch match: Match) {
+  init(withMatches matches: [MatchConversation]) {
     super.init(frame: UIScreen.main.bounds)
     loadView()
     
-    self.match = match
-    setupAvatarImageView(image: match.user.image)
-    matchUserNameLabel.text = match.user.username
+    self.matches = matches
+    setupAvatarImageView(image: matches.first?.user.image)
+    matchUserNameLabel.text = matches.first?.user.username
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -42,9 +42,8 @@ class NewMatchAlertView: UIView, Modal {
   
   // MARK: Actions
   @IBAction func didTapStartChattingButton(_ sender: Any) {
-    let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
-    UIApplication.shared.keyWindow?.rootViewController?.present(chatViewController!, animated: true, completion: nil)
     dismiss(animated: true)
+    delegate?.didTapStartChattingButton()
   }
   
   @IBAction func didTapSkipButton(_ sender: Any) {

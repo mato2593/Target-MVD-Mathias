@@ -236,11 +236,15 @@ extension HomeViewController: TargetFormDelegate {
     let coordinates = mapView.camera.target
     let newTarget = Target(radius: area, lat: coordinates.latitude, lng: coordinates.longitude, title: title, topic: topic, user: UserDataManager.getUserId())
     
-    TargetAPI.createTarget(newTarget, success: { (target, _) in
+    TargetAPI.createTarget(newTarget, success: { (target, matches) in
       self.hideSpinner()
       self.showNewTarget(target)
       self.hideTargetFormView()
       self.targetCircle.radius = 50
+      
+      if !matches.isEmpty {
+        self.showNewMatchesDialog(withMatches: matches)
+      }
     }) { (error) in
       self.hideSpinner()
       self.showMessageError(title: "Error", errorMessage: error.domain)
@@ -260,7 +264,7 @@ extension HomeViewController: TargetFormDelegate {
       
       showSpinner(message: "Updating Target...")
       
-      TargetAPI.updateTarget(target: targetToEdit, success: { (target, _) in
+      TargetAPI.updateTarget(target: targetToEdit, success: { (target, matches) in
         self.targets.remove(at: indexOfTargetToEdit)
         self.targets.append(target)
         
@@ -271,6 +275,10 @@ extension HomeViewController: TargetFormDelegate {
         self.addTargetToMap(target)
         self.hideSpinner()
         self.hideTargetFormView()
+        
+        if !matches.isEmpty {
+          self.showNewMatchesDialog(withMatches: matches)
+        }
       }) { error in
         self.hideSpinner()
         self.showMessageError(errorMessage: error.domain)
@@ -327,6 +335,12 @@ extension HomeViewController: TargetFormDelegate {
   private func showNewTarget(_ target: Target) {
     targets.append(target)
     addTargetToMap(target)
+  }
+  
+  private func showNewMatchesDialog(withMatches matches: [MatchConversation]) {
+    let alert = NewMatchAlertView(withMatches: matches)
+    alert.delegate = self
+    alert.show(animated: true)
   }
 }
 
@@ -401,5 +415,13 @@ extension HomeViewController: GMSMapViewDelegate {
     if targetFormView.formType == .edition && !showingTopicsTableView {
       hideTargetFormView()
     }
+  }
+}
+
+extension HomeViewController: NewMatchAlertViewDelegate {
+  
+  func didTapStartChattingButton() {
+    let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+    navigationController?.pushViewController(chatViewController!, animated: true)
   }
 }
