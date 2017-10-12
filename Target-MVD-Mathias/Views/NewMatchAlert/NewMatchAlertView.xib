@@ -24,6 +24,8 @@
                 <outlet property="dialogView" destination="jhQ-VH-JGg" id="xEb-sg-QYR"/>
                 <outlet property="matchUserImageView" destination="hOm-km-iQ4" id="NJt-VK-c49"/>
                 <outlet property="matchUserNameLabel" destination="bX1-lE-dEg" id="x2t-Sd-zwd"/>
+                <outlet property="matchUserStackView" destination="SJ5-AP-aJu" id="ns1-c4-Cz2"/>
+                <outlet property="newMatchesLabel" destination="8ta-Lv-bhJ" id="vy1-SL-mXS"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

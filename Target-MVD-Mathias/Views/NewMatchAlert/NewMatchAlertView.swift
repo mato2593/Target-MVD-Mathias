@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NewMatchAlertViewDelegate: class {
-  func didTapStartChattingButton()
+  func didTapStartChattingButton(withMatch match: MatchConversation?)
 }
 
 class NewMatchAlertView: UIView, Modal {
@@ -18,8 +18,10 @@ class NewMatchAlertView: UIView, Modal {
   @IBOutlet var contentView: UIView!
   @IBOutlet var backgroundView: UIView!
   @IBOutlet var dialogView: UIView!
+  @IBOutlet weak var newMatchesLabel: UILabel!
   @IBOutlet weak var matchUserImageView: UIImageView!
   @IBOutlet weak var matchUserNameLabel: UILabel!
+  @IBOutlet weak var matchUserStackView: UIStackView!
   
   // MARK: Variables
   var matches: [MatchConversation]?
@@ -31,8 +33,14 @@ class NewMatchAlertView: UIView, Modal {
     loadView()
     
     self.matches = matches
-    setupAvatarImageView(image: matches.first?.user.image)
-    matchUserNameLabel.text = matches.first?.user.username
+    
+    if matches.count > 1 {
+      matchUserStackView.isHidden = true
+      newMatchesLabel.text = "You have new matches!"
+    } else {
+      setupAvatarImageView(image: matches.first?.user.image)
+      matchUserNameLabel.text = matches.first?.user.username
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -43,7 +51,9 @@ class NewMatchAlertView: UIView, Modal {
   // MARK: Actions
   @IBAction func didTapStartChattingButton(_ sender: Any) {
     dismiss(animated: true)
-    delegate?.didTapStartChattingButton()
+    
+    let match = matches?.count == 1 ? matches?.first : nil
+    delegate?.didTapStartChattingButton(withMatch: match)
   }
   
   @IBAction func didTapSkipButton(_ sender: Any) {
