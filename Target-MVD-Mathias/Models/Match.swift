@@ -2,7 +2,7 @@
 //  Match.swift
 //  Target-MVD-Mathias
 //
-//  Created by Mathias Cabano on 9/26/17.
+//  Created by Mathias Cabano on 10/9/17.
 //  Copyright © 2017 TopTier labs. All rights reserved.
 //
 
@@ -16,19 +16,17 @@ class Match: NSObject {
   var user: User
   var title: String
   var channelId: String
-  var unread: Int
-  var lastMessages: [String]
-  var active: Bool
+  var unread: [String: JSON]
+  var lastMessage: [String: JSON]
   
-  init(id: Int, topic: Topic, user: User, title: String = "", channelId: String = "", unread: Int, lastMessages: [String], active: Bool) {
+  init(id: Int, topic: Topic, user: User, title: String = "", channelId: String = "", unread: [String: JSON], lastMessage: [String: JSON]) {
     self.id = id
     self.topic = topic
     self.user = user
     self.title = title
     self.channelId = channelId
     self.unread = unread
-    self.lastMessages = lastMessages
-    self.active = active
+    self.lastMessage = lastMessage
   }
   
   // MARK: Parser
@@ -36,17 +34,12 @@ class Match: NSObject {
     let topic = Topic.parse(fromJSON: json["topic"])
     let user = User.parse(fromJSON: json["user"])
     
-    return Match(id: json["match_id"].intValue,
+    return Match(id: json["id"].intValue,
                  topic: topic,
                  user: user,
                  title: json["title"].stringValue,
                  channelId: json["channel_id"].stringValue,
-                 unread: json["unread"].intValue,
-                 lastMessages: json["last_message"].arrayValue.map { $0.stringValue },
-                 active: json["active"].boolValue)
-  }
-  
-  class func parse(fromJSONArray jsonArray: [JSON]) -> [Match] {
-    return jsonArray.map { parse(fromJSON: $0) }
+                 unread: json["unread"].dictionaryValue,
+                 lastMessage: json["last_message"].dictionaryValue)
   }
 }

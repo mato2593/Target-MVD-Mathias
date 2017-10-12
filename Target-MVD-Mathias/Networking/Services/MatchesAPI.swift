@@ -14,12 +14,12 @@ class MatchesAPI {
   fileprivate static let usersUrl = "/users/"
   fileprivate static let matchesUrl = "/match_conversations/"
   
-  class func matches(success: @escaping (_ response: [Match]) -> Void, failure: @escaping (_ error: Error) -> Void) {
+  class func matches(success: @escaping (_ response: [MatchConversation]) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "\(UserDataManager.getUserId())" + matchesUrl
     
     APIClient.sendGetRequest(url, success: { response in
       let json = JSON(response)
-      let matches = Match.parse(fromJSONArray: json["matches"].arrayValue)
+      let matches = MatchConversation.parse(fromJSONArray: json["matches"].arrayValue)
       
       success(matches)
     }) { error in

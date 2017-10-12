@@ -17,6 +17,10 @@ target 'Target-MVD-Mathias' do
   # Google Maps SDK ---
   pod 'GoogleMaps'
   # ------
+  
+  # Push Notifications ---
+  pod 'Pushwoosh'
+  # ------
 end
 
 target 'AcceptanceTests' do

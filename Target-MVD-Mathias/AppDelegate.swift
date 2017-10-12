@@ -11,9 +11,11 @@ import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import MBProgressHUD
 import GoogleMaps
+import Pushwoosh
+import SwiftyJSON
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate {
   
   static let shared: AppDelegate = {
     guard let appD = UIApplication.shared.delegate as? AppDelegate else {
@@ -42,11 +44,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self.window?.rootViewController = vc
     }
     
+    PushNotificationManager.push().delegate = self
+    
+    // set default Pushwoosh delegate for iOS10 foreground push handling
+    if #available(iOS 10.0, *) {
+      UNUserNotificationCenter.current().delegate = PushNotificationManager.push().notificationCenterDelegate
+    }
+    
+    // track application open statistics
+    PushNotificationManager.push().sendAppOpen()
+    
     return true
   }
   
   func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
     return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+  }
+  
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    PushNotificationManager.push().handlePushRegistration(deviceToken as Data!)
+    
+    if let token = PushNotificationManager.push().getPushToken() {
+      UserAPI.updatePushToken(token: token)
+    }
+  }
+  
+  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    PushNotificationManager.push().handlePushRegistrationFailure(error)
+  }
+  
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    PushNotificationManager.push().handlePushReceived(userInfo)
+    completionHandler(UIBackgroundFetchResult.noData)
+  }
+  
+  func onPushAccepted(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
+    if let pushBody = pushNotification["u"] as? String {
+      let json = JSON(parseJSON: pushBody)
+      
+      if json["title"].string != nil {
+        let match = Match.parse(fromJSON: json)
+        let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+        window?.rootViewController?.present(chatViewController!, animated: false, completion: nil)
+      }
+    }
+  }
+  
+  func onPushReceived(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
+    if !onStart, let pushBody = pushNotification["u"] as? String {
+      let json = JSON(parseJSON: pushBody)
+      
+      if json["title"].string != nil {
+        let match = Match.parse(fromJSON: json)
+        let alert = NewMatchAlertView(withMatch: match)
+        alert.show(animated: true)
+      }
+    }
   }
   
   func applicationWillResignActive(_ application: UIApplication) {
