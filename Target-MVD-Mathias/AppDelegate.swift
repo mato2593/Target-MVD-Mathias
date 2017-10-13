@@ -91,18 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     }
   }
   
-  func onPushReceived(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
-    if !onStart, let pushBody = pushNotification["u"] as? String {
-      let json = JSON(parseJSON: pushBody)
-      
-      if json["title"].string != nil {
-        let match = Match.parse(fromJSON: json)
-        let alert = NewMatchAlertView(withMatch: match)
-        alert.show(animated: true)
-      }
-    }
-  }
-  
   func applicationWillResignActive(_ application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when 
     // the user quits the application and it begins the transition to the background state.

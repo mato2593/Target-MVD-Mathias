@@ -32,7 +32,7 @@ class TargetAPI {
     }
   }
   
-  class func createTarget(_ target: Target, success: @escaping (_ target: Target, _ compatibleTargets: [Target]) -> Void, failure: @escaping (_ error: Error) -> Void) {
+  class func createTarget(_ target: Target, success: @escaping (_ target: Target, _ matches: [MatchConversation]) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "\(UserDataManager.getUserId())" + targetsUrl
     
     let params = [
@@ -48,11 +48,9 @@ class TargetAPI {
     APIClient.sendPostRequest(url, params: params as [String : AnyObject], success: { (response) in
       let json = JSON(response)
       let target = Target.parse(fromJSON: json["target"])
+      let matches = MatchConversation.parse(fromJSONArray: json["matches"].arrayValue)
       
-      let compatibleTargetsArray = json["matches"].arrayValue
-      let compatibleTargets = Target.parse(fromJSONArray: compatibleTargetsArray)
-      
-      success(target, compatibleTargets)
+      success(target, matches)
     }) { (error) in
       failure(error)
     }
@@ -63,16 +61,15 @@ class TargetAPI {
     
     APIClient.sendGetRequest(url, success: { (response) in
       let json = JSON(response)
-      let targetsArray = json["targets"].arrayValue
+      let targets = Target.parse(fromJSONArray: json["targets"].arrayValue)
       
-      let targets = Target.parse(fromJSONArray: targetsArray)
       success(targets)
     }) { error in
       failure(error)
     }
   }
   
-  class func updateTarget(target: Target, success: @escaping (_ target: Target, _ compatibleTargets: [Target]) -> Void, failure: @escaping (_ error: Error) -> Void) {
+  class func updateTarget(target: Target, success: @escaping (_ target: Target, _ matches: [MatchConversation]) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "\(UserDataManager.getUserId())" + targetsUrl + "\(target.id)"
     
     let params = [
@@ -86,11 +83,9 @@ class TargetAPI {
     APIClient.sendPutRequest(url, params: params as [String : AnyObject], success: { (response) in
       let json = JSON(response)
       let target = Target.parse(fromJSON: json["target"])
+      let matches = MatchConversation.parse(fromJSONArray: json["matches"].arrayValue)
       
-      let compatibleTargetsArray = json["matches"].arrayValue
-      let compatibleTargets = Target.parse(fromJSONArray: compatibleTargetsArray)
-      
-      success(target, compatibleTargets)
+      success(target, matches)
     }) { (error) in
       failure(error)
     }

@@ -10,8 +10,23 @@ import UIKit
 
 class ChatViewController: UIViewController {
   
+  // MARK: Lifecycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    navigationController?.isNavigationBarHidden = true
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.isNavigationBarHidden = false
+  }
+  
   // MARK: Actions
   @IBAction func didTapOnBackNavigationItem(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
+    if navigationController != nil {
+      navigationController?.popViewController(animated: true)
+    } else {
+      dismiss(animated: true, completion: nil)
+    }
   }
 }
