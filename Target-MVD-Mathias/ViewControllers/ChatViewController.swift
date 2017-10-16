@@ -32,17 +32,26 @@ class ChatViewController: JSQMessagesViewController {
     return bubbleImageFactory!.incomingMessagesBubbleImage(with: .white70)
   }()
   
+  lazy var navigationBarSeparatorView: UIView = {
+    let navigationBarSeparatorView = UIView()
+    navigationBarSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+    navigationBarSeparatorView.backgroundColor =  UIColor.black.withAlphaComponent(0.5)
+    return navigationBarSeparatorView
+  }()
+  
+  lazy var topicImageView: UIImageView = {
+    let topicImageView = UIImageView()
+    topicImageView.translatesAutoresizingMaskIntoConstraints = false
+    topicImageView.sd_setImage(with: self.match?.topic.icon)
+    return topicImageView
+  }()
+  
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupView()
-    
-    collectionView.collectionViewLayout.messageBubbleFont = UIFont(name: "OpenSans", size: 12.0)
-    collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
-    collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
-    inputToolbar.contentView.leftBarButtonItem = nil
-    inputToolbar.contentView.rightBarButtonItem.setTitleColor(.black, for: .normal)
+    setupConstraints()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -58,15 +67,30 @@ class ChatViewController: JSQMessagesViewController {
   
   // MARK: Private functions
   private func setupView() {
-    let screenWidth = UIScreen.main.bounds.size.width
-    
-    let navigationBarSeparator = UIView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: 0.5))
-    navigationBarSeparator.backgroundColor =  UIColor.black.withAlphaComponent(0.5)
-    view.addSubview(navigationBarSeparator)
-    
-    let topicImageView = UIImageView(frame: CGRect(x: screenWidth - 32, y: 31, width: 22, height: 22))
-    topicImageView.sd_setImage(with: match?.topic.icon)
+    view.addSubview(navigationBarSeparatorView)
     view.addSubview(topicImageView)
+    
+    setupChatView()
+  }
+  
+  private func setupConstraints() {
+    navigationBarSeparatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    navigationBarSeparatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    navigationBarSeparatorView.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
+    navigationBarSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+    
+    topicImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15.0).isActive = true
+    topicImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 31.0).isActive = true
+    topicImageView.heightAnchor.constraint(equalToConstant: 22.0).isActive = true
+    topicImageView.widthAnchor.constraint(equalToConstant: 22.0).isActive = true
+  }
+  
+  private func setupChatView() {
+    collectionView.collectionViewLayout.messageBubbleFont = UIFont(name: "OpenSans", size: 12.0)
+    collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
+    collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+    inputToolbar.contentView.leftBarButtonItem = nil
+    inputToolbar.contentView.rightBarButtonItem.setTitleColor(.black, for: .normal)
   }
   
   private func addMessage(withId id: String, name: String, text: String) {
