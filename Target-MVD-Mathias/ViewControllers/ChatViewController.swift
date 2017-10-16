@@ -104,8 +104,12 @@ extension ChatViewController {
  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? JSQMessagesCollectionViewCell
+    let message = messages[indexPath.item]
     
     cell?.textView?.textColor = UIColor.black
+    cell?.textView.backgroundColor = message.senderId == senderId ? UIColor.macaroniAndCheese.withAlphaComponent(0.7) : .white70
+    cell?.textView.layer.cornerRadius = 8.0
+    
     return cell!
   }
   
@@ -118,9 +122,7 @@ extension ChatViewController {
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-    let message = messages[indexPath.item]
-    
-    return message.senderId == senderId ? outgoingBubbleImageView : incomingBubbleImageView
+    return nil
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
