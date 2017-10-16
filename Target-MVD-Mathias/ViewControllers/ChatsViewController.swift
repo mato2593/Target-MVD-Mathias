@@ -38,14 +38,6 @@ class ChatsViewController: UIViewController {
     fetchMatches()
   }
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let identifier = segue.identifier, identifier == "ChatsToUserProfile", let viewControllers = navigationController?.viewControllers {
-      for viewController in viewControllers where viewController is UserProfileViewController {
-        viewController.removeFromParentViewController()
-      }
-    }
-  }
-  
   // MARK: Actions
   @IBAction func tapOnMapBarButtonItem(_ sender: Any) {
     var homeViewController = getViewControllerFromNavigationStack(type: HomeViewController.self)
@@ -56,6 +48,28 @@ class ChatsViewController: UIViewController {
     
     navigationController?.setPushFromLeftTransition()
     navigationController?.pushViewController(homeViewController!, animated: true)
+  }
+  
+  // MARK: Navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let identifier = segue.identifier ?? ""
+    
+    switch identifier {
+    case "ChatsToUserProfile":
+      if let viewControllers = navigationController?.viewControllers {
+        for viewController in viewControllers where viewController is UserProfileViewController {
+          viewController.removeFromParentViewController()
+        }
+      }
+    case "ChatSegue":
+      if let cell = sender as? UITableViewCell, let indexPath = chatsTableView.indexPath(for: cell) {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        let chatViewController = segue.destination as? ChatViewController
+        chatViewController?.match = matches[indexPath.row]
+      }
+    default:
+      break
+    }
   }
   
   // MARK: Functions

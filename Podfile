@@ -21,6 +21,10 @@ target 'Target-MVD-Mathias' do
   # Push Notifications ---
   pod 'Pushwoosh'
   # ------
+  
+  # Chat ---
+  pod 'JSQMessagesViewController'
+  # ------
 end
 
 target 'AcceptanceTests' do
