@@ -13,14 +13,15 @@ import SwiftyJSON
 extension JSQMessage {
   
   class func parse(fromJSON json: JSON) -> JSQMessage {
+    let date = Date.parse(fromJSON: json["time"])
+    
     return JSQMessage(senderId: String(describing: json["sender"].intValue),
                       senderDisplayName: "",
-                      date: Date(),
+                      date: date,
                       text: json["text"].stringValue)
   }
   
   class func parse(fromJSONArray jsonArray: [JSON]) -> [JSQMessage] {
     return jsonArray.map { parse(fromJSON: $0) }
   }
-  
 }

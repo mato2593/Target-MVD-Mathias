@@ -13,6 +13,7 @@ import MBProgressHUD
 import GoogleMaps
 import Pushwoosh
 import SwiftyJSON
+import JSQMessagesViewController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate {
@@ -84,11 +85,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
       let json = JSON(parseJSON: pushBody)
       
       if json["title"].string != nil {
-        let match = Match.parse(fromJSON: json)
-        let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
-        window?.rootViewController?.present(chatViewController!, animated: false, completion: nil)
+        processNewMatchNotification(json)
+      } else if json["text"].string != nil {
+        processNewMessageNotification(json)
       }
     }
+  }
+  
+  func processNewMatchNotification(_ json: JSON) {
+    let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+    chatViewController?.match = MatchConversation.parse(fromPushNotification: json)
+    
+    if let navigationController = window?.rootViewController as? UINavigationController {
+      navigationController.viewControllers.last?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+      navigationController.pushViewController(chatViewController!, animated: true)
+    }
+  }
+  
+  func processNewMessageNotification(_ json: JSON) {
+    let message = JSQMessage.parse(fromJSON: json)
+    let matchId = json["match_conversation"].intValue
+    
+    MatchesAPI.match(matchId, success: { match in
+      let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+      chatViewController?.match = match
+      
+      if let navigationController = self.window?.rootViewController as? UINavigationController {
+        navigationController.viewControllers.last?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController.pushViewController(chatViewController!, animated: true)
+      }
+    }, failure: { error in
+      print(error.domain)
+    })
   }
   
   func applicationWillResignActive(_ application: UIApplication) {

@@ -23,7 +23,12 @@ class ChatTableViewCell: UITableViewCell {
     setupAvatarImageView(image: match.user.image)
     
     userNameLabel.text = match.user.username
-    lastMessageLabel.text = match.lastMessage.text.isEmpty ? "This conversation hasn't started yet" : match.lastMessage.text
+    
+    var lastMessageLabelText = "This conversation hasn't started yet"
+    if let lastMessage = match.lastMessage?.text, !lastMessage.isEmpty {
+      lastMessageLabelText = lastMessage
+    }
+    lastMessageLabel.text = lastMessageLabelText
     
     chatTopicImageView.sd_setImage(with: match.topic.icon)
     chatTopicImageView.alpha = match.unread > 0 ? 1 : 0.5

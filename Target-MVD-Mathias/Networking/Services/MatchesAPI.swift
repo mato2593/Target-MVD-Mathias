@@ -29,6 +29,18 @@ class MatchesAPI {
     })
   }
   
+  class func match(_ match: Int, success: @escaping (_ response: MatchConversation) -> Void, failure: @escaping (_ error: Error) -> Void) {
+    let url = usersUrl + "\(UserDataManager.getUserId())" + matchesUrl + "\(match)"
+    
+    APIClient.sendGetRequest(url, success: { response in
+      let json = JSON(response)
+      let match = MatchConversation.parse(fromJSON: json)
+      success(match)
+    }, failure: { error in
+      failure(error)
+    })
+  }
+  
   class func messages(forMatch match: Int, success: @escaping (_ messages: [JSQMessage]) -> Void, failure: @escaping (_ error: Error) -> Void) {
     let url = usersUrl + "\(UserDataManager.getUserId())" + matchesUrl + "\(match)" + messages
     

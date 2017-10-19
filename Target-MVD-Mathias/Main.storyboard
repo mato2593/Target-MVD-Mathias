@@ -359,7 +359,7 @@
         <!--Chat View Controller-->
         <scene sceneID="Za9-zm-0bV">
             <objects>
-                <viewController id="c2k-61-9gV" customClass="ChatViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="c2k-61-9gV" customClass="ChatViewController" customModule="swiftbase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jog-MW-BBH"/>
                         <viewControllerLayoutGuide type="bottom" id="LIr-lh-q2G"/>
@@ -379,7 +379,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zbo-2P-3JE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xEC-KC-o6Y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xEC-KC-o6Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

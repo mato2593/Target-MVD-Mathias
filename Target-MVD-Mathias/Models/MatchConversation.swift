@@ -18,10 +18,10 @@ class MatchConversation: NSObject {
   var title: String
   var channelId: String
   var unread: Int
-  var lastMessage: JSQMessage
+  var lastMessage: JSQMessage?
   var active: Bool
   
-  init(id: Int, topic: Topic, user: User, title: String = "", channelId: String = "", unread: Int, lastMessage: JSQMessage, active: Bool) {
+  init(id: Int, topic: Topic, user: User, title: String = "", channelId: String = "", unread: Int = 0, lastMessage: JSQMessage? = nil, active: Bool = true) {
     self.id = id
     self.topic = topic
     self.user = user
@@ -50,5 +50,16 @@ class MatchConversation: NSObject {
   
   class func parse(fromJSONArray jsonArray: [JSON]) -> [MatchConversation] {
     return jsonArray.map { parse(fromJSON: $0) }
+  }
+  
+  class func parse(fromPushNotification push: JSON) -> MatchConversation {
+    let topic = Topic.parse(fromJSON: push["topic"])
+    let user = User.parse(fromJSON: push["user"])
+    
+    return MatchConversation(id: push["id"].intValue,
+                             topic: topic,
+                             user: user,
+                             title: push["title"].stringValue,
+                             channelId: push["channel_id"].stringValue)
   }
 }
