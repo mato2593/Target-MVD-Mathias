@@ -56,6 +56,7 @@
 		F53ED73C1F3CA2F2007C6D43 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */; };
 		F54129811F61DDE6003AD9CE /* TargetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54129801F61DDE5003AD9CE /* TargetAPI.swift */; };
 		F544F4351F44C39500F247E8 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F544F4341F44C39500F247E8 /* UILabelExtension.swift */; };
+		F54CB1F91F97EE840075514A /* JSQMessageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54CB1F81F97EE840075514A /* JSQMessageExtension.swift */; };
 		F54DA6201F87CF1B00B0D6C7 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */; };
 		F54DA6221F8805B200B0D6C7 /* NewMatchAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DA6211F8805B200B0D6C7 /* NewMatchAlertView.swift */; };
 		F550F0071F8D5E7700314876 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F550F0061F8D5E7700314876 /* ChatViewController.swift */; };
@@ -171,6 +172,7 @@
 		F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		F54129801F61DDE5003AD9CE /* TargetAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAPI.swift; sourceTree = "<group>"; };
 		F544F4341F44C39500F247E8 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		F54CB1F81F97EE840075514A /* JSQMessageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQMessageExtension.swift; sourceTree = "<group>"; };
 		F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		F54DA6211F8805B200B0D6C7 /* NewMatchAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchAlertView.swift; path = NewMatchAlert/NewMatchAlertView.swift; sourceTree = "<group>"; };
 		F550F0061F8D5E7700314876 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				F544F4341F44C39500F247E8 /* UILabelExtension.swift */,
 				F502AAC71F60441A0019ED96 /* UITextFieldExtension.swift */,
 				F50BE97E1F79A2F000A7E2EC /* UINavigationControllerExtension.swift */,
+				F54CB1F81F97EE840075514A /* JSQMessageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -793,6 +796,7 @@
 				9BD409101CE9F19E005223C9 /* UIHelper.swift in Sources */,
 				F50BE97F1F79A2F100A7E2EC /* UINavigationControllerExtension.swift in Sources */,
 				9B186ED81CA30DEF002CADE5 /* PaginatedTableView.swift in Sources */,
+				F54CB1F91F97EE840075514A /* JSQMessageExtension.swift in Sources */,
 				9B88CC651CAB2DCE00AE60C5 /* PaginatedCollectionView.swift in Sources */,
 				F544F4351F44C39500F247E8 /* UILabelExtension.swift in Sources */,
 				F577F6741F3E2F2300D11F6C /* ErrorExtension.swift in Sources */,

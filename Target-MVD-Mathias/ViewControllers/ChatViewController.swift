@@ -14,8 +14,6 @@ class ChatViewController: JSQMessagesViewController {
   // MARK: Variables
   var match: MatchConversation? {
     didSet {
-      senderId = String(describing: match?.user.id)
-      senderDisplayName = match?.user.username
       title = match?.user.username
     }
   }
@@ -39,37 +37,29 @@ class ChatViewController: JSQMessagesViewController {
     return navigationBarSeparatorView
   }()
   
-  lazy var topicImageView: UIImageView = {
-    let topicImageView = UIImageView()
-    topicImageView.translatesAutoresizingMaskIntoConstraints = false
-    topicImageView.sd_setImage(with: self.match?.topic.icon)
-    return topicImageView
-  }()
-  
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    senderId = "\(UserDataManager.getUserId())"
+    senderDisplayName = "\(UserDataManager.getUserObject()?.username ?? "")"
+    
     setupView()
     setupConstraints()
+    fetchMessages()
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
     
-    addMessage(withId: "test", name: "Test", text: "First message")
-    addMessage(withId: senderId, name: "Me", text: "My first message")
-    addMessage(withId: "test", name: "Test", text: "This is a very long message. This is a very long message. This is a very long message. This is a very long message.\nThis is a very long message.")
-    addMessage(withId: senderId, name: "Me", text: "My reply")
-    addMessage(withId: senderId, name: "Me", text: "To the long message")
-    finishReceivingMessage()
+    MatchesAPI.closeConversation(withMatch: match?.id ?? 0, success: {}, failure: { _ in })
   }
   
   // MARK: Private functions
   private func setupView() {
     view.addSubview(navigationBarSeparatorView)
-    view.addSubview(topicImageView)
     
+    setupNavigationBar()
     setupChatView()
   }
   
@@ -78,11 +68,17 @@ class ChatViewController: JSQMessagesViewController {
     navigationBarSeparatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     navigationBarSeparatorView.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
     navigationBarSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+  }
+  
+  private func setupNavigationBar() {
+    let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+    statusBarView.backgroundColor = .white
+    view.addSubview(statusBarView)
+    navigationController?.navigationBar.backgroundColor = .white
     
-    topicImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15.0).isActive = true
-    topicImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 31.0).isActive = true
-    topicImageView.heightAnchor.constraint(equalToConstant: 22.0).isActive = true
-    topicImageView.widthAnchor.constraint(equalToConstant: 22.0).isActive = true
+    let topicImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+    topicImageView.sd_setImage(with: self.match?.topic.icon)
+    navigationItem.setRightBarButton(UIBarButtonItem(customView: topicImageView), animated: true)
   }
   
   private func setupChatView() {
@@ -93,10 +89,22 @@ class ChatViewController: JSQMessagesViewController {
     inputToolbar.contentView.rightBarButtonItem.setTitleColor(.black, for: .normal)
   }
   
-  private func addMessage(withId id: String, name: String, text: String) {
-    if let message = JSQMessage(senderId: id, displayName: name, text: text) {
-      messages.append(message)
-    }
+  private func fetchMessages() {
+    MatchesAPI.messages(forMatch: match?.id ?? 0, success: { messages in
+      self.messages = messages
+      self.finishReceivingMessage()
+    }, failure: { error in
+      self.showMessageError(errorMessage: error.domain)
+    })
+  }
+  
+  override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
+    MatchesAPI.sendMessage(toMatch: match?.id ?? 0, messageText: text, success: { message in
+      self.messages.append(message)
+      self.finishSendingMessage()
+    }, failure: { error in
+      self.showMessageError(errorMessage: error.domain)
+    })
   }
 }
 

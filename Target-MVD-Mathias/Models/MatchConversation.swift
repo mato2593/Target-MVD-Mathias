@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import JSQMessagesViewController
 
 class MatchConversation: NSObject {
   
@@ -17,17 +18,17 @@ class MatchConversation: NSObject {
   var title: String
   var channelId: String
   var unread: Int
-  var lastMessages: [String]
+  var lastMessage: JSQMessage
   var active: Bool
   
-  init(id: Int, topic: Topic, user: User, title: String = "", channelId: String = "", unread: Int, lastMessages: [String], active: Bool) {
+  init(id: Int, topic: Topic, user: User, title: String = "", channelId: String = "", unread: Int, lastMessage: JSQMessage, active: Bool) {
     self.id = id
     self.topic = topic
     self.user = user
     self.title = title
     self.channelId = channelId
     self.unread = unread
-    self.lastMessages = lastMessages
+    self.lastMessage = lastMessage
     self.active = active
   }
   
@@ -35,6 +36,7 @@ class MatchConversation: NSObject {
   class func parse(fromJSON json: JSON) -> MatchConversation {
     let topic = Topic.parse(fromJSON: json["topic"])
     let user = User.parse(fromJSON: json["user"])
+    let lastMessage = JSQMessage.parse(fromJSON: json["last_message"])
     
     return MatchConversation(id: json["match_id"].intValue,
                             topic: topic,
@@ -42,7 +44,7 @@ class MatchConversation: NSObject {
                             title: json["title"].stringValue,
                             channelId: json["channel_id"].stringValue,
                             unread: json["unread"].intValue,
-                            lastMessages: json["last_message"].arrayValue.map { $0.stringValue },
+                            lastMessage: lastMessage,
                             active: json["active"].boolValue)
   }
   
