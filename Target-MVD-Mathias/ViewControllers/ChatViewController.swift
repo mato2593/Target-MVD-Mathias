@@ -53,6 +53,7 @@ class ChatViewController: JSQMessagesViewController {
     super.viewWillDisappear(animated)
     
     MatchesAPI.closeConversation(withMatch: match?.id ?? 0, success: {}, failure: { _ in })
+    navigationController?.navigationBar.backgroundColor = .clear
   }
   
   // MARK: Private functions
