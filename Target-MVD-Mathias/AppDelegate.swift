@@ -85,7 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
       let json = JSON(parseJSON: pushBody)
       
       if json["text"].string != nil {
-        processNewMessageNotification(json, notificationReceived: true)
+        processNewMessageNotification(json) { match in
+          self.newMessageNotificationReceived(match)
+        }
       }
     }
   }
@@ -97,7 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
       if json["title"].string != nil {
         processNewMatchNotification(json)
       } else if json["text"].string != nil {
-        processNewMessageNotification(json, notificationReceived: false)
+        processNewMessageNotification(json) { match in
+          self.newMessageNotificationClicked(match)
+        }
       }
     }
   }
@@ -112,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     }
   }
   
-  func processNewMessageNotification(_ json: JSON, notificationReceived: Bool) {
+  func processNewMessageNotification(_ json: JSON, success: (_ match: MatchConversation) -> Void) {
     let message = JSQMessage.parse(fromJSON: json)
     let matchId = json["match_conversation"].intValue
     
@@ -121,27 +125,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     }
     
     MatchesAPI.match(matchId, success: { match in
-      let currentViewController = navigationController.viewControllers.last
-      
-      if notificationReceived {
-        if let chatViewController = currentViewController as? ChatViewController, chatViewController.match?.id == matchId {
-          chatViewController.newMessageReceived(message)
-        } else if let chatsViewController = currentViewController as? ChatsViewController {
-          chatsViewController.newMessageReceived()
-        }
-      } else {
-        guard let chatViewController = currentViewController as? ChatViewController, chatViewController.match?.id == matchId else {
-          let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
-          chatViewController?.match = match
-          
-          currentViewController?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-          navigationController.pushViewController(chatViewController!, animated: true)
-          return
-        }
-      }
+      success(match)
     }, failure: { error in
-      print(error.domain)
+      navigationController.showMessageError(errorMessage: error.domain)
     })
+  }
+  
+  func newMessageNotificationClicked(_ match: MatchConversation) {
+    guard let navigationController = self.window?.rootViewController as? UINavigationController, let currentViewController = navigationController.viewControllers.last else {
+      return
+    }
+    
+    guard let chatViewController = currentViewController as ChatViewController, chatViewController.match?.id == match.id else {
+      let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+      chatViewController?.match = match
+      
+      currentViewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+      navigationController.pushViewController(chatViewController!, animated: true)
+      return
+    }
+  }
+  
+  func newMessageNotificationReceived(_ match: MatchConversation) {
+    guard let navigationController = self.window?.rootViewController as? UINavigationController, let currentViewController = navigationController.viewControllers.last else {
+      return
+    }
+    
+    if let chatViewController = currentViewController as ChatViewController, chatViewController.match?.id == match.id {
+      chatViewController.newMessageReceived(message)
+    } else if let chatsViewController = currentViewController as ChatsViewController {
+      chatsViewController.newMessageReceived()
+    }
   }
   
   func applicationWillResignActive(_ application: UIApplication) {
