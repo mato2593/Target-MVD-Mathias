@@ -49,11 +49,16 @@ class ChatViewController: JSQMessagesViewController {
     fetchMessages()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    navigationController?.navigationBar.backgroundColor = .white
+  }
+  
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
     MatchesAPI.closeConversation(withMatch: match?.id ?? 0, success: {}, failure: { _ in })
-    navigationController?.navigationBar.backgroundColor = .clear
   }
   
   // MARK: Private functions
@@ -75,7 +80,6 @@ class ChatViewController: JSQMessagesViewController {
     let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
     statusBarView.backgroundColor = .white
     view.addSubview(statusBarView)
-    navigationController?.navigationBar.backgroundColor = .white
     
     let topicImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
     topicImageView.sd_setImage(with: self.match?.topic.icon)
@@ -90,6 +94,7 @@ class ChatViewController: JSQMessagesViewController {
     inputToolbar.contentView.rightBarButtonItem.setTitleColor(.black, for: .normal)
   }
   
+  // MARK: Message related
   private func fetchMessages() {
     MatchesAPI.messages(forMatch: match?.id ?? 0, success: { messages in
       self.messages = messages
@@ -106,6 +111,11 @@ class ChatViewController: JSQMessagesViewController {
     }, failure: { error in
       self.showMessageError(errorMessage: error.domain)
     })
+  }
+  
+  func newMessageReceived(_ message: JSQMessage) {
+    messages.append(message)
+    finishReceivingMessage()
   }
 }
 

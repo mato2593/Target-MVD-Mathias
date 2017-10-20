@@ -200,8 +200,8 @@ class UserAPI {
       "push_token": token
       ] as [String: AnyObject]
     
-    APIClient.sendPostRequest(url, params: parameters, success: { response in
-    }) { error in
+    APIClient.sendPostRequest(url, params: parameters, success: { _ in
+    }) { _ in
     }
   }
 }

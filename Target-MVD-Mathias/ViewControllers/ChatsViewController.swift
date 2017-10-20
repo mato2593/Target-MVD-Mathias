@@ -35,6 +35,7 @@ class ChatsViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    navigationController?.navigationBar.backgroundColor = .clear
     fetchMatches()
   }
   
@@ -83,6 +84,13 @@ class ChatsViewController: UIViewController {
       self.refreshControl.endRefreshing()
       self.showMessageError(title: "Error", errorMessage: error.domain)
     }
+  }
+  
+  func newMessageReceived() {
+    MatchesAPI.matches(success: { matches in
+      self.matches = matches
+      self.chatsTableView.reloadData()
+    }) { _ in }
   }
 }
 

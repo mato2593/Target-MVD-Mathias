@@ -51,6 +51,8 @@ class HomeViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    navigationController?.navigationBar.backgroundColor = .clear
+    
     if targets.isEmpty {
       getTargets()
     }

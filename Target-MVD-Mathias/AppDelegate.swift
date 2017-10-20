@@ -80,6 +80,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     completionHandler(UIBackgroundFetchResult.noData)
   }
   
+  func onPushReceived(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
+    if let pushBody = pushNotification["u"] as? String {
+      let json = JSON(parseJSON: pushBody)
+      
+      if json["text"].string != nil {
+        processNewMessageNotification(json, notificationReceived: true)
+      }
+    }
+  }
+  
   func onPushAccepted(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
     if let pushBody = pushNotification["u"] as? String {
       let json = JSON(parseJSON: pushBody)
@@ -87,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
       if json["title"].string != nil {
         processNewMatchNotification(json)
       } else if json["text"].string != nil {
-        processNewMessageNotification(json)
+        processNewMessageNotification(json, notificationReceived: false)
       }
     }
   }
@@ -102,17 +112,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     }
   }
   
-  func processNewMessageNotification(_ json: JSON) {
+  func processNewMessageNotification(_ json: JSON, notificationReceived: Bool) {
     let message = JSQMessage.parse(fromJSON: json)
     let matchId = json["match_conversation"].intValue
     
+    guard let navigationController = self.window?.rootViewController as? UINavigationController else {
+      return
+    }
+    
     MatchesAPI.match(matchId, success: { match in
-      let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
-      chatViewController?.match = match
+      let currentViewController = navigationController.viewControllers.last
       
-      if let navigationController = self.window?.rootViewController as? UINavigationController {
-        navigationController.viewControllers.last?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationController.pushViewController(chatViewController!, animated: true)
+      if notificationReceived {
+        if let chatViewController = currentViewController as? ChatViewController, chatViewController.match?.id == matchId {
+          chatViewController.newMessageReceived(message)
+        } else if let chatsViewController = currentViewController as? ChatsViewController {
+          chatsViewController.newMessageReceived()
+        }
+      } else {
+        guard let chatViewController = currentViewController as? ChatViewController, chatViewController.match?.id == matchId else {
+          let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+          chatViewController?.match = match
+          
+          currentViewController?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+          navigationController.pushViewController(chatViewController!, animated: true)
+          return
+        }
       }
     }, failure: { error in
       print(error.domain)
