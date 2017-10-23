@@ -85,8 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
       let json = JSON(parseJSON: pushBody)
       
       if json["text"].string != nil {
-        processNewMessageNotification(json) { match in
-          self.newMessageNotificationReceived(match)
+        processNewMessageNotification(json) { (match, message) in
+          self.newMessageNotificationReceived(match, message: message)
         }
       }
     }
@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
       if json["title"].string != nil {
         processNewMatchNotification(json)
       } else if json["text"].string != nil {
-        processNewMessageNotification(json) { match in
+        processNewMessageNotification(json) { (match, _) in
           self.newMessageNotificationClicked(match)
         }
       }
@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     }
   }
   
-  func processNewMessageNotification(_ json: JSON, success: (_ match: MatchConversation) -> Void) {
+  func processNewMessageNotification(_ json: JSON, success: @escaping (_ match: MatchConversation, _ message: JSQMessage) -> Void) {
     let message = JSQMessage.parse(fromJSON: json)
     let matchId = json["match_conversation"].intValue
     
@@ -125,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     }
     
     MatchesAPI.match(matchId, success: { match in
-      success(match)
+      success(match, message)
     }, failure: { error in
       navigationController.showMessageError(errorMessage: error.domain)
     })
@@ -136,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
       return
     }
     
-    guard let chatViewController = currentViewController as ChatViewController, chatViewController.match?.id == match.id else {
+    guard let chatViewController = currentViewController as? ChatViewController, chatViewController.match?.id == match.id else {
       let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
       chatViewController?.match = match
       
@@ -146,14 +146,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     }
   }
   
-  func newMessageNotificationReceived(_ match: MatchConversation) {
+  func newMessageNotificationReceived(_ match: MatchConversation, message: JSQMessage) {
     guard let navigationController = self.window?.rootViewController as? UINavigationController, let currentViewController = navigationController.viewControllers.last else {
       return
     }
     
-    if let chatViewController = currentViewController as ChatViewController, chatViewController.match?.id == match.id {
+    if let chatViewController = currentViewController as? ChatViewController, chatViewController.match?.id == match.id {
       chatViewController.newMessageReceived(message)
-    } else if let chatsViewController = currentViewController as ChatsViewController {
+    } else if let chatsViewController = currentViewController as? ChatsViewController {
       chatsViewController.newMessageReceived()
     }
   }
