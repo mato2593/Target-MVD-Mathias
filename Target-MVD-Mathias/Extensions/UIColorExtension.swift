@@ -20,4 +20,5 @@ extension UIColor {
   static let transparentWhite = UIColor(r: 255, g: 255, b: 255, alpha: 0.7)
   static let brightSkyBlue = UIColor(r: 47, g: 188, b: 247)
   static let white70 = UIColor(r: 244, g: 244, b: 244, alpha: 0.7)
+  static let grayLight = UIColor(r: 175, g: 175, b: 175)
 }

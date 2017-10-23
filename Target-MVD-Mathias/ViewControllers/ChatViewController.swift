@@ -12,11 +12,7 @@ import JSQMessagesViewController
 class ChatViewController: JSQMessagesViewController {
   
   // MARK: Variables
-  var match: MatchConversation? {
-    didSet {
-      title = match?.user.username
-    }
-  }
+  var match: MatchConversation?
   
   var messages: [JSQMessage] = []
   
@@ -84,6 +80,41 @@ class ChatViewController: JSQMessagesViewController {
     let topicImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
     topicImageView.sd_setImage(with: self.match?.topic.icon)
     navigationItem.setRightBarButton(UIBarButtonItem(customView: topicImageView), animated: true)
+    
+    setupTitleView()
+  }
+  
+  private func setupTitleView() {
+    let username = match?.user.username
+    let matchTitle = match?.title
+    
+    let titleParameters = [
+      NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: UIFontWeightSemibold)
+    ] as [String: Any]
+    
+    let subtitleParameters = [
+      NSForegroundColorAttributeName: UIColor.grayLight,
+      NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 11) ?? UIFont.systemFont(ofSize: 11, weight: UIFontWeightSemibold)
+    ] as [String : Any]
+    
+    let titleText = NSMutableAttributedString(string: username!, attributes: titleParameters)
+    
+    titleText.append(NSAttributedString(string: "\n"))
+    titleText.append(NSAttributedString(string: matchTitle!, attributes: subtitleParameters))
+    
+    let size = titleText.size()
+    
+    guard let height = navigationController?.navigationBar.frame.size.height else {
+      title = match?.user.username
+      return
+    }
+    
+    let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: size.width, height: height))
+    titleLabel.attributedText = titleText
+    titleLabel.numberOfLines = 0
+    titleLabel.textAlignment = .center
+    
+    navigationItem.titleView = titleLabel
   }
   
   private func setupChatView() {
