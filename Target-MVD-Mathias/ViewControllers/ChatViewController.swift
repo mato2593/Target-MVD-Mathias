@@ -40,6 +40,12 @@ class ChatViewController: JSQMessagesViewController {
     senderId = "\(UserDataManager.getUserId())"
     senderDisplayName = "\(UserDataManager.getUserObject()?.username ?? "")"
     
+    incomingCellIdentifier = IncomingMessagesCollectionViewCell.cellReuseIdentifier()
+    incomingMediaCellIdentifier = IncomingMessagesCollectionViewCell.mediaCellReuseIdentifier()
+    
+    collectionView.register(IncomingMessagesCollectionViewCell.nib(), forCellWithReuseIdentifier: incomingCellIdentifier)
+    collectionView.register(IncomingMessagesCollectionViewCell.nib(), forCellWithReuseIdentifier: incomingMediaCellIdentifier)
+    
     setupView()
     setupConstraints()
     fetchMessages()
@@ -153,14 +159,30 @@ class ChatViewController: JSQMessagesViewController {
 extension ChatViewController {
  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? JSQMessagesCollectionViewCell
     let message = messages[indexPath.item]
     
-    cell?.textView?.textColor = UIColor.black
-    cell?.textView.backgroundColor = message.senderId == senderId ? UIColor.macaroniAndCheese.withAlphaComponent(0.7) : .white70
-    cell?.textView.layer.cornerRadius = 8.0
+    if message.senderId == senderId {
+      let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? JSQMessagesCollectionViewCell
+      
+      cell?.textView?.textColor = UIColor.black
+      cell?.textView.backgroundColor = message.senderId == senderId ? UIColor.macaroniAndCheese.withAlphaComponent(0.7) : .white70
+      cell?.textView.layer.cornerRadius = 8.0
+      
+      return cell!
+    } else if let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? IncomingMessagesCollectionViewCell {
+      cell.textView.textColor = .black
+      cell.textView.backgroundColor = .white70
+      cell.textView.layer.cornerRadius = 8.0
+      
+      let formatter = DateFormatter()
+      formatter.dateFormat = "HH:mm"
+      
+      cell.messageTimeStampLabel.text = formatter.string(from: message.date)
+      
+      return cell
+    }
     
-    return cell!
+    return UICollectionViewCell()
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
@@ -169,10 +191,6 @@ extension ChatViewController {
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return messages.count
-  }
-  
-  override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
-    return 15
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
