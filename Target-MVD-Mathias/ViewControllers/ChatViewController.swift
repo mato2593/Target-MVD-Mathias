@@ -171,6 +171,26 @@ extension ChatViewController {
     return messages.count
   }
   
+  override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
+    return 15
+  }
+  
+  override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+    let message = messages[indexPath.item]
+    
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH.mm a"
+    formatter.amSymbol = "AM"
+    formatter.pmSymbol = "PM"
+    
+    let parameters = [
+      NSForegroundColorAttributeName: UIColor.warmGray,
+      NSFontAttributeName: UIFont(name: "OpenSans", size: 9) ?? UIFont.systemFont(ofSize: 9, weight: UIFontWeightRegular)
+      ] as [String : Any]
+
+    return NSAttributedString(string: formatter.string(from: message.date), attributes: parameters)
+  }
+  
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
     return nil
   }
