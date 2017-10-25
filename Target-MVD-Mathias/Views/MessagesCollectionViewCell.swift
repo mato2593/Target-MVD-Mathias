@@ -14,11 +14,11 @@ class MessagesCollectionViewCell: JSQMessagesCollectionViewCell {
   @IBOutlet weak var messageTimestampLabel: UILabel!
   
   override class func nib() -> UINib {
-    let className = String(describing: self).components(separatedBy: ".").first
-    return UINib(nibName: className!, bundle: nil)
+    let className = String(describing: self)
+    return UINib(nibName: className, bundle: nil)
   }
   
   override class func cellReuseIdentifier() -> String {
-    return String(describing: self).components(separatedBy: ".").first!
+    return String(describing: self)
   }
 }
