@@ -7,17 +7,12 @@
 //
 
 import UIKit
-import JSQMessagesViewController
 
-class IncomingMessagesCollectionViewCell: JSQMessagesCollectionViewCellIncoming {
-
-  @IBOutlet weak var messageTimeStampLabel: UILabel!
-
-  override class func nib() -> UINib {
-    return UINib(nibName: "IncomingMessagesCollectionViewCell", bundle: nil)
-  }
+class IncomingMessagesCollectionViewCell: MessagesCollectionViewCell {
   
-  override class func cellReuseIdentifier() -> String {
-    return "IncomingMessagesCollectionViewCell"
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    messageTimestampLabel.textAlignment = .left
   }
 }

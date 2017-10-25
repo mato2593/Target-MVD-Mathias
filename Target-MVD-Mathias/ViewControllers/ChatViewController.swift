@@ -40,12 +40,7 @@ class ChatViewController: JSQMessagesViewController {
     senderId = "\(UserDataManager.getUserId())"
     senderDisplayName = "\(UserDataManager.getUserObject()?.username ?? "")"
     
-    incomingCellIdentifier = IncomingMessagesCollectionViewCell.cellReuseIdentifier()
-    incomingMediaCellIdentifier = IncomingMessagesCollectionViewCell.mediaCellReuseIdentifier()
-    
-    collectionView.register(IncomingMessagesCollectionViewCell.nib(), forCellWithReuseIdentifier: incomingCellIdentifier)
-    collectionView.register(IncomingMessagesCollectionViewCell.nib(), forCellWithReuseIdentifier: incomingMediaCellIdentifier)
-    
+    registerCells()
     setupView()
     setupConstraints()
     fetchMessages()
@@ -64,6 +59,18 @@ class ChatViewController: JSQMessagesViewController {
   }
   
   // MARK: Private functions
+  private func registerCells() {
+    incomingCellIdentifier = IncomingMessagesCollectionViewCell.cellReuseIdentifier()
+    incomingMediaCellIdentifier = IncomingMessagesCollectionViewCell.mediaCellReuseIdentifier()
+    outgoingCellIdentifier = OutgoingMessagesCollectionViewCell.cellReuseIdentifier()
+    outgoingMediaCellIdentifier = OutgoingMessagesCollectionViewCell.mediaCellReuseIdentifier()
+    
+    collectionView.register(IncomingMessagesCollectionViewCell.nib(), forCellWithReuseIdentifier: incomingCellIdentifier)
+    collectionView.register(IncomingMessagesCollectionViewCell.nib(), forCellWithReuseIdentifier: incomingMediaCellIdentifier)
+    collectionView.register(OutgoingMessagesCollectionViewCell.nib(), forCellWithReuseIdentifier: outgoingCellIdentifier)
+    collectionView.register(OutgoingMessagesCollectionViewCell.nib(), forCellWithReuseIdentifier: outgoingMediaCellIdentifier)
+  }
+  
   private func setupView() {
     view.addSubview(navigationBarSeparatorView)
     
@@ -159,30 +166,19 @@ class ChatViewController: JSQMessagesViewController {
 extension ChatViewController {
  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? MessagesCollectionViewCell
     let message = messages[indexPath.item]
     
-    if message.senderId == senderId {
-      let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? JSQMessagesCollectionViewCell
-      
-      cell?.textView?.textColor = UIColor.black
-      cell?.textView.backgroundColor = message.senderId == senderId ? UIColor.macaroniAndCheese.withAlphaComponent(0.7) : .white70
-      cell?.textView.layer.cornerRadius = 8.0
-      
-      return cell!
-    } else if let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? IncomingMessagesCollectionViewCell {
-      cell.textView.textColor = .black
-      cell.textView.backgroundColor = .white70
-      cell.textView.layer.cornerRadius = 8.0
-      
-      let formatter = DateFormatter()
-      formatter.dateFormat = "HH:mm"
-      
-      cell.messageTimeStampLabel.text = formatter.string(from: message.date)
-      
-      return cell
-    }
+    cell?.textView.textColor = UIColor.black
+    cell?.textView.backgroundColor = message.senderId == senderId ? UIColor.macaroniAndCheese.withAlphaComponent(0.7) : .white70
+    cell?.textView.layer.cornerRadius = 8.0
     
-    return UICollectionViewCell()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    
+    cell?.messageTimestampLabel.text = formatter.string(from: message.date)
+    
+    return cell!
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
