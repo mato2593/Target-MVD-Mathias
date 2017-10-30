@@ -53,9 +53,16 @@
 		F535FC701F7AAA68008BB9F8 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F535FC6F1F7AAA68008BB9F8 /* ChatTableViewCell.swift */; };
 		F535FC721F7AE3BC008BB9F8 /* MatchesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F535FC711F7AE3BC008BB9F8 /* MatchesAPI.swift */; };
 		F535FC741F7AE4B2008BB9F8 /* MatchConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F535FC731F7AE4B2008BB9F8 /* MatchConversation.swift */; };
+		F53B24C61F9FEA6D00B3B1BF /* IncomingMessagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F53B24C51F9FEA6D00B3B1BF /* IncomingMessagesCollectionViewCell.xib */; };
+		F53B24C81F9FEC2B00B3B1BF /* IncomingMessagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B24C71F9FEC2B00B3B1BF /* IncomingMessagesCollectionViewCell.swift */; };
 		F53ED73C1F3CA2F2007C6D43 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */; };
 		F54129811F61DDE6003AD9CE /* TargetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54129801F61DDE5003AD9CE /* TargetAPI.swift */; };
 		F544F4351F44C39500F247E8 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F544F4341F44C39500F247E8 /* UILabelExtension.swift */; };
+		F546F64A1FA0D70D00E25F47 /* MessagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546F6491FA0D70D00E25F47 /* MessagesCollectionViewCell.swift */; };
+		F546F64C1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546F64B1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift */; };
+		F546F6571FA0DE1300E25F47 /* OutgoingMessagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F546F6561FA0DE1300E25F47 /* OutgoingMessagesCollectionViewCell.xib */; };
+		F54CB1F91F97EE840075514A /* JSQMessageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54CB1F81F97EE840075514A /* JSQMessageExtension.swift */; };
+		F54CB1FB1F992A940075514A /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54CB1FA1F992A940075514A /* DateExtension.swift */; };
 		F54DA6201F87CF1B00B0D6C7 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */; };
 		F54DA6221F8805B200B0D6C7 /* NewMatchAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DA6211F8805B200B0D6C7 /* NewMatchAlertView.swift */; };
 		F550F0071F8D5E7700314876 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F550F0061F8D5E7700314876 /* ChatViewController.swift */; };
@@ -168,9 +175,16 @@
 		F535FC6F1F7AAA68008BB9F8 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		F535FC711F7AE3BC008BB9F8 /* MatchesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesAPI.swift; sourceTree = "<group>"; };
 		F535FC731F7AE4B2008BB9F8 /* MatchConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchConversation.swift; sourceTree = "<group>"; };
+		F53B24C51F9FEA6D00B3B1BF /* IncomingMessagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingMessagesCollectionViewCell.xib; sourceTree = "<group>"; };
+		F53B24C71F9FEC2B00B3B1BF /* IncomingMessagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingMessagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		F53ED73B1F3CA2F2007C6D43 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		F54129801F61DDE5003AD9CE /* TargetAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAPI.swift; sourceTree = "<group>"; };
 		F544F4341F44C39500F247E8 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		F546F6491FA0D70D00E25F47 /* MessagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCollectionViewCell.swift; sourceTree = "<group>"; };
+		F546F64B1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingMessagesCollectionViewCell.swift; sourceTree = "<group>"; };
+		F546F6561FA0DE1300E25F47 /* OutgoingMessagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingMessagesCollectionViewCell.xib; sourceTree = "<group>"; };
+		F54CB1F81F97EE840075514A /* JSQMessageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQMessageExtension.swift; sourceTree = "<group>"; };
+		F54CB1FA1F992A940075514A /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		F54DA6211F8805B200B0D6C7 /* NewMatchAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchAlertView.swift; path = NewMatchAlert/NewMatchAlertView.swift; sourceTree = "<group>"; };
 		F550F0061F8D5E7700314876 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -419,6 +433,7 @@
 		E8290BFB1D832D4100599960 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F53B24C41F9FE83300B3B1BF /* Chat */,
 				F5A311501F86BDD20026E22C /* NewMatchAlert */,
 				F59A8F541F63192C00C17889 /* TableViewCells */,
 				F502AACB1F6084790019ED96 /* TargetForm */,
@@ -442,6 +457,8 @@
 				F544F4341F44C39500F247E8 /* UILabelExtension.swift */,
 				F502AAC71F60441A0019ED96 /* UITextFieldExtension.swift */,
 				F50BE97E1F79A2F000A7E2EC /* UINavigationControllerExtension.swift */,
+				F54CB1F81F97EE840075514A /* JSQMessageExtension.swift */,
+				F54CB1FA1F992A940075514A /* DateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -453,6 +470,18 @@
 				F502AACC1F6084C10019ED96 /* TargetFormView.swift */,
 			);
 			name = TargetForm;
+			sourceTree = "<group>";
+		};
+		F53B24C41F9FE83300B3B1BF /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				F546F6561FA0DE1300E25F47 /* OutgoingMessagesCollectionViewCell.xib */,
+				F53B24C51F9FEA6D00B3B1BF /* IncomingMessagesCollectionViewCell.xib */,
+				F53B24C71F9FEC2B00B3B1BF /* IncomingMessagesCollectionViewCell.swift */,
+				F546F6491FA0D70D00E25F47 /* MessagesCollectionViewCell.swift */,
+				F546F64B1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		F553AA171F4CAA7900F54DA8 /* Segues */ = {
@@ -619,9 +648,11 @@
 				F5631F1C1F41EAC100CA49BD /* OpenSans-LightItalic.ttf in Resources */,
 				9B0C72721C738D3400BAF3B1 /* Assets.xcassets in Resources */,
 				F5631F161F41EAC100CA49BD /* OpenSans-Bold.ttf in Resources */,
+				F546F6571FA0DE1300E25F47 /* OutgoingMessagesCollectionViewCell.xib in Resources */,
 				F502D6EC1F3B636F00474060 /* Onboarding.storyboard in Resources */,
 				F5631F1F1F41EAC100CA49BD /* OpenSans-SemiboldItalic.ttf in Resources */,
 				F502AACA1F6081590019ED96 /* TargetFormView.xib in Resources */,
+				F53B24C61F9FEA6D00B3B1BF /* IncomingMessagesCollectionViewCell.xib in Resources */,
 				F5631F1B1F41EAC100CA49BD /* OpenSans-Light.ttf in Resources */,
 				F5631F1D1F41EAC100CA49BD /* OpenSans-Regular.ttf in Resources */,
 				F5631F191F41EAC100CA49BD /* OpenSans-ExtraBoldItalic.ttf in Resources */,
@@ -644,7 +675,10 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -656,7 +690,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PusherSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -789,14 +826,17 @@
 				9BD409101CE9F19E005223C9 /* UIHelper.swift in Sources */,
 				F50BE97F1F79A2F100A7E2EC /* UINavigationControllerExtension.swift in Sources */,
 				9B186ED81CA30DEF002CADE5 /* PaginatedTableView.swift in Sources */,
+				F54CB1F91F97EE840075514A /* JSQMessageExtension.swift in Sources */,
 				9B88CC651CAB2DCE00AE60C5 /* PaginatedCollectionView.swift in Sources */,
 				F544F4351F44C39500F247E8 /* UILabelExtension.swift in Sources */,
 				F577F6741F3E2F2300D11F6C /* ErrorExtension.swift in Sources */,
 				F5B5168B1F8C216000D8A9E7 /* Match.swift in Sources */,
 				F5BBC4721F61E3DF00ADC5BE /* Topic.swift in Sources */,
+				F546F64C1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift in Sources */,
 				E8B30E021E72FF8000131DCF /* UIStoryboardExtension.swift in Sources */,
 				9B3AA3A11ED4D014005A4D26 /* HomeViewController.swift in Sources */,
 				F550F0071F8D5E7700314876 /* ChatViewController.swift in Sources */,
+				F546F64A1FA0D70D00E25F47 /* MessagesCollectionViewCell.swift in Sources */,
 				F535FC721F7AE3BC008BB9F8 /* MatchesAPI.swift in Sources */,
 				F54DA6201F87CF1B00B0D6C7 /* Modal.swift in Sources */,
 				F502AACD1F6084C10019ED96 /* TargetFormView.swift in Sources */,
@@ -808,6 +848,7 @@
 				E81171921DE5EFB7003D3DF5 /* UIViewControllerExtension.swift in Sources */,
 				F59A8F561F63196400C17889 /* TopicTableViewCell.swift in Sources */,
 				9B3AA3991ED35007005A4D26 /* SignInViewController.swift in Sources */,
+				F53B24C81F9FEC2B00B3B1BF /* IncomingMessagesCollectionViewCell.swift in Sources */,
 				E8FBB1BF1DD21A32000D6740 /* Session.swift in Sources */,
 				9B77E0731E2FB6350020E450 /* User.swift in Sources */,
 				FA54D5881E11C59600F0DBEA /* FirstViewController.swift in Sources */,
@@ -820,6 +861,7 @@
 				F53ED73C1F3CA2F2007C6D43 /* UIColorExtension.swift in Sources */,
 				F502AAC81F60441A0019ED96 /* UITextFieldExtension.swift in Sources */,
 				F54DA6221F8805B200B0D6C7 /* NewMatchAlertView.swift in Sources */,
+				F54CB1FB1F992A940075514A /* DateExtension.swift in Sources */,
 				F54129811F61DDE6003AD9CE /* TargetAPI.swift in Sources */,
 				F5738C7D1F829785001B6EBE /* MapCircle.swift in Sources */,
 				9B0C72711C738D3400BAF3B1 /* AppDelegate.swift in Sources */,
@@ -949,7 +991,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -991,7 +1033,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1015,7 +1057,7 @@
 					"$(PROJECT_DIR)/frameworks",
 				);
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;
@@ -1042,7 +1084,7 @@
 					"$(PROJECT_DIR)/frameworks",
 				);
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;
@@ -1092,7 +1134,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1116,7 +1158,7 @@
 					"$(PROJECT_DIR)/frameworks",
 				);
 				INFOPLIST_FILE = "Target-MVD-Mathias/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.targetmvd.mathias;
 				PRODUCT_NAME = swiftbase;

@@ -90,6 +90,11 @@ class UserProfileViewController: UIViewController {
     getUserData()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.navigationBar.backgroundColor = .clear
+  }
+  
   // MARK: Actions
   @IBAction func tapOnAvatarImageView(_ sender: Any) {
     imagePicker.allowsEditing = false

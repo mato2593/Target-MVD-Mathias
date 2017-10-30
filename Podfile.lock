@@ -18,6 +18,9 @@ PODS:
   - GoogleMaps/Maps (2.4.0):
     - GoogleMaps/Base
   - IQKeyboardManagerSwift (4.0.10)
+  - JSQMessagesViewController (7.3.5):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - KIF (3.5.2):
     - KIF/Core (= 3.5.2)
   - KIF/Core (3.5.2)
@@ -37,6 +40,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (6.0.0)
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
+  - PusherSwift (4.2.1)
   - Pushwoosh (5.3.7)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
@@ -50,10 +54,12 @@ DEPENDENCIES:
   - FBSDKShareKit
   - GoogleMaps
   - IQKeyboardManagerSwift (~> 4.0.8)
+  - JSQMessagesViewController
   - KIF (~> 3.5.2)
   - KIF/IdentifierTests (~> 3.5.2)
   - MBProgressHUD (~> 1.0.0)
   - OHHTTPStubs/Swift (~> 6.0.0)
+  - PusherSwift (= 4.2.1)
   - Pushwoosh
   - SDWebImage (~> 3.8)
   - SwiftyJSON (~> 3.1.3)
@@ -66,13 +72,16 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 65751c3b9937ab9d594e6c37611ecc115ceeb448
   GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
+  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   KIF: f2a6025bb3f11692df675054a134d43a9ec2d7db
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
+  PusherSwift: 5f9b172dde3ca9e8362d92544cdd1c1be28874b5
   Pushwoosh: 91a4a341a37a5ce9f23cba68a909950fced10a8f
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: e31f4136b832dd5326a2e4055e1a4a9d88413815
+PODFILE CHECKSUM: 892351f879958ce420579272f9a264b33ced5353
 
 COCOAPODS: 1.3.1

@@ -13,6 +13,7 @@ import MBProgressHUD
 import GoogleMaps
 import Pushwoosh
 import SwiftyJSON
+import JSQMessagesViewController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate {
@@ -79,15 +80,81 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate 
     completionHandler(UIBackgroundFetchResult.noData)
   }
   
+  func onPushReceived(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
+    if let pushBody = pushNotification["u"] as? String {
+      let json = JSON(parseJSON: pushBody)
+      
+      if json["text"].string != nil {
+        processNewMessageNotification(json) { (match, message) in
+          self.newMessageNotificationReceived(match, message: message)
+        }
+      }
+    }
+  }
+  
   func onPushAccepted(_ pushManager: PushNotificationManager!, withNotification pushNotification: [AnyHashable : Any]!, onStart: Bool) {
     if let pushBody = pushNotification["u"] as? String {
       let json = JSON(parseJSON: pushBody)
       
       if json["title"].string != nil {
-        let match = Match.parse(fromJSON: json)
-        let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
-        window?.rootViewController?.present(chatViewController!, animated: false, completion: nil)
+        processNewMatchNotification(json)
+      } else if json["text"].string != nil {
+        processNewMessageNotification(json) { (match, _) in
+          self.newMessageNotificationClicked(match)
+        }
       }
+    }
+  }
+  
+  func processNewMatchNotification(_ json: JSON) {
+    let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+    chatViewController?.match = MatchConversation.parse(fromPushNotification: json)
+    
+    if let navigationController = window?.rootViewController as? UINavigationController {
+      navigationController.viewControllers.last?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+      navigationController.pushViewController(chatViewController!, animated: true)
+    }
+  }
+  
+  func processNewMessageNotification(_ json: JSON, success: @escaping (_ match: MatchConversation, _ message: JSQMessage) -> Void) {
+    let message = JSQMessage.parse(fromJSON: json)
+    let matchId = json["match_conversation"].intValue
+    
+    guard let navigationController = self.window?.rootViewController as? UINavigationController else {
+      return
+    }
+    
+    MatchesAPI.match(matchId, success: { match in
+      success(match, message)
+    }, failure: { error in
+      navigationController.showMessageError(errorMessage: error.domain)
+    })
+  }
+  
+  func newMessageNotificationClicked(_ match: MatchConversation) {
+    guard let navigationController = self.window?.rootViewController as? UINavigationController, let currentViewController = navigationController.viewControllers.last else {
+      return
+    }
+    
+    guard let chatViewController = currentViewController as? ChatViewController, chatViewController.match?.id == match.id else {
+      let chatViewController = UIStoryboard.instantiateViewController(ChatViewController.self)
+      chatViewController?.match = match
+      
+      currentViewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+      navigationController.pushViewController(chatViewController!, animated: true)
+      return
+    }
+  }
+  
+  func newMessageNotificationReceived(_ match: MatchConversation, message: JSQMessage) {
+    guard let navigationController = self.window?.rootViewController as? UINavigationController, let currentViewController = navigationController.viewControllers.last else {
+      return
+    }
+    
+    if let chatViewController = currentViewController as? ChatViewController, chatViewController.match?.id == match.id {
+      chatViewController.newMessageReceived(message)
+    } else if let chatsViewController = currentViewController as? ChatsViewController {
+      chatsViewController.newMessageReceived()
     }
   }
   

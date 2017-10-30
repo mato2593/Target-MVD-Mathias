@@ -35,15 +35,8 @@ class ChatsViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    navigationController?.navigationBar.backgroundColor = .clear
     fetchMatches()
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let identifier = segue.identifier, identifier == "ChatsToUserProfile", let viewControllers = navigationController?.viewControllers {
-      for viewController in viewControllers where viewController is UserProfileViewController {
-        viewController.removeFromParentViewController()
-      }
-    }
   }
   
   // MARK: Actions
@@ -58,6 +51,28 @@ class ChatsViewController: UIViewController {
     navigationController?.pushViewController(homeViewController!, animated: true)
   }
   
+  // MARK: Navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let identifier = segue.identifier ?? ""
+    
+    switch identifier {
+    case "ChatsToUserProfile":
+      if let viewControllers = navigationController?.viewControllers {
+        for viewController in viewControllers where viewController is UserProfileViewController {
+          viewController.removeFromParentViewController()
+        }
+      }
+    case "ChatSegue":
+      if let cell = sender as? UITableViewCell, let indexPath = chatsTableView.indexPath(for: cell) {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        let chatViewController = segue.destination as? ChatViewController
+        chatViewController?.match = matches[indexPath.row]
+      }
+    default:
+      break
+    }
+  }
+  
   // MARK: Functions
   func fetchMatches() {
     refreshControl.beginRefreshing()
@@ -69,6 +84,13 @@ class ChatsViewController: UIViewController {
       self.refreshControl.endRefreshing()
       self.showMessageError(title: "Error", errorMessage: error.domain)
     }
+  }
+  
+  func newMessageReceived() {
+    MatchesAPI.matches(success: { matches in
+      self.matches = matches
+      self.chatsTableView.reloadData()
+    }) { _ in }
   }
 }
 
