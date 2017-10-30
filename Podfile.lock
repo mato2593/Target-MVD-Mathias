@@ -40,6 +40,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (6.0.0)
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
+  - PusherSwift (4.2.1)
   - Pushwoosh (5.3.7)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - KIF/IdentifierTests (~> 3.5.2)
   - MBProgressHUD (~> 1.0.0)
   - OHHTTPStubs/Swift (~> 6.0.0)
+  - PusherSwift (= 4.2.1)
   - Pushwoosh
   - SDWebImage (~> 3.8)
   - SwiftyJSON (~> 3.1.3)
@@ -75,10 +77,11 @@ SPEC CHECKSUMS:
   KIF: f2a6025bb3f11692df675054a134d43a9ec2d7db
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
+  PusherSwift: 5f9b172dde3ca9e8362d92544cdd1c1be28874b5
   Pushwoosh: 91a4a341a37a5ce9f23cba68a909950fced10a8f
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 89842d41cddced04cc21bdcbc806eb6dd2f93140
+PODFILE CHECKSUM: 892351f879958ce420579272f9a264b33ced5353
 
 COCOAPODS: 1.3.1

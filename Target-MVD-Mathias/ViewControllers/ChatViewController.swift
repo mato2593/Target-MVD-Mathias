@@ -8,6 +8,8 @@
 
 import UIKit
 import JSQMessagesViewController
+import PusherSwift
+import SwiftyJSON
 
 class ChatViewController: JSQMessagesViewController {
   
@@ -33,6 +35,9 @@ class ChatViewController: JSQMessagesViewController {
     return navigationBarSeparatorView
   }()
   
+  var pusher: Pusher?
+  var channel: PusherChannel?
+  
   // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,6 +49,7 @@ class ChatViewController: JSQMessagesViewController {
     setupView()
     setupConstraints()
     fetchMessages()
+    registerForMessages()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -146,6 +152,29 @@ class ChatViewController: JSQMessagesViewController {
     }, failure: { error in
       self.showMessageError(errorMessage: error.domain)
     })
+  }
+  
+  private func registerForMessages() {
+    guard let pusherKey = ConfigurationManager.getValue(for: "PusherKey"), let match = match else {
+      return
+    }
+    
+    let options = PusherClientOptions(host: .cluster("us2"))
+    pusher = Pusher(key: pusherKey, options: options)
+    
+    // subscribe to channel and bind to event
+    channel = pusher?.subscribe(match.channelId)
+    
+    _ = channel?.bind(eventName: "new_message", callback: { (data: Any?) -> Void in
+      if let data = data as? [String : AnyObject] {
+        if data["text"] != nil {
+          self.messages.append(JSQMessage.parse(fromJSON: JSON(data)))
+          self.finishReceivingMessage()
+        }
+      }
+    })
+    
+    pusher?.connect()
   }
   
   override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
