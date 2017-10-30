@@ -24,8 +24,8 @@ class HomeViewController: UIViewController {
   
   lazy var targetCircle: MapCircle = {
     let targetCircle = MapCircle()
-    targetCircle.fillColor = .transparentWhite
-    targetCircle.strokeColor = .macaroniAndCheese
+    targetCircle.fillColor = .targetTransparentWhite
+    targetCircle.strokeColor = .targetMacaroniAndCheese
     
     return targetCircle
   }()
@@ -143,7 +143,7 @@ class HomeViewController: UIViewController {
   fileprivate func addTargetToMap(_ target: Target) {
     let targetMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: target.lat, longitude: target.lng))
     
-    targetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: target.topic.icon)
+    targetMarker.iconView = targetMarkerView(withColor: .targetMacaroniAndCheese, icon: target.topic.icon)
     targetMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
     targetMarker.isFlat = true
     targetMarker.map = mapView
@@ -174,7 +174,7 @@ class HomeViewController: UIViewController {
   
   fileprivate func hideTargetFormView() {
     if targetFormView.formType == .edition, let targetMarker = selectedTargetMarker, let selectedTarget = targetMarker.userData as? Target {
-      targetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: selectedTarget.topic.icon)
+      targetMarker.iconView = targetMarkerView(withColor: .targetMacaroniAndCheese, icon: selectedTarget.topic.icon)
       selectedTargetMarker = nil
     }
     
@@ -402,11 +402,11 @@ extension HomeViewController: GMSMapViewDelegate {
     if let target = marker.userData as? Target {
       
       if let selectedTargetMarker = selectedTargetMarker, let selectedTarget = selectedTargetMarker.userData as? Target {
-        selectedTargetMarker.iconView = targetMarkerView(withColor: .macaroniAndCheese, icon: selectedTarget.topic.icon)
+        selectedTargetMarker.iconView = targetMarkerView(withColor: .targetMacaroniAndCheese, icon: selectedTarget.topic.icon)
       }
       
       selectedTargetMarker = marker
-      selectedTargetMarker?.iconView = targetMarkerView(withColor: .brightSkyBlue, icon: target.topic.icon)
+      selectedTargetMarker?.iconView = targetMarkerView(withColor: .targetBrightSkyBlue, icon: target.topic.icon)
       showTargetForm(withFormType: .edition, target: target)
     }
     

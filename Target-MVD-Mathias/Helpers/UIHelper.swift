@@ -37,7 +37,7 @@ class UIHelper {
   }
   
   class func showErrorInForm(textField: UITextField, errorLabel: UILabel?, errorMessage: String = "") {
-    textField.addBorder(color: .tomato, weight: 1.5)
+    textField.addBorder(color: .targetTomato, weight: 1.5)
     
     if !errorMessage.isEmpty {
       errorLabel?.text = errorMessage

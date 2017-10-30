@@ -20,12 +20,12 @@ class ChatViewController: JSQMessagesViewController {
   
   lazy var outgoingBubbleImageView: JSQMessagesBubbleImage = {
     let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-    return bubbleImageFactory!.outgoingMessagesBubbleImage(with: UIColor.macaroniAndCheese.withAlphaComponent(0.7))
+    return bubbleImageFactory!.outgoingMessagesBubbleImage(with: UIColor.targetMacaroniAndCheese.withAlphaComponent(0.7))
   }()
   
   lazy var incomingBubbleImageView: JSQMessagesBubbleImage = {
     let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-    return bubbleImageFactory!.incomingMessagesBubbleImage(with: .white70)
+    return bubbleImageFactory!.incomingMessagesBubbleImage(with: .targetWhite70)
   }()
   
   lazy var navigationBarSeparatorView: UIView = {
@@ -112,7 +112,7 @@ class ChatViewController: JSQMessagesViewController {
     ] as [String: Any]
     
     let subtitleParameters = [
-      NSForegroundColorAttributeName: UIColor.grayLight,
+      NSForegroundColorAttributeName: UIColor.targetGrayLight,
       NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 11) ?? UIFont.systemFont(ofSize: 11, weight: UIFontWeightSemibold)
     ] as [String : Any]
     
@@ -199,7 +199,7 @@ extension ChatViewController {
     let message = messages[indexPath.item]
     
     cell?.textView.textColor = UIColor.black
-    cell?.textView.backgroundColor = message.senderId == senderId ? UIColor.macaroniAndCheese.withAlphaComponent(0.7) : .white70
+    cell?.textView.backgroundColor = message.senderId == senderId ? UIColor.targetMacaroniAndCheese.withAlphaComponent(0.7) : .targetWhite70
     cell?.textView.layer.cornerRadius = 8.0
     
     let formatter = DateFormatter()
