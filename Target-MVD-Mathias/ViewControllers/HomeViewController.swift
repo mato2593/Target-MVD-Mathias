@@ -426,6 +426,12 @@ extension HomeViewController: NewMatchAlertViewDelegate {
     let match = matches.count == 1 ? matches.first : nil
     let viewControllerToPush = UIStoryboard.instantiateViewController(match != nil ? ChatViewController.self : ChatsViewController.self)
     
-    navigationController?.pushViewController(viewControllerToPush!, animated: true)
+    if let viewControllerToPush = viewControllerToPush as? ChatViewController {
+      viewControllerToPush.match = match
+      navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+      navigationController?.pushViewController(viewControllerToPush, animated: true)
+    } else {
+      navigationController?.pushViewController(viewControllerToPush!, animated: true)
+    }
   }
 }
