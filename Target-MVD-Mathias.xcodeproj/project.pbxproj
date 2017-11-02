@@ -61,6 +61,8 @@
 		F546F64A1FA0D70D00E25F47 /* MessagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546F6491FA0D70D00E25F47 /* MessagesCollectionViewCell.swift */; };
 		F546F64C1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546F64B1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift */; };
 		F546F6571FA0DE1300E25F47 /* OutgoingMessagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F546F6561FA0DE1300E25F47 /* OutgoingMessagesCollectionViewCell.xib */; };
+		F54847111FABC67600833E80 /* DeleteTargetConfirmationDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = F54847101FABC67600833E80 /* DeleteTargetConfirmationDialog.xib */; };
+		F54847131FABCEB800833E80 /* DeleteTargetConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54847121FABCEB800833E80 /* DeleteTargetConfirmationDialog.swift */; };
 		F54CB1F91F97EE840075514A /* JSQMessageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54CB1F81F97EE840075514A /* JSQMessageExtension.swift */; };
 		F54CB1FB1F992A940075514A /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54CB1FA1F992A940075514A /* DateExtension.swift */; };
 		F54DA6201F87CF1B00B0D6C7 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */; };
@@ -183,6 +185,8 @@
 		F546F6491FA0D70D00E25F47 /* MessagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		F546F64B1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingMessagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		F546F6561FA0DE1300E25F47 /* OutgoingMessagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingMessagesCollectionViewCell.xib; sourceTree = "<group>"; };
+		F54847101FABC67600833E80 /* DeleteTargetConfirmationDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeleteTargetConfirmationDialog.xib; sourceTree = "<group>"; };
+		F54847121FABCEB800833E80 /* DeleteTargetConfirmationDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTargetConfirmationDialog.swift; sourceTree = "<group>"; };
 		F54CB1F81F97EE840075514A /* JSQMessageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQMessageExtension.swift; sourceTree = "<group>"; };
 		F54CB1FA1F992A940075514A /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		F54DA61F1F87CF1B00B0D6C7 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
@@ -433,6 +437,7 @@
 		E8290BFB1D832D4100599960 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F548470D1FABC52100833E80 /* DeleteTargetConfirmation */,
 				F53B24C41F9FE83300B3B1BF /* Chat */,
 				F5A311501F86BDD20026E22C /* NewMatchAlert */,
 				F59A8F541F63192C00C17889 /* TableViewCells */,
@@ -482,6 +487,15 @@
 				F546F64B1FA0DB1000E25F47 /* OutgoingMessagesCollectionViewCell.swift */,
 			);
 			name = Chat;
+			sourceTree = "<group>";
+		};
+		F548470D1FABC52100833E80 /* DeleteTargetConfirmation */ = {
+			isa = PBXGroup;
+			children = (
+				F54847101FABC67600833E80 /* DeleteTargetConfirmationDialog.xib */,
+				F54847121FABCEB800833E80 /* DeleteTargetConfirmationDialog.swift */,
+			);
+			name = DeleteTargetConfirmation;
 			sourceTree = "<group>";
 		};
 		F553AA171F4CAA7900F54DA8 /* Segues */ = {
@@ -642,6 +656,7 @@
 				F5631F1A1F41EAC100CA49BD /* OpenSans-Italic.ttf in Resources */,
 				F5631F171F41EAC100CA49BD /* OpenSans-BoldItalic.ttf in Resources */,
 				9BFA84F51C77682B009F64E4 /* Main.storyboard in Resources */,
+				F54847111FABC67600833E80 /* DeleteTargetConfirmationDialog.xib in Resources */,
 				F5631F1E1F41EAC100CA49BD /* OpenSans-Semibold.ttf in Resources */,
 				F5631F181F41EAC100CA49BD /* OpenSans-ExtraBold.ttf in Resources */,
 				9BFA84F31C776827009F64E4 /* LaunchScreen.storyboard in Resources */,
@@ -852,6 +867,7 @@
 				E8FBB1BF1DD21A32000D6740 /* Session.swift in Sources */,
 				9B77E0731E2FB6350020E450 /* User.swift in Sources */,
 				FA54D5881E11C59600F0DBEA /* FirstViewController.swift in Sources */,
+				F54847131FABCEB800833E80 /* DeleteTargetConfirmationDialog.swift in Sources */,
 				F553AA191F4CAADA00F54DA8 /* SegueFromLeft.swift in Sources */,
 				FABDC9221EE1EB2B000DDAC3 /* ConfigurationManager.swift in Sources */,
 				9B0C72761C738D3400BAF3B1 /* UserAPI.swift in Sources */,
