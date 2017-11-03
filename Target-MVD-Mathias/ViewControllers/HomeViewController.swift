@@ -295,22 +295,13 @@ extension HomeViewController: TargetFormDelegate {
   
   func deleteTarget() {
     if let selectedTargetMarker = selectedTargetMarker, let targetToDelete = selectedTargetMarker.userData as? Target {
-      guard let indexOfTargetToDelete = targets.index(of: targetToDelete) else {
+      guard targets.index(of: targetToDelete) != nil else {
         preconditionFailure("Target to delete not found")
       }
       
-      showSpinner(message: "Deleting target")
-      
-      TargetAPI.removeTarget(target: targetToDelete, success: { _ in
-        selectedTargetMarker.map = nil
-        self.targets.remove(at: indexOfTargetToDelete)
-        self.targetsMarkers.remove(at: indexOfTargetToDelete)
-        self.hideSpinner()
-        self.hideTargetFormView()
-      }) { error in
-        self.hideSpinner()
-        self.showMessageError(title: "Error", errorMessage: error.domain)
-      }
+      let deleteTargetConfirmationDialog = DeleteTargetConfirmationDialog(withTarget: targetToDelete)
+      deleteTargetConfirmationDialog.delegate = self
+      deleteTargetConfirmationDialog.show(animated: true)
     }
   }
   
@@ -343,6 +334,30 @@ extension HomeViewController: TargetFormDelegate {
     let alert = NewMatchAlertView(withMatches: matches)
     alert.delegate = self
     alert.show(animated: true)
+  }
+}
+
+extension HomeViewController: DeleteTargetConfirmationDialogDelegate {
+  
+  func didTapDeleteTargetButton(target: Target) {
+    if let selectedTargetMarker = selectedTargetMarker {
+      guard let indexOfTargetToDelete = targets.index(of: target) else {
+        preconditionFailure("Target to delete not found")
+      }
+      
+      showSpinner(message: "Deleting target")
+      
+      TargetAPI.removeTarget(target: target, success: { _ in
+        selectedTargetMarker.map = nil
+        self.targets.remove(at: indexOfTargetToDelete)
+        self.targetsMarkers.remove(at: indexOfTargetToDelete)
+        self.hideSpinner()
+        self.hideTargetFormView()
+      }) { error in
+        self.hideSpinner()
+        self.showMessageError(title: "Error", errorMessage: error.domain)
+      }
+    }
   }
 }
 
