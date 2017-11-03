@@ -24,9 +24,9 @@
                 <outlet property="contentView" destination="iN0-l3-epB" id="Is2-QJ-YJm"/>
                 <outlet property="deleteButton" destination="Dsq-XG-ioo" id="7vI-MB-90F"/>
                 <outlet property="dialogView" destination="bXE-dg-Lvl" id="hR8-A2-eDp"/>
-                <outlet property="targetImageView" destination="XsE-gg-fP1" id="Xf1-0H-8Io"/>
                 <outlet property="targetTitleLabel" destination="eOm-Ni-dLA" id="vUJ-2u-Xpt"/>
-                <outlet property="targetView" destination="Cf7-Bc-NME" id="LOn-dy-C59"/>
+                <outlet property="targetTopicImageView" destination="XsE-gg-fP1" id="WVj-Of-pzN"/>
+                <outlet property="targetTopicView" destination="Cf7-Bc-NME" id="MG5-uk-XcV"/>
                 <outlet property="titleLabel" destination="dfI-98-3Jq" id="cPv-h1-lvH"/>
             </connections>
         </placeholder>
@@ -50,10 +50,10 @@ this target?</string>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cf7-Bc-NME" userLabel="Target View">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cf7-Bc-NME" userLabel="Target Topic View">
                             <rect key="frame" x="93" y="80.5" width="55" height="55"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FootbalExample" translatesAutoresizingMaskIntoConstraints="NO" id="XsE-gg-fP1" userLabel="Target Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FootbalExample" translatesAutoresizingMaskIntoConstraints="NO" id="XsE-gg-fP1" userLabel="Target Topic Image View">
                                     <rect key="frame" x="16.5" y="16.5" width="22" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="22" id="gH1-3C-A9e"/>
@@ -84,6 +84,9 @@ this target?</string>
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="didTapOnCancelButton:" destination="-1" eventType="touchUpInside" id="L5U-NR-w6y"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dsq-XG-ioo" userLabel="Delete Button">
                             <rect key="frame" x="42" y="191" width="158" height="42"/>
@@ -95,6 +98,9 @@ this target?</string>
                             <state key="normal" title="DELETE">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="didTapOnDeleteTargetButton:" destination="-1" eventType="touchUpInside" id="zK8-ai-xNM"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -119,7 +125,6 @@ this target?</string>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="bXE-dg-Lvl" firstAttribute="centerY" secondItem="BLV-UI-EtV" secondAttribute="centerY" id="0ui-22-5ia"/>
                 <constraint firstItem="bXE-dg-Lvl" firstAttribute="centerX" secondItem="BLV-UI-EtV" secondAttribute="centerX" id="7sJ-oL-Hvo"/>
